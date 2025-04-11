@@ -754,7 +754,7 @@ function precomputeEquinoxJDNs() {
         if (!gDay || !gMonth || !gYear) return { error: "Date grégorienne incomplète." };
 
         const inputJDN = gregorianToJDN(gDay, gMonth, gYear);
-        const republicanEpochJDN = 2375841; // 1 Vendémiaire An I
+        const republicanEpochJDN = 2375839; // 1 Vendémiaire An I
 
         if (inputJDN < republicanEpochJDN) {
              // Pas d'erreur ici, car l'autre fonction gère déjà ça.
