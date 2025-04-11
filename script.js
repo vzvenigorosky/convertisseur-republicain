@@ -862,7 +862,7 @@ convertButton.addEventListener('click', () => {
          // --- Calcul et Affichage (Romme) ---
          // ... (La logique pour Romme reste inchangée) ...
          const inputJDNCheck = gregorianToJDN(day, month, year);
-         const republicanEpochJDN = 2375840;
+         const republicanEpochJDN = 2375839;
          if (inputJDNCheck >= republicanEpochJDN) {
               const resultRomme = calculateRommeDate(day, month, year);
               if (resultRomme.error) {
