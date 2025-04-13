@@ -358,15 +358,15 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: "Pigeon", latin: "Columba livia domestica", author: "(Gmelin 1789)", urlImage: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Columba_livia_Luc_Viatour.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Columba_(oiseau)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PIGEON", description: "Oiseau commun des villes et campagnes, élevé pour sa chair ou comme messager." },
             { name: "Lilas (commun)", latin: "Syringa vulgaris", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/LILAC", urlImage: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Lilac_%282%29.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Syringa_vulgaris", description: "Arbuste très parfumé aux grappes de fleurs mauves ou blanches au printemps." },
             { name: "Anémone", latin: "Anemone", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ANEMONE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/d/db/Colorful-Anemone-coronaria-Zachi-Evenor.jpg", urlWiki: "https://fr.wikipedia.org/wiki/An%C3%A9mone", description: "Genre de plantes à fleurs délicates, souvent printanières (ex: Anémone des bois)." },
-            { name: "Pensée", latin: "Viola tricolor / Viola x wittrockiana", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Fleur colorée et veloutée, symbole de souvenir." },
-            { name: "Myrtille", latin: "Vaccinium myrtillus", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Petite baie bleu foncé sauvage ou cultivée, riche en antioxydants." },
-            { name: "Greffoir", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Outil tranchant utilisé pour réaliser des greffes sur les arbres fruitiers ou d'ornement." }
+            { name: "Pensée", latin: "Viola tricolor / Viola x wittrockiana", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PENS%C3%89E", urlImage: "https://upload.wikimedia.org/wikipedia/commons/1/1c/JDCANO_Viola_Cazorlensis.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Viola_(plante)", description: "Fleur colorée et veloutée, symbole de souvenir." },
+            { name: "Myrtille", latin: "Vaccinium myrtillus", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/MYRTILLE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Myrtille_Vaccinium_myrtillus.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Vaccinium_myrtillus", description: "Petite baie bleu foncé sauvage ou cultivée, riche en antioxydants." },
+            { name: "Greffoir", latin: "", author: "", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/GREFFOIR", urlImage: "https://www.promessedefleurs.com/blogwp/wp-content/uploads/2021/06/greffoir-couteau.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Greffoir", description: "Outil tranchant utilisé pour réaliser des greffes sur les arbres fruitiers ou d'ornement." }
         ],
 		
 		// , author: "", urlEncy: "", urlImage: "", urlWiki: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "
         // Floréal (Printemps) - Mois 8
         [
-           { name: "Rose", latin: "Rosa", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Fleur emblématique, symbole d'amour et de beauté, cultivée pour son parfum et son esthétique." },
+           { name: "Rose", latin: "Rosa", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ROSE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Rose_Papa_Meilland.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Rose_(fleur)", description: "Fleur emblématique, symbole d'amour et de beauté, cultivée pour son parfum et son esthétique." },
            { name: "Chêne", latin: "Quercus", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Arbre majestueux et robuste, symbole de force et de longévité, produisant des glands." },
            { name: "Fougère", latin: "Pteridophyta", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante sans fleur se reproduisant par spores, typique des sous-bois humides." },
            { name: "Aubépine", latin: "Crataegus monogyna", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Arbuste épineux aux fleurs blanches ou roses parfumées ('épine blanche')." },
@@ -817,135 +817,152 @@ function precomputeEquinoxJDNs() {
     }
 
 // --- Event Listener ---
-convertButton.addEventListener('click', () => {
-    const day = parseInt(dayInput.value, 10);
-    const month = parseInt(monthInput.value, 10);
-    const year = parseInt(yearInput.value, 10);
+    convertButton.addEventListener('click', () => {
+        // Récupération des valeurs d'entrée
+        const day = parseInt(dayInput.value, 10);
+        const month = parseInt(monthInput.value, 10);
+        const year = parseInt(yearInput.value, 10);
 
-    // Références aux éléments d'affichage (Ajout des nouveaux)
-    const resultDisplayEquinox = document.getElementById('republican-date-equinox');
-    const feteNameDisplay = document.getElementById('fete-name'); 
-    const feteLatinDisplay = document.getElementById('fete-latin');
-    const feteAuthorDisplay = document.getElementById('fete-author');
-    const feteLatinAuthorLine = document.getElementById('fete-latin-author'); // Le <p> qui contient latin+auteur
-    const feteDescriptionDisplay = document.getElementById('fete-description');
-    const resultDisplayRomme = document.getElementById('romme-date-info');
-    const errorDisplay = document.getElementById('error-area');
-    // Nouveaux éléments des colonnes latérales
-    const wikiLink = document.getElementById('fete-wiki-link');
-    const image = document.getElementById('fete-image');
-    const imagePlaceholder = document.getElementById('image-placeholder');
-    const encycloFrame = document.getElementById('encyclopedia-frame');
-    const encycloPlaceholder = document.getElementById('encyclopedia-placeholder');
+        // Références aux éléments d'affichage (vérifiez que toutes sont bien déclarées au début du script)
+        const resultDisplayEquinox = document.getElementById('republican-date-equinox');
+        const feteNameDisplay = document.getElementById('fete-name'); 
+        const feteLatinDisplay = document.getElementById('fete-latin');
+        const feteAuthorDisplay = document.getElementById('fete-author');
+        const feteLatinAuthorLine = document.getElementById('fete-latin-author');
+        const feteDescriptionDisplay = document.getElementById('fete-description');
+        const resultDisplayRomme = document.getElementById('romme-date-info');
+        const errorDisplay = document.getElementById('error-area');
+        const leftColumnTitle = document.getElementById('left-column-title'); // Titre colonne gauche
+        const wikiLink = document.getElementById('fete-wiki-link');
+        const image = document.getElementById('fete-image');
+        const imagePlaceholder = document.getElementById('image-placeholder');
+        const encycloFrame = document.getElementById('encyclopedia-frame');
+        const encycloPlaceholder = document.getElementById('encyclopedia-placeholder');
 
-    // Reset displays
-    errorDisplay.textContent = '';
-    errorDisplay.style.display = 'none';
-    resultDisplayEquinox.textContent = '---';
-    feteNameDisplay.textContent = 'Fête du jour : ---';
-    feteLatinDisplay.textContent = '';
-    feteAuthorDisplay.textContent = '';
-    feteLatinAuthorLine.style.display = 'none'; // Cacher la ligne par défaut
-    feteDescriptionDisplay.textContent = '---';
-    resultDisplayRomme.textContent = 'Date selon méthode Romme : ---';
-    // Reset colonnes latérales
-    wikiLink.style.display = 'none';
-    wikiLink.href = '#';
-    image.style.display = 'none';
-    image.src = '';
-    image.alt = '';
-    imagePlaceholder.style.display = 'block';
-    encycloFrame.style.display = 'none';
-    encycloFrame.src = 'about:blank';
-    encycloPlaceholder.style.display = 'block';
+        // --- Reset de tous les affichages ---
+        errorDisplay.textContent = '';
+        errorDisplay.style.display = 'none';
+        resultDisplayEquinox.textContent = '---';
+        feteNameDisplay.textContent = 'Fête du jour : ---';
+        feteLatinDisplay.textContent = '';
+        feteAuthorDisplay.textContent = '';
+        feteLatinAuthorLine.style.display = 'none'; // Cacher par défaut
+        feteDescriptionDisplay.textContent = '---';
+        resultDisplayRomme.textContent = 'Date selon méthode Romme : ---';
+        leftColumnTitle.textContent = 'Illustration'; // Titre colonne gauche par défaut
+        // Reset colonne gauche
+        wikiLink.style.display = 'none';
+        wikiLink.href = '#';
+        wikiLink.removeAttribute('target'); // Assurer qu'il n'y a pas de target si pas de lien
+        image.style.display = 'none';
+        image.src = '';
+        image.alt = '';
+        imagePlaceholder.style.display = 'block';
+        // Reset colonne droite
+        encycloFrame.style.display = 'none';
+        encycloFrame.src = 'about:blank';
+        encycloPlaceholder.style.display = 'block';
 
+        // --- Calcul et Affichage (Méthode Équinoxe) ---
+        const resultEquinox = calculateEquinoxDate(day, month, year);
 
-    // --- Calcul et Affichage (Équinoxe) ---
-    const resultEquinox = calculateEquinoxDate(day, month, year);
+        // --- Gestion des Erreurs et Affichage ---
+        if (resultEquinox.error && !resultEquinox.useRommeOnly) {
+            // Erreur bloquante (date invalide, avant An I, etc.)
+            errorDisplay.textContent = resultEquinox.error;
+            errorDisplay.style.display = 'block';
+            // Assurer que tout est bien reset (déjà fait au début, mais par sécurité)
+            leftColumnTitle.textContent = 'Illustration'; 
+            feteLatinAuthorLine.style.display = 'none';
 
-    if (resultEquinox.error && !resultEquinox.useRommeOnly) {
-        errorDisplay.textContent = resultEquinox.error;
-        errorDisplay.style.display = 'block';
-    } else {
-        // Affichage principal (même si hors plage équinoxe pour N/A)
-        if (resultEquinox.date) {
-            resultDisplayEquinox.textContent = resultEquinox.date;
-            feteNameDisplay.textContent = `Fête du jour : ${resultEquinox.fete || 'Inconnue'}`;
-            feteLatinDisplay.textContent = resultEquinox.latin || '';
-            feteAuthorDisplay.textContent = resultEquinox.author || '';
-            feteDescriptionDisplay.textContent = resultEquinox.description || '';
+        } else { 
+            // Pas d'erreur bloquante OU date hors plage équinoxe
 
-            // Afficher la ligne Latin/Auteur seulement si l'un des deux existe
-            if (resultEquinox.latin || resultEquinox.author) {
-                feteLatinAuthorLine.style.display = 'block'; 
-            } else {
-                feteLatinAuthorLine.style.display = 'none';
-            }
+            // Affichage principal basé sur Equinoxe (si dans la plage)
+            if (resultEquinox.date) { 
+                // Mise à jour colonne centrale
+                resultDisplayEquinox.textContent = resultEquinox.date;
+                leftColumnTitle.textContent = resultEquinox.date; // Met à jour le titre de la colonne gauche
+                feteNameDisplay.textContent = `Fête du jour : ${resultEquinox.fete || 'Inconnue'}`;
+                feteLatinDisplay.textContent = resultEquinox.latin || '';
+                feteAuthorDisplay.textContent = resultEquinox.author || '';
+                feteDescriptionDisplay.textContent = resultEquinox.description || '';
 
-            // Mise à jour Colonne Gauche (Image/Wiki)
-            if (resultEquinox.urlImage) {
-                image.src = resultEquinox.urlImage;
-                image.alt = `Illustration pour ${resultEquinox.fete || 'fête du jour'}`;
-                image.style.display = 'block';
-                wikiLink.style.display = 'inline-block'; // Le lien contient l'image
-                imagePlaceholder.style.display = 'none';
-                // Mettre le lien Wiki s'il existe, sinon lien désactivé
-                wikiLink.href = resultEquinox.urlWiki || '#'; 
-                if (!resultEquinox.urlWiki) {
-                    wikiLink.removeAttribute('target'); // Pas d'ouverture d'onglet si pas de lien
-                    // Optionnel: rendre l'image non cliquable visuellement
+                // Afficher la ligne Latin/Auteur seulement si l'un des deux existe
+                if (resultEquinox.latin || resultEquinox.author) {
+                    feteLatinAuthorLine.style.display = 'block'; 
                 } else {
-                     wikiLink.target = '_blank'; // Assurer l'ouverture dans un nouvel onglet
+                    feteLatinAuthorLine.style.display = 'none';
                 }
-            } else {
-                 // Pas d'image, on cache tout et on montre le placeholder
-                wikiLink.style.display = 'none';
-                image.style.display = 'none';
-                imagePlaceholder.style.display = 'block';
-            }
 
-            // Mise à jour Colonne Droite (Encyclopédie)
-            if (resultEquinox.urlEncy) {
-                encycloFrame.src = resultEquinox.urlEncy;
-                encycloFrame.style.display = 'block';
-                encycloPlaceholder.style.display = 'none';
-            } else {
-                encycloFrame.style.display = 'none';
-                encycloFrame.src = 'about:blank'; // Vider l'iframe
-                encycloPlaceholder.style.display = 'block';
-            }
+                // Mise à jour Colonne Gauche (Image/Wiki)
+                if (resultEquinox.urlImage) {
+                    image.src = resultEquinox.urlImage;
+                    image.alt = `Illustration pour ${resultEquinox.fete || 'fête du jour'}`;
+                    image.style.display = 'block';
+                    wikiLink.style.display = 'inline-block'; 
+                    imagePlaceholder.style.display = 'none';
+                    // Mettre le lien Wiki s'il existe
+                    if (resultEquinox.urlWiki) {
+                        wikiLink.href = resultEquinox.urlWiki;
+                        wikiLink.target = '_blank'; // Ouvrir dans un nouvel onglet
+                    } else {
+                        wikiLink.href = '#'; // Lien désactivé si pas d'URL Wiki
+                        wikiLink.removeAttribute('target');
+                    }
+                } else {
+                    // Pas d'image: s'assurer que le placeholder est visible
+                    imagePlaceholder.style.display = 'block';
+                    wikiLink.style.display = 'none';
+                    image.style.display = 'none';
+                }
 
+                // Mise à jour Colonne Droite (Encyclopédie)
+                if (resultEquinox.urlEncy) {
+                    encycloFrame.src = resultEquinox.urlEncy;
+                    encycloFrame.style.display = 'block';
+                    encycloPlaceholder.style.display = 'none';
+                } else {
+                    // Pas d'URL encyclopédie: s'assurer que le placeholder est visible
+                    encycloPlaceholder.style.display = 'block';
+                    encycloFrame.style.display = 'none';
+                    encycloFrame.src = 'about:blank';
+                }
+            }
+            
+            // Gestion spécifique si date hors plage équinoxe (après 2199)
+             if (resultEquinox.useRommeOnly) {
+                 resultDisplayEquinox.textContent = 'N/A (hors plage équinoxe)';
+                 leftColumnTitle.textContent = 'Date hors plage équinoxe'; // Indiquer pourquoi il n'y a pas d'infos associées
+                 feteNameDisplay.textContent = 'Fête du jour : N/A';
+                 feteLatinDisplay.textContent = '';
+                 feteAuthorDisplay.textContent = '';
+                 feteLatinAuthorLine.style.display = 'none';
+                 feteDescriptionDisplay.textContent = '';
+                 // Les colonnes latérales restent à leur état reset (placeholders visibles)
+                 errorDisplay.textContent = resultEquinox.error; // Afficher l'info/erreur
+                 errorDisplay.style.display = 'block';
+             }
+
+             // --- Calcul et Affichage (Méthode Romme) ---
+             // Calculer et afficher Romme dans tous les cas où la date est valide (>= An I)
+             const inputJDNCheck = gregorianToJDN(day, month, year);
+             const republicanEpochJDN = 2375840; // JDN pour 22 Sept 1792
+             if (inputJDNCheck >= republicanEpochJDN) {
+                  const resultRomme = calculateRommeDate(day, month, year);
+                  if (resultRomme.error) {
+                      resultDisplayRomme.textContent = `Date selon méthode Romme : Erreur (${resultRomme.error})`;
+                  } else if (resultRomme.date) {
+                      resultDisplayRomme.textContent = `Date selon méthode Romme : ${resultRomme.date}`;
+                  }
+             } else {
+                 // Si la date est avant An I (normalement déjà géré par resultEquinox.error)
+                 resultDisplayRomme.textContent = `Date selon méthode Romme : N/A (avant An I)`;
+             }
         }
-         // Si date hors plage équinoxe
-         if (resultEquinox.useRommeOnly) {
-             resultDisplayEquinox.textContent = 'N/A (hors plage équinoxe)';
-             feteNameDisplay.textContent = 'Fête du jour : N/A';
-             feteLatinDisplay.textContent = '';
-             feteAuthorDisplay.textContent = '';
-             feteLatinAuthorLine.style.display = 'none';
-             feteDescriptionDisplay.textContent = '';
-             // Les colonnes latérales restent à leur état reset (placeholders visibles)
-             errorDisplay.textContent = resultEquinox.error; // Afficher l'info/erreur
-             errorDisplay.style.display = 'block';
-         }
-
-         // --- Calcul et Affichage (Romme) ---
-         // ... (La logique pour Romme reste inchangée) ...
-         const inputJDNCheck = gregorianToJDN(day, month, year);
-         const republicanEpochJDN = 2375840;
-         if (inputJDNCheck >= republicanEpochJDN) {
-              const resultRomme = calculateRommeDate(day, month, year);
-              if (resultRomme.error) {
-                  resultDisplayRomme.textContent = `Date selon méthode Romme : Erreur (${resultRomme.error})`;
-              } else {
-                  resultDisplayRomme.textContent = `Date selon méthode Romme : ${resultRomme.date}`;
-              }
-         } else {
-             resultDisplayRomme.textContent = `Date selon méthode Romme : N/A (avant An I)`;
-         }
-    }
-});
-
+    }); // Fin de l'event listener
+	
+	
     // --- Initialisation ---
     precomputeEquinoxJDNs();
     yearInput.max = 2199;
