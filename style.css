@@ -1,50 +1,127 @@
+*, *::before, *::after {
+    box-sizing: border-box; /* Applique le modèle de boîte standard */
+}
+
+/* Styles généraux */
 body {
-    font-family: sans-serif;
+    display: block; 
+    padding: 20px; 
     background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+    font-family: sans-serif;
     color: #333;
+    line-height: 1.4;
 }
 
-.converter-container {
+/* Conteneur principal de la grille */
+.main-grid-container {
+    display: grid;
+    /* Nouvelles proportions : Côtés plus larges */
+    grid-template-columns: 2fr 2fr 2fr; 
+    gap: 40px; /* Espace entre les colonnes */
+    max-width: 1700px; 
+    margin: 0 auto; 
+    align-items: start; 
+}
+
+/* Styles pour les colonnes latérales */
+.left-column, .right-column {
     background-color: #fff;
-    padding: 30px;
+    padding: 20px; 
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 500px;
-    width: 90%;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    min-height: 300px; 
 }
 
-h1 {
+.left-column h3, .right-column h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-size: 1.2em;
+}
+
+/* Conteneurs pour l'image et l'iframe */
+#image-container, #encyclopedia-container {
+    text-align: center;
+}
+
+/* Styles pour l'image et son lien */
+#fete-wiki-link {
+    display: none; 
+    cursor: pointer;
+}
+#fete-image {
+    display: none; 
+    max-width: 100%; 
+    height: auto; 
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    margin-bottom: 10px; 
+}
+#image-placeholder {
+    display: block; 
+    color: #888;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+/* Styles pour l'iframe et son placeholder */
+#encyclopedia-frame {
+    border: 1px solid #ccc;
+    display: none; 
+    width: 100%; 
+    height: 65vh; /* Gardons la hauteur adaptative */
+    border-radius: 4px;
+}
+#encyclopedia-placeholder {
+    display: block; 
+    color: #888;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+
+/* Styles pour la colonne centrale (convertisseur) */
+.center-column .converter-container {
+     max-width: none; 
+     width: 100%; 
+     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08); 
+     background-color: #fff;
+     padding: 30px;
+     border-radius: 8px;
+     text-align: center;
+}
+
+/* Styles généraux du convertisseur (réutilisés) */
+.converter-container h1 {
     color: #2c3e50;
     margin-bottom: 15px;
 }
 
-p {
+.converter-container p { 
     color: #555;
     margin-bottom: 25px;
     font-size: 0.9em;
 }
 
+/* Groupe d'inputs */
 .input-group {
     display: flex;
-    justify-content: space-around; /* Adjusted for better spacing */
-    align-items: center; /* Center items vertically */
+    justify-content: space-around; 
+    align-items: center; 
     margin-bottom: 25px;
-    gap: 10px; /* Add gap between elements */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 10px; 
+    flex-wrap: wrap; 
 }
 
 .input-group label {
-    margin-bottom: 5px; /* Add space below label */
-    display: block; /* Make label take full width in wrap scenario */
+    margin-bottom: 5px; 
+    display: block; 
     text-align: left;
-    width: auto; /* Let it size naturally */
-    margin-right: 5px; /* Space between label and input */
+    width: auto; 
+    margin-right: 5px; 
 }
 
 .input-group input {
@@ -52,18 +129,17 @@ p {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
-    flex-grow: 1; /* Allow inputs to grow */
-    min-width: 60px; /* Minimum width */
+    flex-grow: 1; 
+    min-width: 60px; 
     text-align: center;
 }
 
-/* Target specific input types if needed */
 #year {
     min-width: 80px;
 }
 
-
-button {
+/* Bouton Convertir */
+button#convert-button { 
     background-color: #3498db;
     color: white;
     border: none;
@@ -72,113 +148,118 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%; /* Make button full width */
-    margin-top: 10px; /* Add space above button */
+    width: 100%; 
+    margin-top: 10px; 
 }
 
-button:hover {
+button#convert-button:hover {
     background-color: #2980b9;
 }
 
+/* Zone de résultat */
 #result-area {
     margin-top: 30px;
     background-color: #eaf6ff;
-    padding: 15px;
+    padding: 20px; 
     border-radius: 5px;
     border: 1px solid #bde0ff;
+    text-align: left; 
 }
 
 #result-area h2 {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 15px; 
     color: #1a5f8a;
-    font-size: 1.1em;
+    font-size: 1.2em; 
+    text-align: center; 
+    border-bottom: 1px solid #bde0ff; 
+    padding-bottom: 10px;
 }
 
-#republican-date {
+/* Styles spécifiques aux infos affichées */
+#republican-date-equinox { 
     font-size: 1.3em;
     font-weight: bold;
     color: #0056b3;
-    margin-bottom: 0;
-    min-height: 1.5em; /* Prevent layout shift */
+    margin-bottom: 10px; 
+    min-height: 1.5em; 
+    text-align: center; 
 }
 
+#fete-name {
+    font-style: italic; 
+    font-size: 1.1em; 
+    margin-bottom: 2px;
+    color: #333;
+}
+
+#fete-latin-author {
+    font-size: 0.9em; 
+    color: #666; 
+    margin-top: 0px; 
+    margin-bottom: 8px; 
+}
+
+#fete-latin {
+    font-style: italic;
+}
+
+#fete-author {
+   margin-left: 5px;
+}
+
+#fete-latin-author:empty { /* Cache la ligne si latin et auteur sont vides */
+     display: none;
+} 
+
+#fete-description {
+    font-size: 0.9em; 
+    color: #444; 
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+#romme-date-info {
+    font-size: 0.85em; 
+    color: #555;
+    margin-top: 15px; 
+    border-top: 1px dashed #ccc; 
+    padding-top: 10px;
+}
+
+
+/* Message d'erreur */
 .error-message {
-    color: #d9534f; /* Bootstrap danger color */
+    color: #d9534f; 
     background-color: #f2dede;
     border: 1px solid #ebccd1;
-    padding: 10px;
+    padding: 12px; 
     border-radius: 4px;
-    margin-top: 15px;
+    margin-top: 20px; 
     font-weight: bold;
+    text-align: center;
 }
 
-#result-area {
-    margin-top: 30px;
-    background-color: #eaf6ff;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #bde0ff;
-    text-align: left; /* Aligner le texte à gauche dans cette zone */
-}
+/* Media Query pour les écrans plus petits */
+@media (max-width: 1024px) {
+    .main-grid-container {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 20px; /* Réduire l'espace vertical */
+    }
 
-#result-area h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #1a5f8a;
-    font-size: 1.1em;
-    text-align: center; /* Centrer le titre principal */
-}
+    #encyclopedia-frame {
+        height: 50vh; /* Réduire hauteur iframe */
+    }
 
-#result-area h3 {
-    margin-top: 15px;
-    margin-bottom: 8px;
-    color: #333;
-    font-size: 1em;
-    border-bottom: 1px solid #ddd; /* Séparateur léger */
-    padding-bottom: 5px;
-}
+    .left-column, .right-column, .center-column .converter-container {
+        padding: 15px; /* Réduire padding interne */
+    }
 
-#republican-date {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #0056b3;
-    margin-bottom: 15px; /* Espace avant les infos du jour */
-    min-height: 1.5em; /* Prevent layout shift */
-    text-align: center; /* Centrer la date */
-}
-
-#day-info p {
-    margin-bottom: 5px; /* Espacement réduit entre les paragraphes d'info */
-    color: #333;
-    font-size: 0.95em;
-    line-height: 1.4;
-}
-
-#day-info strong {
-    color: #1a5f8a; /* Couleur assortie au titre */
-}
-
-#item-latin {
-    font-style: italic;
-    color: #555; /* Gris un peu plus foncé */
-    display: block; /* Assure qu'il prend sa propre ligne si non vide */
-    margin-top: -5px; /* Rapproche un peu du nom */
-    margin-bottom: 5px;
-    font-size: 0.9em;
-}
-
-#item-latin:empty {
-    display: none; /* Cache l'élément s'il n'y a pas de nom latin */
-}
-
-.description {
-    font-size: 0.9em;
-    color: #555;
-    margin-top: 5px;
-}
-
-.error-message {
-    /* Styles existants... */
-    text-align: center; /* Centrer le message d'erreur */
+    /* Optionnel : Masquer les colonnes latérales sur les très petits écrans */
+    /* @media (max-width: 600px) { 
+        .left-column, .right-column {
+            display: none; 
+        }
+    } 
+    */
 }
