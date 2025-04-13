@@ -9,16 +9,6 @@
 <body>
     <div class="main-grid-container">
 
-        <div class="left-column">
-            <h3>Illustration</h3>
-            <div id="image-container">
-                <a id="fete-wiki-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
-                    <img id="fete-image" src="" alt="Illustration Fête du Jour" style="display: none; max-width: 100%; height: auto; border: 1px solid #ccc;">
-                </a>
-                <p id="image-placeholder" style="display: block; color: #888;">(Pas d'illustration disponible)</p>
-            </div>
-        </div>
-
         <div class="center-column">
             <div class="converter-container">
                 <h1>Convertisseur Grégorien vers Républicain</h1>
@@ -45,11 +35,11 @@
                     <p id="republican-date-equinox">---</p>
 
                     <p id="fete-name" style="font-style: italic; font-size: 1em; margin-bottom: 2px;">Fête du jour : ---</p>
-                    <p id="fete-latin-author" style="font-size: 0.9em; color: #666; margin-top: 0px; margin-bottom: 5px;">
+                    <p id="fete-latin-author" style="font-size: 0.9em; color: #666; margin-top: 0px; margin-bottom: 5px; display: none;">
                         <i id="fete-latin"></i> <span id="fete-author" style="margin-left: 5px;"></span>
                     </p>
                     <p id="fete-description" style="font-size: 0.85em; color: #333; margin-bottom: 15px;">---</p>
-                    
+
                     <hr style="margin: 15px 0;">
                     <p id="romme-date-info" style="font-size: 0.85em; color: #555;">Date selon méthode Romme : ---</p>
                 </div>
@@ -58,14 +48,24 @@
             </div>
         </div>
 
+<div class="left-column">
+            <h3 id="left-column-title">Illustration</h3> 
+            <div id="image-container">
+                <a id="fete-wiki-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
+                    <img id="fete-image" src="" alt="Illustration Fête du Jour" style="display: none; max-width: 100%; height: auto; border: 1px solid #ccc;">
+                </a>
+                <p id="image-placeholder" style="display: block; color: #888;">(Pas d'illustration disponible)</p>
+            </div>
+        </div>
+
         <div class="right-column">
             <h3>Encyclopédie (première édition)</h3>
             <div id="encyclopedia-container">
-                <iframe id="encyclopedia-frame" src="about:blank" width="100%" height="400px" style="border: 1px solid #ccc; display: none;"></iframe>
-                <p id="encyclopedia-placeholder" style="display: block; color: #888;">(Pas d'article lié disponible)</p>
-                 <p style="font-size: 0.8em; text-align: center; margin-top: 10px;">
-                    <a href="https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition" target="_blank">Accéder à l'Encyclopédie</a>
-                </p>
+                 <iframe id="encyclopedia-frame" src="about:blank" width="100%" style="border: 1px solid #ccc; display: none;"></iframe>
+                 <p id="encyclopedia-placeholder" style="display: block; color: #888;">(Pas d'article lié disponible)</p>
+                  <p style="font-size: 0.8em; text-align: center; margin-top: 10px;">
+                     <a href="https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition" target="_blank">Accéder à l'Encyclopédie</a>
+                 </p>
             </div>
         </div>
 
