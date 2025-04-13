@@ -15,16 +15,17 @@ body {
 /* Conteneur principal de la grille */
 .main-grid-container {
     display: grid;
-    /* Nouvelles proportions : Côtés plus larges */
-    grid-template-columns: 2fr 2fr 2fr; 
+    /* Colonnes flexibles : Centre (1.5fr) - Gauche (2fr) - Droite (2fr) */
+    /* L'ordre visuel sur desktop correspond à l'ordre HTML ci-dessus */
+    grid-template-columns: 1.5fr 2fr 2fr; 
     gap: 40px; /* Espace entre les colonnes */
     max-width: 1700px; 
     margin: 0 auto; 
     align-items: start; 
 }
 
-/* Styles pour les colonnes latérales */
-.left-column, .right-column {
+/* Styles pour les colonnes */
+.center-column, .left-column, .right-column {
     background-color: #fff;
     padding: 20px; 
     border-radius: 8px;
@@ -32,6 +33,7 @@ body {
     min-height: 300px; 
 }
 
+/* Titres des colonnes latérales */
 .left-column h3, .right-column h3 {
     text-align: center;
     margin-top: 0;
@@ -72,7 +74,7 @@ body {
     border: 1px solid #ccc;
     display: none; 
     width: 100%; 
-    height: 65vh; /* Gardons la hauteur adaptative */
+    height: 65vh; /* Hauteur adaptative */
     border-radius: 4px;
 }
 #encyclopedia-placeholder {
@@ -82,25 +84,30 @@ body {
     padding: 20px 0;
 }
 
-
 /* Styles pour la colonne centrale (convertisseur) */
-.center-column .converter-container {
-     max-width: none; 
+/* Plus besoin de .center-column .converter-container car .center-column contient directement .converter-container */
+.converter-container {
+     /* max-width: none; */ /* Pas nécessaire car la colonne grid limite */
      width: 100%; 
-     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08); 
-     background-color: #fff;
+     /* box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08); */ /* L'ombre est sur .center-column maintenant */
+     background-color: #fff; /* Redondant si .center-column a déjà le fond */
      padding: 30px;
      border-radius: 8px;
      text-align: center;
+     /* Retirer la bordure/ombre interne si .center-column l'a déjà */
+     box-shadow: none; 
+     border: none;
+     padding: 0; /* Le padding est géré par .center-column */
 }
 
-/* Styles généraux du convertisseur (réutilisés) */
+/* Styles généraux du convertisseur */
 .converter-container h1 {
     color: #2c3e50;
     margin-bottom: 15px;
+     margin-top: 0; /* Enlever marge haute si .center-column a du padding */
 }
 
-.converter-container p { 
+.converter-container > p { /* Paragraphe d'intro direct enfant */
     color: #555;
     margin-bottom: 25px;
     font-size: 0.9em;
@@ -198,6 +205,7 @@ button#convert-button:hover {
     color: #666; 
     margin-top: 0px; 
     margin-bottom: 8px; 
+    display: none; /* Masqué par défaut, affiché par JS */
 }
 
 #fete-latin {
@@ -208,9 +216,7 @@ button#convert-button:hover {
    margin-left: 5px;
 }
 
-#fete-latin-author:empty { /* Cache la ligne si latin et auteur sont vides */
-     display: none;
-} 
+/* Pas besoin de #fete-latin-author:empty car on gère l'affichage par JS */
 
 #fete-description {
     font-size: 0.9em; 
@@ -226,7 +232,6 @@ button#convert-button:hover {
     border-top: 1px dashed #ccc; 
     padding-top: 10px;
 }
-
 
 /* Message d'erreur */
 .error-message {
@@ -244,15 +249,25 @@ button#convert-button:hover {
 @media (max-width: 1024px) {
     .main-grid-container {
         grid-template-columns: 1fr; /* Une seule colonne */
-        gap: 20px; /* Réduire l'espace vertical */
+        gap: 20px; /* Espace vertical réduit */
     }
+
+    /* Réorganisation spécifique pour mobile */
+    .center-column { order: 1; } /* Convertisseur en premier */
+    .left-column   { order: 2; } /* Illustration ensuite */
+    .right-column  { order: 3; } /* Encyclopédie en dernier */
 
     #encyclopedia-frame {
         height: 50vh; /* Réduire hauteur iframe */
     }
 
-    .left-column, .right-column, .center-column .converter-container {
-        padding: 15px; /* Réduire padding interne */
+    .center-column, .left-column, .right-column {
+        padding: 15px; /* Réduire padding interne des colonnes */
+    }
+    
+    /* Le padding du .converter-container n'est plus nécessaire ici car géré par .center-column */
+    .converter-container {
+        padding: 0;
     }
 
     /* Optionnel : Masquer les colonnes latérales sur les très petits écrans */
@@ -260,6 +275,5 @@ button#convert-button:hover {
         .left-column, .right-column {
             display: none; 
         }
-    } 
-    */
+    } */
 }
