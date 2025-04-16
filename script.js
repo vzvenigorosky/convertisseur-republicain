@@ -1,30 +1,858 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Element References ---
     const dayInput = document.getElementById('day');
     const monthInput = document.getElementById('month');
     const yearInput = document.getElementById('year');
     const convertButton = document.getElementById('convert-button');
     const resultDisplayEquinox = document.getElementById('republican-date-equinox');
-    const feteDisplay = document.getElementById('fete-du-jour');
     const resultDisplayRomme = document.getElementById('romme-date-info');
     const errorDisplay = document.getElementById('error-area');
+    const calendarInfoDisplay = document.getElementById('calendar-info');
+    const supportedRangeInfo = document.getElementById('supported-range-info'); // For dynamic range text
+    const feteNameDisplay = document.getElementById('fete-name');
+    const feteLatinDisplay = document.getElementById('fete-latin');
+    const feteAuthorDisplay = document.getElementById('fete-author');
+    const feteLatinAuthorLine = document.getElementById('fete-latin-author');
+    const feteDescriptionDisplay = document.getElementById('fete-description');
+    const leftColumnTitle = document.getElementById('left-column-title');
+    const wikiLink = document.getElementById('fete-wiki-link');
+    const image = document.getElementById('fete-image');
+    const imagePlaceholder = document.getElementById('image-placeholder');
+    const encycloFrame = document.getElementById('encyclopedia-frame');
+    const encycloPlaceholder = document.getElementById('encyclopedia-placeholder');
+    // ** NOUVELLES RÉFÉRENCES pour Commémoration **
+    const commemorationArea = document.getElementById('commemoration-area');
+    const commemorationTitle = document.getElementById('commemoration-title');
+    const commemorationDesc = document.getElementById('commemoration-description');
 
+    // --- Global variables for data range ---
+    let minEquinoxDataYear = null;
+    let maxEquinoxDataYear = null;
 
     // --- Constantes Calendrier Républicain ---
-    const republicanMonths = [ /* ... reste identique ... */
+    const republicanMonths = [
         "Vendémiaire", "Brumaire", "Frimaire", "Nivôse", "Pluviôse", "Ventôse",
         "Germinal", "Floréal", "Prairial", "Messidor", "Thermidor", "Fructidor"
     ];
-    const decadeDays = [ /* ... reste identique ... */
+    const decadeDays = [
         "Primidi", "Duodi", "Tridi", "Quartidi", "Quintidi",
         "Sextidi", "Septidi", "Octidi", "Nonidi", "Décadi"
     ];
-    const complementaryDaysNames = [ /* Noms génériques, utilisés si description non trouvée */
+    const complementaryDaysNames = [ /* Noms génériques */
         "Jour de la Vertu", "Jour du Génie", "Jour du Travail",
         "Jour de l'Opinion", "Jour des Récompenses", "Jour de la Révolution"
     ];
 
     // --- Données Équinoxe Automne (1792-2199) ---
     const equinoxDates = { /* Copiez ici l'objet equinoxData de la réponse précédente */
+// --- DEBUT Données Equinoxe 1000-1049 ---
+        // Converties en Proleptique Grégorien (+6 jours)
+        1000: { month: 9, day: 23 }, // 17 Sep Julian
+        1001: { month: 9, day: 23 }, // 17 Sep Julian
+        1002: { month: 9, day: 24 }, // 18 Sep Julian
+        1003: { month: 9, day: 24 }, // 18 Sep Julian
+        1004: { month: 9, day: 23 }, // 17 Sep Julian
+        1005: { month: 9, day: 23 }, // 17 Sep Julian
+        1006: { month: 9, day: 24 }, // 18 Sep Julian
+        1007: { month: 9, day: 24 }, // 18 Sep Julian
+        1008: { month: 9, day: 23 }, // 17 Sep Julian
+        1009: { month: 9, day: 23 }, // 17 Sep Julian
+        1010: { month: 9, day: 24 }, // 18 Sep Julian
+        1011: { month: 9, day: 24 }, // 18 Sep Julian
+        1012: { month: 9, day: 23 }, // 17 Sep Julian
+        1013: { month: 9, day: 23 }, // 17 Sep Julian
+        1014: { month: 9, day: 23 }, // 17 Sep Julian (?) Text: Sep 17 -> Sep 23. Correct.
+        1015: { month: 9, day: 24 }, // 18 Sep Julian
+        1016: { month: 9, day: 23 }, // 17 Sep Julian
+        1017: { month: 9, day: 23 }, // 17 Sep Julian
+        1018: { month: 9, day: 23 }, // 17 Sep Julian
+        1019: { month: 9, day: 24 }, // 18 Sep Julian
+        1020: { month: 9, day: 23 }, // 17 Sep Julian
+        1021: { month: 9, day: 23 }, // 17 Sep Julian
+        1022: { month: 9, day: 23 }, // 17 Sep Julian
+        1023: { month: 9, day: 24 }, // 18 Sep Julian
+        1024: { month: 9, day: 23 }, // 17 Sep Julian
+        1025: { month: 9, day: 23 }, // 17 Sep Julian
+        1026: { month: 9, day: 23 }, // 17 Sep Julian
+        1027: { month: 9, day: 24 }, // 18 Sep Julian
+        1028: { month: 9, day: 23 }, // 17 Sep Julian
+        1029: { month: 9, day: 23 }, // 17 Sep Julian
+        1030: { month: 9, day: 23 }, // 17 Sep Julian
+        1031: { month: 9, day: 24 }, // 18 Sep Julian
+        1032: { month: 9, day: 23 }, // 17 Sep Julian
+        1033: { month: 9, day: 23 }, // 17 Sep Julian
+        1034: { month: 9, day: 23 }, // 17 Sep Julian
+        1035: { month: 9, day: 24 }, // 18 Sep Julian
+        1036: { month: 9, day: 23 }, // 17 Sep Julian
+        1037: { month: 9, day: 23 }, // 17 Sep Julian
+        1038: { month: 9, day: 23 }, // 17 Sep Julian
+        1039: { month: 9, day: 24 }, // 18 Sep Julian
+        1040: { month: 9, day: 23 }, // 17 Sep Julian
+        1041: { month: 9, day: 23 }, // 17 Sep Julian
+        1042: { month: 9, day: 23 }, // 17 Sep Julian
+        1043: { month: 9, day: 23 }, // 17 Sep Julian (?) Text: Sep 17 -> Sep 23. Correct.
+        1044: { month: 9, day: 23 }, // 17 Sep Julian
+        1045: { month: 9, day: 23 }, // 17 Sep Julian
+        1046: { month: 9, day: 23 }, // 17 Sep Julian
+        1047: { month: 9, day: 23 }, // 17 Sep Julian
+        1048: { month: 9, day: 23 }, // 17 Sep Julian
+        1049: { month: 9, day: 23 }, // 17 Sep Julian
+        // --- FIN Données Equinoxe 1000-1049 ---
+        1050: { month: 9, day: 23 }, // 17 Sep Julian
+        1051: { month: 9, day: 23 }, // 17 Sep Julian
+        1052: { month: 9, day: 23 }, // 17 Sep Julian
+        1053: { month: 9, day: 23 }, // 17 Sep Julian
+        1054: { month: 9, day: 23 }, // 17 Sep Julian
+        1055: { month: 9, day: 23 }, // 17 Sep Julian
+        1056: { month: 9, day: 23 }, // 17 Sep Julian
+        1057: { month: 9, day: 23 }, // 17 Sep Julian
+        1058: { month: 9, day: 23 }, // 17 Sep Julian
+        1059: { month: 9, day: 23 }, // 17 Sep Julian
+        1060: { month: 9, day: 23 }, // 17 Sep Julian
+        1061: { month: 9, day: 23 }, // 17 Sep Julian
+        1062: { month: 9, day: 23 }, // 17 Sep Julian
+        1063: { month: 9, day: 23 }, // 17 Sep Julian
+        1064: { month: 9, day: 23 }, // 17 Sep Julian
+        1065: { month: 9, day: 23 }, // 17 Sep Julian
+        1066: { month: 9, day: 23 }, // 17 Sep Julian
+        1067: { month: 9, day: 23 }, // 17 Sep Julian
+        1068: { month: 9, day: 23 }, // 17 Sep Julian
+        1069: { month: 9, day: 23 }, // 17 Sep Julian
+        1070: { month: 9, day: 23 }, // 17 Sep Julian
+        1071: { month: 9, day: 23 }, // 17 Sep Julian
+        1072: { month: 9, day: 23 }, // 17 Sep Julian
+        1073: { month: 9, day: 23 }, // 17 Sep Julian
+        1074: { month: 9, day: 23 }, // 17 Sep Julian
+        1075: { month: 9, day: 23 }, // 17 Sep Julian
+        1076: { month: 9, day: 22 }, // 16 Sep Julian (?) Text: Sep 16 -> Sep 22. Correct.
+        1077: { month: 9, day: 23 }, // 17 Sep Julian
+        1078: { month: 9, day: 23 }, // 17 Sep Julian
+        1079: { month: 9, day: 23 }, // 17 Sep Julian
+        1080: { month: 9, day: 22 }, // 16 Sep Julian
+        1081: { month: 9, day: 23 }, // 17 Sep Julian
+        1082: { month: 9, day: 23 }, // 17 Sep Julian
+        1083: { month: 9, day: 23 }, // 17 Sep Julian
+        1084: { month: 9, day: 22 }, // 16 Sep Julian
+        1085: { month: 9, day: 23 }, // 17 Sep Julian
+        1086: { month: 9, day: 23 }, // 17 Sep Julian
+        1087: { month: 9, day: 23 }, // 17 Sep Julian
+        1088: { month: 9, day: 22 }, // 16 Sep Julian
+        1089: { month: 9, day: 23 }, // 17 Sep Julian
+        1090: { month: 9, day: 23 }, // 17 Sep Julian
+        1091: { month: 9, day: 23 }, // 17 Sep Julian
+        1092: { month: 9, day: 22 }, // 16 Sep Julian
+        1093: { month: 9, day: 23 }, // 17 Sep Julian
+        1094: { month: 9, day: 23 }, // 17 Sep Julian
+        1095: { month: 9, day: 23 }, // 17 Sep Julian
+        1096: { month: 9, day: 22 }, // 16 Sep Julian
+        1097: { month: 9, day: 23 }, // 17 Sep Julian
+        1098: { month: 9, day: 23 }, // 17 Sep Julian
+        1099: { month: 9, day: 23 }, // 17 Sep Julian
+        // --- FIN Données Equinoxe 1050-1099 ---
+        1100: { month: 9, day: 23 }, // 16 Sep Julian
+        1101: { month: 9, day: 24 }, // 17 Sep Julian
+        1102: { month: 9, day: 24 }, // 17 Sep Julian
+        1103: { month: 9, day: 24 }, // 17 Sep Julian
+        1104: { month: 9, day: 23 }, // 16 Sep Julian
+        1105: { month: 9, day: 24 }, // 17 Sep Julian
+        1106: { month: 9, day: 24 }, // 17 Sep Julian
+        1107: { month: 9, day: 24 }, // 17 Sep Julian
+        1108: { month: 9, day: 23 }, // 16 Sep Julian
+        1109: { month: 9, day: 23 }, // 16 Sep Julian
+        1110: { month: 9, day: 24 }, // 17 Sep Julian
+        1111: { month: 9, day: 24 }, // 17 Sep Julian
+        1112: { month: 9, day: 23 }, // 16 Sep Julian
+        1113: { month: 9, day: 23 }, // 16 Sep Julian
+        1114: { month: 9, day: 24 }, // 17 Sep Julian
+        1115: { month: 9, day: 24 }, // 17 Sep Julian
+        1116: { month: 9, day: 23 }, // 16 Sep Julian
+        1117: { month: 9, day: 23 }, // 16 Sep Julian
+        1118: { month: 9, day: 24 }, // 17 Sep Julian
+        1119: { month: 9, day: 24 }, // 17 Sep Julian
+        1120: { month: 9, day: 23 }, // 16 Sep Julian
+        1121: { month: 9, day: 23 }, // 16 Sep Julian
+        1122: { month: 9, day: 24 }, // 17 Sep Julian
+        1123: { month: 9, day: 24 }, // 17 Sep Julian
+        1124: { month: 9, day: 23 }, // 16 Sep Julian
+        1125: { month: 9, day: 23 }, // 16 Sep Julian
+        1126: { month: 9, day: 24 }, // 17 Sep Julian
+        1127: { month: 9, day: 24 }, // 17 Sep Julian
+        1128: { month: 9, day: 23 }, // 16 Sep Julian
+        1129: { month: 9, day: 23 }, // 16 Sep Julian
+        1130: { month: 9, day: 24 }, // 17 Sep Julian
+        1131: { month: 9, day: 24 }, // 17 Sep Julian
+        1132: { month: 9, day: 23 }, // 16 Sep Julian
+        1133: { month: 9, day: 23 }, // 16 Sep Julian
+        1134: { month: 9, day: 24 }, // 17 Sep Julian
+        1135: { month: 9, day: 24 }, // 17 Sep Julian
+        1136: { month: 9, day: 23 }, // 16 Sep Julian
+        1137: { month: 9, day: 23 }, // 16 Sep Julian
+        1138: { month: 9, day: 24 }, // 17 Sep Julian
+        1139: { month: 9, day: 24 }, // 17 Sep Julian
+        1140: { month: 9, day: 23 }, // 16 Sep Julian
+        1141: { month: 9, day: 23 }, // 16 Sep Julian
+        1142: { month: 9, day: 23 }, // 16 Sep Julian (?) Text: Sep 16 -> Sep 23. Correct.
+        1143: { month: 9, day: 24 }, // 17 Sep Julian
+        1144: { month: 9, day: 23 }, // 16 Sep Julian
+        1145: { month: 9, day: 23 }, // 16 Sep Julian
+        1146: { month: 9, day: 23 }, // 16 Sep Julian
+        1147: { month: 9, day: 24 }, // 17 Sep Julian
+        1148: { month: 9, day: 23 }, // 16 Sep Julian
+        1149: { month: 9, day: 23 }, // 16 Sep Julian
+        // --- FIN Données Equinoxe 1100-1149 ---
+        1150: { month: 9, day: 23 }, // 16 Sep Julian
+        1151: { month: 9, day: 24 }, // 17 Sep Julian
+        1152: { month: 9, day: 23 }, // 16 Sep Julian
+        1153: { month: 9, day: 23 }, // 16 Sep Julian
+        1154: { month: 9, day: 23 }, // 16 Sep Julian
+        1155: { month: 9, day: 24 }, // 17 Sep Julian
+        1156: { month: 9, day: 23 }, // 16 Sep Julian
+        1157: { month: 9, day: 23 }, // 16 Sep Julian
+        1158: { month: 9, day: 23 }, // 16 Sep Julian
+        1159: { month: 9, day: 24 }, // 17 Sep Julian
+        1160: { month: 9, day: 23 }, // 16 Sep Julian
+        1161: { month: 9, day: 23 }, // 16 Sep Julian
+        1162: { month: 9, day: 23 }, // 16 Sep Julian
+        1163: { month: 9, day: 24 }, // 17 Sep Julian
+        1164: { month: 9, day: 23 }, // 16 Sep Julian
+        1165: { month: 9, day: 23 }, // 16 Sep Julian
+        1166: { month: 9, day: 23 }, // 16 Sep Julian
+        1167: { month: 9, day: 24 }, // 17 Sep Julian
+        1168: { month: 9, day: 23 }, // 16 Sep Julian
+        1169: { month: 9, day: 23 }, // 16 Sep Julian
+        1170: { month: 9, day: 23 }, // 16 Sep Julian
+        1171: { month: 9, day: 24 }, // 17 Sep Julian
+        1172: { month: 9, day: 23 }, // 16 Sep Julian
+        1173: { month: 9, day: 23 }, // 16 Sep Julian
+        1174: { month: 9, day: 23 }, // 16 Sep Julian
+        1175: { month: 9, day: 23 }, // 16 Sep Julian (?) Text: Sep 16 -> Sep 23. Correct.
+        1176: { month: 9, day: 23 }, // 16 Sep Julian
+        1177: { month: 9, day: 23 }, // 16 Sep Julian
+        1178: { month: 9, day: 23 }, // 16 Sep Julian
+        1179: { month: 9, day: 23 }, // 16 Sep Julian
+        1180: { month: 9, day: 23 }, // 16 Sep Julian
+        1181: { month: 9, day: 23 }, // 16 Sep Julian
+        1182: { month: 9, day: 23 }, // 16 Sep Julian
+        1183: { month: 9, day: 23 }, // 16 Sep Julian
+        1184: { month: 9, day: 23 }, // 16 Sep Julian
+        1185: { month: 9, day: 23 }, // 16 Sep Julian
+        1186: { month: 9, day: 23 }, // 16 Sep Julian
+        1187: { month: 9, day: 23 }, // 16 Sep Julian
+        1188: { month: 9, day: 23 }, // 16 Sep Julian
+        1189: { month: 9, day: 23 }, // 16 Sep Julian
+        1190: { month: 9, day: 23 }, // 16 Sep Julian
+        1191: { month: 9, day: 23 }, // 16 Sep Julian
+        1192: { month: 9, day: 23 }, // 16 Sep Julian
+        1193: { month: 9, day: 23 }, // 16 Sep Julian
+        1194: { month: 9, day: 23 }, // 16 Sep Julian
+        1195: { month: 9, day: 23 }, // 16 Sep Julian
+        1196: { month: 9, day: 23 }, // 16 Sep Julian
+        1197: { month: 9, day: 23 }, // 16 Sep Julian
+        1198: { month: 9, day: 23 }, // 16 Sep Julian
+        1199: { month: 9, day: 23 }, // 16 Sep Julian
+        // --- FIN Données Equinoxe 1150-1199 ---
+        1200: { month: 9, day: 23 }, // 16 Sep Julian
+        1201: { month: 9, day: 23 }, // 16 Sep Julian
+        1202: { month: 9, day: 23 }, // 16 Sep Julian
+        1203: { month: 9, day: 23 }, // 16 Sep Julian
+        1204: { month: 9, day: 23 }, // 16 Sep Julian
+        1205: { month: 9, day: 23 }, // 16 Sep Julian
+        1206: { month: 9, day: 23 }, // 16 Sep Julian
+        1207: { month: 9, day: 23 }, // 16 Sep Julian
+        1208: { month: 9, day: 22 }, // 15 Sep Julian
+        1209: { month: 9, day: 23 }, // 16 Sep Julian
+        1210: { month: 9, day: 23 }, // 16 Sep Julian
+        1211: { month: 9, day: 23 }, // 16 Sep Julian
+        1212: { month: 9, day: 22 }, // 15 Sep Julian
+        1213: { month: 9, day: 23 }, // 16 Sep Julian
+        1214: { month: 9, day: 23 }, // 16 Sep Julian
+        1215: { month: 9, day: 23 }, // 16 Sep Julian
+        1216: { month: 9, day: 22 }, // 15 Sep Julian
+        1217: { month: 9, day: 23 }, // 16 Sep Julian
+        1218: { month: 9, day: 23 }, // 16 Sep Julian
+        1219: { month: 9, day: 23 }, // 16 Sep Julian
+        1220: { month: 9, day: 22 }, // 15 Sep Julian
+        1221: { month: 9, day: 23 }, // 16 Sep Julian
+        1222: { month: 9, day: 23 }, // 16 Sep Julian
+        1223: { month: 9, day: 23 }, // 16 Sep Julian
+        1224: { month: 9, day: 22 }, // 15 Sep Julian
+        1225: { month: 9, day: 23 }, // 16 Sep Julian
+        1226: { month: 9, day: 23 }, // 16 Sep Julian
+        1227: { month: 9, day: 23 }, // 16 Sep Julian
+        1228: { month: 9, day: 22 }, // 15 Sep Julian
+        1229: { month: 9, day: 23 }, // 16 Sep Julian
+        1230: { month: 9, day: 23 }, // 16 Sep Julian
+        1231: { month: 9, day: 23 }, // 16 Sep Julian
+        1232: { month: 9, day: 22 }, // 15 Sep Julian
+        1233: { month: 9, day: 23 }, // 16 Sep Julian
+        1234: { month: 9, day: 23 }, // 16 Sep Julian
+        1235: { month: 9, day: 23 }, // 16 Sep Julian
+        1236: { month: 9, day: 22 }, // 15 Sep Julian
+        1237: { month: 9, day: 22 }, // 15 Sep Julian
+        1238: { month: 9, day: 23 }, // 16 Sep Julian
+        1239: { month: 9, day: 23 }, // 16 Sep Julian
+        1240: { month: 9, day: 22 }, // 15 Sep Julian
+        1241: { month: 9, day: 22 }, // 15 Sep Julian
+        1242: { month: 9, day: 23 }, // 16 Sep Julian
+        1243: { month: 9, day: 23 }, // 16 Sep Julian
+        1244: { month: 9, day: 22 }, // 15 Sep Julian
+        1245: { month: 9, day: 22 }, // 15 Sep Julian
+        1246: { month: 9, day: 23 }, // 16 Sep Julian
+        1247: { month: 9, day: 23 }, // 16 Sep Julian
+        1248: { month: 9, day: 22 }, // 15 Sep Julian
+        1249: { month: 9, day: 22 }, // 15 Sep Julian
+        // --- FIN Données Equinoxe 1200-1249 ---
+        1250: { month: 9, day: 23 }, // 16 Sep Julian
+        1251: { month: 9, day: 23 }, // 16 Sep Julian
+        1252: { month: 9, day: 22 }, // 15 Sep Julian
+        1253: { month: 9, day: 22 }, // 15 Sep Julian
+        1254: { month: 9, day: 23 }, // 16 Sep Julian
+        1255: { month: 9, day: 23 }, // 16 Sep Julian
+        1256: { month: 9, day: 22 }, // 15 Sep Julian
+        1257: { month: 9, day: 22 }, // 15 Sep Julian
+        1258: { month: 9, day: 23 }, // 16 Sep Julian
+        1259: { month: 9, day: 23 }, // 16 Sep Julian
+        1260: { month: 9, day: 22 }, // 15 Sep Julian
+        1261: { month: 9, day: 22 }, // 15 Sep Julian
+        1262: { month: 9, day: 23 }, // 16 Sep Julian
+        1263: { month: 9, day: 23 }, // 16 Sep Julian
+        1264: { month: 9, day: 22 }, // 15 Sep Julian
+        1265: { month: 9, day: 22 }, // 15 Sep Julian
+        1266: { month: 9, day: 23 }, // 16 Sep Julian
+        1267: { month: 9, day: 23 }, // 16 Sep Julian
+        1268: { month: 9, day: 22 }, // 15 Sep Julian
+        1269: { month: 9, day: 22 }, // 15 Sep Julian
+        1270: { month: 9, day: 22 }, // 15 Sep Julian
+        1271: { month: 9, day: 23 }, // 16 Sep Julian
+        1272: { month: 9, day: 22 }, // 15 Sep Julian
+        1273: { month: 9, day: 22 }, // 15 Sep Julian
+        1274: { month: 9, day: 22 }, // 15 Sep Julian
+        1275: { month: 9, day: 23 }, // 16 Sep Julian
+        1276: { month: 9, day: 22 }, // 15 Sep Julian
+        1277: { month: 9, day: 22 }, // 15 Sep Julian
+        1278: { month: 9, day: 22 }, // 15 Sep Julian
+        1279: { month: 9, day: 23 }, // 16 Sep Julian
+        1280: { month: 9, day: 22 }, // 15 Sep Julian
+        1281: { month: 9, day: 22 }, // 15 Sep Julian
+        1282: { month: 9, day: 22 }, // 15 Sep Julian
+        1283: { month: 9, day: 23 }, // 16 Sep Julian
+        1284: { month: 9, day: 22 }, // 15 Sep Julian
+        1285: { month: 9, day: 22 }, // 15 Sep Julian
+        1286: { month: 9, day: 22 }, // 15 Sep Julian
+        1287: { month: 9, day: 23 }, // 16 Sep Julian
+        1288: { month: 9, day: 22 }, // 15 Sep Julian
+        1289: { month: 9, day: 22 }, // 15 Sep Julian
+        1290: { month: 9, day: 22 }, // 15 Sep Julian
+        1291: { month: 9, day: 23 }, // 16 Sep Julian
+        1292: { month: 9, day: 22 }, // 15 Sep Julian
+        1293: { month: 9, day: 22 }, // 15 Sep Julian
+        1294: { month: 9, day: 22 }, // 15 Sep Julian
+        1295: { month: 9, day: 23 }, // 16 Sep Julian
+        1296: { month: 9, day: 22 }, // 15 Sep Julian
+        1297: { month: 9, day: 22 }, // 15 Sep Julian
+        1298: { month: 9, day: 22 }, // 15 Sep Julian
+        1299: { month: 9, day: 23 }, // 16 Sep Julian
+        // --- FIN Données Equinoxe 1250-1299 ---
+        1300: { month: 9, day: 23 }, // 15 Sep Julian
+        1301: { month: 9, day: 23 }, // 15 Sep Julian
+        1302: { month: 9, day: 23 }, // 15 Sep Julian
+        1303: { month: 9, day: 23 }, // 15 Sep Julian
+        1304: { month: 9, day: 23 }, // 15 Sep Julian
+        1305: { month: 9, day: 23 }, // 15 Sep Julian
+        1306: { month: 9, day: 23 }, // 15 Sep Julian
+        1307: { month: 9, day: 23 }, // 15 Sep Julian
+        1308: { month: 9, day: 23 }, // 15 Sep Julian
+        1309: { month: 9, day: 23 }, // 15 Sep Julian
+        1310: { month: 9, day: 23 }, // 15 Sep Julian
+        1311: { month: 9, day: 23 }, // 15 Sep Julian
+        1312: { month: 9, day: 23 }, // 15 Sep Julian
+        1313: { month: 9, day: 23 }, // 15 Sep Julian
+        1314: { month: 9, day: 23 }, // 15 Sep Julian
+        1315: { month: 9, day: 23 }, // 15 Sep Julian
+        1316: { month: 9, day: 23 }, // 15 Sep Julian
+        1317: { month: 9, day: 23 }, // 15 Sep Julian
+        1318: { month: 9, day: 23 }, // 15 Sep Julian
+        1319: { month: 9, day: 23 }, // 15 Sep Julian
+        1320: { month: 9, day: 23 }, // 15 Sep Julian
+        1321: { month: 9, day: 23 }, // 15 Sep Julian
+        1322: { month: 9, day: 23 }, // 15 Sep Julian
+        1323: { month: 9, day: 23 }, // 15 Sep Julian
+        1324: { month: 9, day: 23 }, // 15 Sep Julian
+        1325: { month: 9, day: 23 }, // 15 Sep Julian
+        1326: { month: 9, day: 23 }, // 15 Sep Julian
+        1327: { month: 9, day: 23 }, // 15 Sep Julian
+        1328: { month: 9, day: 23 }, // 15 Sep Julian
+        1329: { month: 9, day: 23 }, // 15 Sep Julian
+        1330: { month: 9, day: 23 }, // 15 Sep Julian
+        1331: { month: 9, day: 23 }, // 15 Sep Julian
+        1332: { month: 9, day: 23 }, // 15 Sep Julian
+        1333: { month: 9, day: 23 }, // 15 Sep Julian
+        1334: { month: 9, day: 23 }, // 15 Sep Julian
+        1335: { month: 9, day: 23 }, // 15 Sep Julian
+        1336: { month: 9, day: 22 }, // 14 Sep Julian
+        1337: { month: 9, day: 23 }, // 15 Sep Julian
+        1338: { month: 9, day: 23 }, // 15 Sep Julian
+        1339: { month: 9, day: 23 }, // 15 Sep Julian
+        1340: { month: 9, day: 22 }, // 14 Sep Julian
+        1341: { month: 9, day: 23 }, // 15 Sep Julian
+        1342: { month: 9, day: 23 }, // 15 Sep Julian
+        1343: { month: 9, day: 23 }, // 15 Sep Julian
+        1344: { month: 9, day: 22 }, // 14 Sep Julian
+        1345: { month: 9, day: 23 }, // 15 Sep Julian
+        1346: { month: 9, day: 23 }, // 15 Sep Julian
+        1347: { month: 9, day: 23 }, // 15 Sep Julian
+        1348: { month: 9, day: 22 }, // 14 Sep Julian
+        1349: { month: 9, day: 23 }, // 15 Sep Julian
+        // --- FIN Données Equinoxe 1300-1349 ---
+        1350: { month: 9, day: 23 }, // 15 Sep Julian
+        1351: { month: 9, day: 23 }, // 15 Sep Julian
+        1352: { month: 9, day: 22 }, // 14 Sep Julian
+        1353: { month: 9, day: 23 }, // 15 Sep Julian
+        1354: { month: 9, day: 23 }, // 15 Sep Julian
+        1355: { month: 9, day: 23 }, // 15 Sep Julian
+        1356: { month: 9, day: 22 }, // 14 Sep Julian
+        1357: { month: 9, day: 23 }, // 15 Sep Julian
+        1358: { month: 9, day: 23 }, // 15 Sep Julian
+        1359: { month: 9, day: 23 }, // 15 Sep Julian
+        1360: { month: 9, day: 22 }, // 14 Sep Julian
+        1361: { month: 9, day: 23 }, // 15 Sep Julian
+        1362: { month: 9, day: 23 }, // 15 Sep Julian
+        1363: { month: 9, day: 23 }, // 15 Sep Julian
+        1364: { month: 9, day: 22 }, // 14 Sep Julian
+        1365: { month: 9, day: 22 }, // 14 Sep Julian
+        1366: { month: 9, day: 23 }, // 15 Sep Julian
+        1367: { month: 9, day: 23 }, // 15 Sep Julian
+        1368: { month: 9, day: 22 }, // 14 Sep Julian
+        1369: { month: 9, day: 22 }, // 14 Sep Julian
+        1370: { month: 9, day: 23 }, // 15 Sep Julian
+        1371: { month: 9, day: 23 }, // 15 Sep Julian
+        1372: { month: 9, day: 22 }, // 14 Sep Julian
+        1373: { month: 9, day: 22 }, // 14 Sep Julian
+        1374: { month: 9, day: 23 }, // 15 Sep Julian
+        1375: { month: 9, day: 23 }, // 15 Sep Julian
+        1376: { month: 9, day: 22 }, // 14 Sep Julian
+        1377: { month: 9, day: 22 }, // 14 Sep Julian
+        1378: { month: 9, day: 23 }, // 15 Sep Julian
+        1379: { month: 9, day: 23 }, // 15 Sep Julian
+        1380: { month: 9, day: 22 }, // 14 Sep Julian
+        1381: { month: 9, day: 22 }, // 14 Sep Julian
+        1382: { month: 9, day: 23 }, // 15 Sep Julian
+        1383: { month: 9, day: 23 }, // 15 Sep Julian
+        1384: { month: 9, day: 22 }, // 14 Sep Julian
+        1385: { month: 9, day: 22 }, // 14 Sep Julian
+        1386: { month: 9, day: 23 }, // 15 Sep Julian
+        1387: { month: 9, day: 23 }, // 15 Sep Julian
+        1388: { month: 9, day: 22 }, // 14 Sep Julian
+        1389: { month: 9, day: 22 }, // 14 Sep Julian
+        1390: { month: 9, day: 23 }, // 15 Sep Julian
+        1391: { month: 9, day: 23 }, // 15 Sep Julian
+        1392: { month: 9, day: 22 }, // 14 Sep Julian
+        1393: { month: 9, day: 22 }, // 14 Sep Julian
+        1394: { month: 9, day: 23 }, // 15 Sep Julian
+        1395: { month: 9, day: 23 }, // 15 Sep Julian
+        1396: { month: 9, day: 22 }, // 14 Sep Julian
+        1397: { month: 9, day: 22 }, // 14 Sep Julian
+        1398: { month: 9, day: 22 }, // 14 Sep Julian
+        1399: { month: 9, day: 23 }, // 15 Sep Julian
+        // --- FIN Données Equinoxe 1350-1399 ---
+        // Converties en Proleptique Grégorien (+9 jours)
+        1400: { month: 9, day: 23 }, // 14 Sep Julian
+        1401: { month: 9, day: 23 }, // 14 Sep Julian
+        1402: { month: 9, day: 23 }, // 14 Sep Julian
+        1403: { month: 9, day: 24 }, // 15 Sep Julian
+        1404: { month: 9, day: 23 }, // 14 Sep Julian
+        1405: { month: 9, day: 23 }, // 14 Sep Julian
+        1406: { month: 9, day: 23 }, // 14 Sep Julian
+        1407: { month: 9, day: 24 }, // 15 Sep Julian
+        1408: { month: 9, day: 23 }, // 14 Sep Julian
+        1409: { month: 9, day: 23 }, // 14 Sep Julian
+        1410: { month: 9, day: 23 }, // 14 Sep Julian
+        1411: { month: 9, day: 24 }, // 15 Sep Julian
+        1412: { month: 9, day: 23 }, // 14 Sep Julian
+        1413: { month: 9, day: 23 }, // 14 Sep Julian
+        1414: { month: 9, day: 23 }, // 14 Sep Julian
+        1415: { month: 9, day: 24 }, // 15 Sep Julian
+        1416: { month: 9, day: 23 }, // 14 Sep Julian
+        1417: { month: 9, day: 23 }, // 14 Sep Julian
+        1418: { month: 9, day: 23 }, // 14 Sep Julian
+        1419: { month: 9, day: 24 }, // 15 Sep Julian
+        1420: { month: 9, day: 23 }, // 14 Sep Julian
+        1421: { month: 9, day: 23 }, // 14 Sep Julian
+        1422: { month: 9, day: 23 }, // 14 Sep Julian
+        1423: { month: 9, day: 24 }, // 15 Sep Julian
+        1424: { month: 9, day: 23 }, // 14 Sep Julian
+        1425: { month: 9, day: 23 }, // 14 Sep Julian
+        1426: { month: 9, day: 23 }, // 14 Sep Julian
+        1427: { month: 9, day: 24 }, // 15 Sep Julian
+        1428: { month: 9, day: 23 }, // 14 Sep Julian
+        1429: { month: 9, day: 23 }, // 14 Sep Julian
+        1430: { month: 9, day: 23 }, // 14 Sep Julian
+        1431: { month: 9, day: 23 }, // 14 Sep Julian
+        1432: { month: 9, day: 23 }, // 14 Sep Julian
+        1433: { month: 9, day: 23 }, // 14 Sep Julian
+        1434: { month: 9, day: 23 }, // 14 Sep Julian
+        1435: { month: 9, day: 23 }, // 14 Sep Julian
+        1436: { month: 9, day: 23 }, // 14 Sep Julian
+        1437: { month: 9, day: 23 }, // 14 Sep Julian
+        1438: { month: 9, day: 23 }, // 14 Sep Julian
+        1439: { month: 9, day: 23 }, // 14 Sep Julian
+        1440: { month: 9, day: 23 }, // 14 Sep Julian
+        1441: { month: 9, day: 23 }, // 14 Sep Julian
+        1442: { month: 9, day: 23 }, // 14 Sep Julian
+        1443: { month: 9, day: 23 }, // 14 Sep Julian
+        1444: { month: 9, day: 23 }, // 14 Sep Julian
+        1445: { month: 9, day: 23 }, // 14 Sep Julian
+        1446: { month: 9, day: 23 }, // 14 Sep Julian
+        1447: { month: 9, day: 23 }, // 14 Sep Julian
+        1448: { month: 9, day: 23 }, // 14 Sep Julian
+        1449: { month: 9, day: 23 }, // 14 Sep Julian
+        // --- FIN Données Equinoxe 1400-1449 ---
+        1450: { month: 9, day: 23 }, // 14 Sep Julian
+        1451: { month: 9, day: 23 }, // 14 Sep Julian
+        1452: { month: 9, day: 23 }, // 14 Sep Julian
+        1453: { month: 9, day: 23 }, // 14 Sep Julian
+        1454: { month: 9, day: 23 }, // 14 Sep Julian
+        1455: { month: 9, day: 23 }, // 14 Sep Julian
+        1456: { month: 9, day: 23 }, // 14 Sep Julian
+        1457: { month: 9, day: 23 }, // 14 Sep Julian
+        1458: { month: 9, day: 23 }, // 14 Sep Julian
+        1459: { month: 9, day: 23 }, // 14 Sep Julian
+        1460: { month: 9, day: 23 }, // 14 Sep Julian
+        1461: { month: 9, day: 23 }, // 14 Sep Julian
+        1462: { month: 9, day: 23 }, // 14 Sep Julian
+        1463: { month: 9, day: 23 }, // 14 Sep Julian
+        1464: { month: 9, day: 22 }, // 13 Sep Julian
+        1465: { month: 9, day: 23 }, // 14 Sep Julian
+        1466: { month: 9, day: 23 }, // 14 Sep Julian
+        1467: { month: 9, day: 23 }, // 14 Sep Julian
+        1468: { month: 9, day: 22 }, // 13 Sep Julian
+        1469: { month: 9, day: 23 }, // 14 Sep Julian
+        1470: { month: 9, day: 23 }, // 14 Sep Julian
+        1471: { month: 9, day: 23 }, // 14 Sep Julian
+        1472: { month: 9, day: 22 }, // 13 Sep Julian
+        1473: { month: 9, day: 23 }, // 14 Sep Julian
+        1474: { month: 9, day: 23 }, // 14 Sep Julian
+        1475: { month: 9, day: 23 }, // 14 Sep Julian
+        1476: { month: 9, day: 22 }, // 13 Sep Julian
+        1477: { month: 9, day: 23 }, // 14 Sep Julian
+        1478: { month: 9, day: 23 }, // 14 Sep Julian
+        1479: { month: 9, day: 23 }, // 14 Sep Julian
+        1480: { month: 9, day: 22 }, // 13 Sep Julian
+        1481: { month: 9, day: 23 }, // 14 Sep Julian
+        1482: { month: 9, day: 23 }, // 14 Sep Julian
+        1483: { month: 9, day: 23 }, // 14 Sep Julian
+        1484: { month: 9, day: 22 }, // 13 Sep Julian
+        1485: { month: 9, day: 23 }, // 14 Sep Julian
+        1486: { month: 9, day: 23 }, // 14 Sep Julian
+        1487: { month: 9, day: 23 }, // 14 Sep Julian
+        1488: { month: 9, day: 22 }, // 13 Sep Julian
+        1489: { month: 9, day: 23 }, // 14 Sep Julian
+        1490: { month: 9, day: 23 }, // 14 Sep Julian
+        1491: { month: 9, day: 23 }, // 14 Sep Julian
+        1492: { month: 9, day: 22 }, // 13 Sep Julian
+        1493: { month: 9, day: 22 }, // 13 Sep Julian
+        1494: { month: 9, day: 23 }, // 14 Sep Julian
+        1495: { month: 9, day: 23 }, // 14 Sep Julian
+        1496: { month: 9, day: 22 }, // 13 Sep Julian
+        1497: { month: 9, day: 22 }, // 13 Sep Julian
+        1498: { month: 9, day: 23 }, // 14 Sep Julian
+        1499: { month: 9, day: 23 }, // 14 Sep Julian
+        // --- FIN Données Equinoxe 1450-1499 ---
+        1500: { month: 9, day: 23 }, // 13 Sep Julian
+        1501: { month: 9, day: 23 }, // 13 Sep Julian
+        1502: { month: 9, day: 24 }, // 14 Sep Julian
+        1503: { month: 9, day: 24 }, // 14 Sep Julian
+        1504: { month: 9, day: 23 }, // 13 Sep Julian
+        1505: { month: 9, day: 23 }, // 13 Sep Julian
+        1506: { month: 9, day: 24 }, // 14 Sep Julian
+        1507: { month: 9, day: 24 }, // 14 Sep Julian
+        1508: { month: 9, day: 23 }, // 13 Sep Julian
+        1509: { month: 9, day: 23 }, // 13 Sep Julian
+        1510: { month: 9, day: 24 }, // 14 Sep Julian
+        1511: { month: 9, day: 24 }, // 14 Sep Julian
+        1512: { month: 9, day: 23 }, // 13 Sep Julian
+        1513: { month: 9, day: 23 }, // 13 Sep Julian
+        1514: { month: 9, day: 24 }, // 14 Sep Julian
+        1515: { month: 9, day: 24 }, // 14 Sep Julian
+        1516: { month: 9, day: 23 }, // 13 Sep Julian
+        1517: { month: 9, day: 23 }, // 13 Sep Julian
+        1518: { month: 9, day: 24 }, // 14 Sep Julian
+        1519: { month: 9, day: 24 }, // 14 Sep Julian
+        1520: { month: 9, day: 23 }, // 13 Sep Julian
+        1521: { month: 9, day: 23 }, // 13 Sep Julian
+        1522: { month: 9, day: 24 }, // 14 Sep Julian
+        1523: { month: 9, day: 24 }, // 14 Sep Julian
+        1524: { month: 9, day: 23 }, // 13 Sep Julian
+        1525: { month: 9, day: 23 }, // 13 Sep Julian
+        1526: { month: 9, day: 23 }, // 13 Sep Julian
+        1527: { month: 9, day: 24 }, // 14 Sep Julian
+        1528: { month: 9, day: 23 }, // 13 Sep Julian
+        1529: { month: 9, day: 23 }, // 13 Sep Julian
+        1530: { month: 9, day: 23 }, // 13 Sep Julian
+        1531: { month: 9, day: 24 }, // 14 Sep Julian
+        1532: { month: 9, day: 23 }, // 13 Sep Julian
+        1533: { month: 9, day: 23 }, // 13 Sep Julian
+        1534: { month: 9, day: 23 }, // 13 Sep Julian
+        1535: { month: 9, day: 24 }, // 14 Sep Julian
+        1536: { month: 9, day: 23 }, // 13 Sep Julian
+        1537: { month: 9, day: 23 }, // 13 Sep Julian
+        1538: { month: 9, day: 23 }, // 13 Sep Julian
+        1539: { month: 9, day: 24 }, // 14 Sep Julian
+        1540: { month: 9, day: 23 }, // 13 Sep Julian
+        1541: { month: 9, day: 23 }, // 13 Sep Julian
+        1542: { month: 9, day: 23 }, // 13 Sep Julian
+        1543: { month: 9, day: 24 }, // 14 Sep Julian
+        1544: { month: 9, day: 23 }, // 13 Sep Julian
+        1545: { month: 9, day: 23 }, // 13 Sep Julian
+        1546: { month: 9, day: 23 }, // 13 Sep Julian
+        1547: { month: 9, day: 24 }, // 14 Sep Julian
+        1548: { month: 9, day: 23 }, // 13 Sep Julian
+        1549: { month: 9, day: 23 }, // 13 Sep Julian
+        // --- FIN Données Equinoxe 1500-1549 ---
+        1550: { month: 9, day: 23 }, // 13 Sep Julian
+        1551: { month: 9, day: 24 }, // 14 Sep Julian
+        1552: { month: 9, day: 23 }, // 13 Sep Julian
+        1553: { month: 9, day: 23 }, // 13 Sep Julian
+        1554: { month: 9, day: 23 }, // 13 Sep Julian
+        1555: { month: 9, day: 24 }, // 14 Sep Julian
+        1556: { month: 9, day: 23 }, // 13 Sep Julian
+        1557: { month: 9, day: 23 }, // 13 Sep Julian
+        1558: { month: 9, day: 23 }, // 13 Sep Julian
+        1559: { month: 9, day: 23 }, // 13 Sep Julian
+        1560: { month: 9, day: 23 }, // 13 Sep Julian
+        1561: { month: 9, day: 23 }, // 13 Sep Julian
+        1562: { month: 9, day: 23 }, // 13 Sep Julian
+        1563: { month: 9, day: 23 }, // 13 Sep Julian
+        1564: { month: 9, day: 23 }, // 13 Sep Julian
+        1565: { month: 9, day: 23 }, // 13 Sep Julian
+        1566: { month: 9, day: 23 }, // 13 Sep Julian
+        1567: { month: 9, day: 23 }, // 13 Sep Julian
+        1568: { month: 9, day: 23 }, // 13 Sep Julian
+        1569: { month: 9, day: 23 }, // 13 Sep Julian
+        1570: { month: 9, day: 23 }, // 13 Sep Julian
+        1571: { month: 9, day: 23 }, // 13 Sep Julian
+        1572: { month: 9, day: 23 }, // 13 Sep Julian
+        1573: { month: 9, day: 23 }, // 13 Sep Julian
+        1574: { month: 9, day: 23 }, // 13 Sep Julian
+        1575: { month: 9, day: 23 }, // 13 Sep Julian
+        1576: { month: 9, day: 23 }, // 13 Sep Julian
+        1577: { month: 9, day: 23 }, // 13 Sep Julian
+        1578: { month: 9, day: 23 }, // 13 Sep Julian
+        1579: { month: 9, day: 23 }, // 13 Sep Julian
+        1580: { month: 9, day: 23 }, // 13 Sep Julian
+        1581: { month: 9, day: 23 }, // 13 Sep Julian
+        1582: { month: 9, day: 23 }, // 13 Sep Julian (Last Julian equinox before reform)
+        // --- FIN Données Equinoxe avant Réforme ---
+		1583: { month: 9, day: 23 }, // 18h 23m 52s
+        1584: { month: 9, day: 23 }, // 00h 16m 38s
+        1585: { month: 9, day: 23 }, // 06h 07m 49s
+        1586: { month: 9, day: 23 }, // 11h 58m 04s
+        1587: { month: 9, day: 23 }, // 17h 46m 11s
+        1588: { month: 9, day: 22 }, // 23h 35m 24s
+        1589: { month: 9, day: 23 }, // 05h 32m 57s
+        1590: { month: 9, day: 23 }, // 11h 24m 48s
+        1591: { month: 9, day: 23 }, // 17h 12m 37s
+        1592: { month: 9, day: 22 }, // 23h 02m 14s
+        1593: { month: 9, day: 23 }, // 04h 50m 09s
+        1594: { month: 9, day: 23 }, // 10h 33m 51s
+        1595: { month: 9, day: 23 }, // 16h 16m 57s
+        1596: { month: 9, day: 22 }, // 22h 02m 58s
+        1597: { month: 9, day: 23 }, // 03h 52m 32s
+        1598: { month: 9, day: 23 }, // 09h 39m 40s
+        1599: { month: 9, day: 23 }, // 15h 23m 01s
+        1600: { month: 9, day: 22 }, // 21h 11m 51s
+        1601: { month: 9, day: 23 }, // 03h 05m 30s
+        1602: { month: 9, day: 23 }, // 08h 54m 34s
+        1603: { month: 9, day: 23 }, // 14h 43m 06s
+        1604: { month: 9, day: 22 }, // 20h 34m 39s
+        1605: { month: 9, day: 23 }, // 02h 26m 16s
+        1606: { month: 9, day: 23 }, // 08h 17m 52s
+        1607: { month: 9, day: 23 }, // 14h 05m 01s
+        1608: { month: 9, day: 22 }, // 19h 54m 48s
+        1609: { month: 9, day: 23 }, // 01h 48m 18s
+        1610: { month: 9, day: 23 }, // 07h 32m 53s
+        1611: { month: 9, day: 23 }, // 13h 16m 37s
+        1612: { month: 9, day: 22 }, // 19h 06m 32s
+        1613: { month: 9, day: 23 }, // 00h 56m 07s
+        1614: { month: 9, day: 23 }, // 06h 46m 13s
+        1615: { month: 9, day: 23 }, // 12h 32m 22s
+        1616: { month: 9, day: 22 }, // 18h 16m 58s
+        1617: { month: 9, day: 23 }, // 00h 08m 36s
+        1618: { month: 9, day: 23 }, // 05h 52m 16s
+        1619: { month: 9, day: 23 }, // 11h 35m 02s
+        1620: { month: 9, day: 22 }, // 17h 27m 50s
+        1621: { month: 9, day: 22 }, // 23h 17m 13s
+        1622: { month: 9, day: 23 }, // 05h 06m 58s
+        1623: { month: 9, day: 23 }, // 10h 57m 13s
+        1624: { month: 9, day: 22 }, // 16h 44m 44s
+        1625: { month: 9, day: 22 }, // 22h 42m 54s
+        1626: { month: 9, day: 23 }, // 04h 33m 14s
+        1627: { month: 9, day: 23 }, // 10h 16m 56s
+        1628: { month: 9, day: 22 }, // 16h 11m 39s
+        1629: { month: 9, day: 22 }, // 21h 58m 35s
+        1630: { month: 9, day: 23 }, // 03h 45m 22s
+        1631: { month: 9, day: 23 }, // 09h 34m 32s
+        1632: { month: 9, day: 22 }, // 15h 18m 09s
+        1633: { month: 9, day: 22 }, // 21h 11m 04s
+        1634: { month: 9, day: 23 }, // 02h 56m 07s
+        1635: { month: 9, day: 23 }, // 08h 33m 54s
+        1636: { month: 9, day: 22 }, // 14h 28m 21s
+        1637: { month: 9, day: 22 }, // 20h 16m 57s
+        1638: { month: 9, day: 23 }, // 02h 05m 09s
+        1639: { month: 9, day: 23 }, // 07h 56m 51s
+        1640: { month: 9, day: 22 }, // 13h 40m 53s
+        1641: { month: 9, day: 22 }, // 19h 34m 55s
+        1642: { month: 9, day: 23 }, // 01h 24m 18s
+        1643: { month: 9, day: 23 }, // 07h 05m 42s
+        1644: { month: 9, day: 22 }, // 13h 03m 37s
+        1645: { month: 9, day: 22 }, // 18h 54m 08s
+        1646: { month: 9, day: 23 }, // 00h 39m 41s
+        1647: { month: 9, day: 23 }, // 06h 33m 38s
+        1648: { month: 9, day: 22 }, // 12h 19m 16s
+        1649: { month: 9, day: 22 }, // 18h 14m 14s
+        1650: { month: 9, day: 23 }, // 00h 05m 33s
+        1651: { month: 9, day: 23 }, // 05h 42m 28s
+        1652: { month: 9, day: 22 }, // 11h 35m 12s
+        1653: { month: 9, day: 22 }, // 17h 21m 43s
+        1654: { month: 9, day: 22 }, // 23h 01m 02s
+        1655: { month: 9, day: 23 }, // 04h 53m 40s
+        1656: { month: 9, day: 22 }, // 10h 36m 36s
+        1657: { month: 9, day: 22 }, // 16h 26m 43s
+        1658: { month: 9, day: 22 }, // 22h 18m 54s
+        1659: { month: 9, day: 23 }, // 03h 57m 00s
+        1660: { month: 9, day: 22 }, // 09h 55m 30s
+        1661: { month: 9, day: 22 }, // 15h 50m 51s
+        1662: { month: 9, day: 22 }, // 21h 36m 18s
+        1663: { month: 9, day: 23 }, // 03h 33m 41s
+        1664: { month: 9, day: 22 }, // 09h 20m 42s
+        1665: { month: 9, day: 22 }, // 15h 10m 55s
+        1666: { month: 9, day: 22 }, // 21h 04m 58s
+        1667: { month: 9, day: 23 }, // 02h 42m 05s
+        1668: { month: 9, day: 22 }, // 08h 35m 34s
+        1669: { month: 9, day: 22 }, // 14h 25m 25s
+        1670: { month: 9, day: 22 }, // 20h 02m 53s
+        1671: { month: 9, day: 23 }, // 01h 53m 59s
+        1672: { month: 9, day: 22 }, // 07h 39m 14s
+        1673: { month: 9, day: 22 }, // 13h 27m 11s
+        1674: { month: 9, day: 22 }, // 19h 21m 30s
+        1675: { month: 9, day: 23 }, // 00h 58m 39s
+        1676: { month: 9, day: 22 }, // 06h 50m 32s
+        1677: { month: 9, day: 22 }, // 12h 44m 26s
+        1678: { month: 9, day: 22 }, // 18h 24m 52s
+        1679: { month: 9, day: 23 }, // 00h 21m 21s
+        1680: { month: 9, day: 22 }, // 06h 12m 43s
+        1681: { month: 9, day: 22 }, // 12h 01m 41s
+        1682: { month: 9, day: 22 }, // 17h 58m 55s
+        1683: { month: 9, day: 22 }, // 23h 39m 41s
+        1684: { month: 9, day: 22 }, // 05h 33m 23s
+        1685: { month: 9, day: 22 }, // 11h 31m 37s
+        1686: { month: 9, day: 22 }, // 17h 10m 10s
+        1687: { month: 9, day: 22 }, // 23h 00m 57s
+        1688: { month: 9, day: 22 }, // 04h 47m 31s
+        1689: { month: 9, day: 22 }, // 10h 28m 37s
+        1690: { month: 9, day: 22 }, // 16h 21m 19s
+        1691: { month: 9, day: 22 }, // 21h 58m 57s
+        1692: { month: 9, day: 22 }, // 03h 46m 57s
+        1693: { month: 9, day: 22 }, // 09h 41m 53s
+        1694: { month: 9, day: 22 }, // 15h 20m 08s
+        1695: { month: 9, day: 22 }, // 21h 12m 27s
+        1696: { month: 9, day: 22 }, // 03h 07m 59s
+        1697: { month: 9, day: 22 }, // 08h 56m 51s
+        1698: { month: 9, day: 22 }, // 14h 55m 05s
+        1699: { month: 9, day: 22 }, // 20h 38m 30s
+        1700: { month: 9, day: 23 }, // 02h 28m 17s - Note: 1700 is not a leap year in Gregorian
+        1701: { month: 9, day: 23 }, // 08h 25m 27s
+        1702: { month: 9, day: 23 }, // 14h 06m 13s
+        1703: { month: 9, day: 23 }, // 19h 55m 32s
+        1704: { month: 9, day: 23 }, // 01h 48m 02s
+        1705: { month: 9, day: 23 }, // 07h 30m 38s
+        1706: { month: 9, day: 23 }, // 13h 21m 25s
+        1707: { month: 9, day: 23 }, // 19h 03m 02s
+        1708: { month: 9, day: 23 }, // 00h 49m 47s
+        1709: { month: 9, day: 23 }, // 06h 46m 36s
+        1710: { month: 9, day: 23 }, // 12h 26m 22s
+        1711: { month: 9, day: 23 }, // 18h 12m 48s
+        1712: { month: 9, day: 23 }, // 00h 06m 25s
+        1713: { month: 9, day: 23 }, // 05h 50m 22s
+        1714: { month: 9, day: 23 }, // 11h 43m 11s
+        1715: { month: 9, day: 23 }, // 17h 30m 00s
+        1716: { month: 9, day: 22 }, // 23h 18m 01s
+        1717: { month: 9, day: 23 }, // 05h 16m 12s
+        1718: { month: 9, day: 23 }, // 10h 59m 13s
+        1719: { month: 9, day: 23 }, // 16h 48m 06s
+        1720: { month: 9, day: 22 }, // 22h 47m 10s
+        1721: { month: 9, day: 23 }, // 04h 34m 37s
+        1722: { month: 9, day: 23 }, // 10h 25m 54s
+        1723: { month: 9, day: 23 }, // 16h 10m 50s
+        1724: { month: 9, day: 22 }, // 21h 54m 51s
+        1725: { month: 9, day: 23 }, // 03h 46m 57s
+        1726: { month: 9, day: 23 }, // 09h 28m 21s
+        1727: { month: 9, day: 23 }, // 15h 12m 01s
+        1728: { month: 9, day: 22 }, // 21h 06m 04s
+        1729: { month: 9, day: 23 }, // 02h 50m 26s
+        1730: { month: 9, day: 23 }, // 08h 38m 04s
+        1731: { month: 9, day: 23 }, // 14h 25m 54s
+        1732: { month: 9, day: 22 }, // 20h 15m 19s
+        1733: { month: 9, day: 23 }, // 02h 10m 30s
+        1734: { month: 9, day: 23 }, // 07h 57m 04s
+        1735: { month: 9, day: 23 }, // 13h 42m 15s
+        1736: { month: 9, day: 22 }, // 19h 37m 56s
+        1737: { month: 9, day: 23 }, // 01h 27m 18s
+        1738: { month: 9, day: 23 }, // 07h 16m 33s
+        1739: { month: 9, day: 23 }, // 13h 06m 27s
+        1740: { month: 9, day: 22 }, // 18h 54m 18s
+        1741: { month: 9, day: 23 }, // 00h 45m 21s
+        1742: { month: 9, day: 23 }, // 06h 30m 35s
+        1743: { month: 9, day: 23 }, // 12h 15m 22s
+        1744: { month: 9, day: 22 }, // 18h 10m 34s
+        1745: { month: 9, day: 22 }, // 23h 59m 45s
+        1746: { month: 9, day: 23 }, // 05h 44m 17s
+        1747: { month: 9, day: 23 }, // 11h 30m 10s
+        1748: { month: 9, day: 22 }, // 17h 15m 37s
+        1749: { month: 9, day: 22 }, // 23h 04m 00s
+        1750: { month: 9, day: 23 }, // 04h 49m 24s
+        1751: { month: 9, day: 23 }, // 10h 33m 49s
+        1752: { month: 9, day: 22 }, // 16h 27m 21s
+        1753: { month: 9, day: 22 }, // 22h 18m 44s
+        1754: { month: 9, day: 23 }, // 04h 06m 54s
+        1755: { month: 9, day: 23 }, // 09h 58m 26s
+        1756: { month: 9, day: 22 }, // 15h 53m 21s
+        1757: { month: 9, day: 22 }, // 21h 45m 16s
+        1758: { month: 9, day: 23 }, // 03h 33m 40s
+        1759: { month: 9, day: 23 }, // 09h 19m 05s
+        1760: { month: 9, day: 22 }, // 15h 09m 30s
+        1761: { month: 9, day: 22 }, // 21h 00m 08s
+        1762: { month: 9, day: 23 }, // 02h 44m 45s
+        1763: { month: 9, day: 23 }, // 08h 29m 23s
+        1764: { month: 9, day: 22 }, // 14h 19m 05s
+        1765: { month: 9, day: 22 }, // 20h 03m 01s
+        1766: { month: 9, day: 23 }, // 01h 47m 23s
+        1767: { month: 9, day: 23 }, // 07h 33m 33s
+        1768: { month: 9, day: 22 }, // 13h 24m 09s
+        1769: { month: 9, day: 22 }, // 19h 18m 00s
+        1770: { month: 9, day: 23 }, // 01h 04m 18s
+        1771: { month: 9, day: 23 }, // 06h 50m 33s
+        1772: { month: 9, day: 22 }, // 12h 45m 07s
+        1773: { month: 9, day: 22 }, // 18h 34m 27s
+        1774: { month: 9, day: 23 }, // 00h 23m 15s
+        1775: { month: 9, day: 23 }, // 06h 14m 04s
+        1776: { month: 9, day: 22 }, // 12h 04m 42s
+        1777: { month: 9, day: 22 }, // 17h 58m 23s
+        1778: { month: 9, day: 22 }, // 23h 45m 32s
+        1779: { month: 9, day: 23 }, // 05h 31m 11s
+        1780: { month: 9, day: 22 }, // 11h 26m 26s
+        1781: { month: 9, day: 22 }, // 17h 12m 27s
+        1782: { month: 9, day: 22 }, // 22h 53m 19s
+        1783: { month: 9, day: 23 }, // 04h 38m 45s
+        1784: { month: 9, day: 22 }, // 10h 23m 26s
+        1785: { month: 9, day: 22 }, // 16h 13m 17s
+        1786: { month: 9, day: 22 }, // 22h 00m 07s
+        1787: { month: 9, day: 23 }, // 03h 42m 04s
+        1788: { month: 9, day: 22 }, // 09h 37m 50s
+        1789: { month: 9, day: 22 }, // 15h 25m 58s
+        1790: { month: 9, day: 22 }, // 21h 11m 32s
+        1791: { month: 9, day: 23 }, // 03h 07m 43s <<< Fin de la plage demandée
+        // --- FIN Données Equinoxe 1583-1791 ---
         1792: { month: 9, day: 22 }, 1793: { month: 9, day: 22 }, 1794: { month: 9, day: 22 }, 1795: { month: 9, day: 23 },
         1796: { month: 9, day: 22 }, 1797: { month: 9, day: 22 }, 1798: { month: 9, day: 22 }, 1799: { month: 9, day: 23 },
         1800: { month: 9, day: 23 }, 1801: { month: 9, day: 23 }, 1802: { month: 9, day: 23 }, 1803: { month: 9, day: 24 },
@@ -347,7 +1175,11 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: "Hêtre", latin: "Fagus sylvatica", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Grand arbre forestier au tronc lisse et gris, dont les fruits sont les faînes." },
             { name: "Abeille", latin: "Apis mellifera", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Insecte social essentiel pour la pollinisation et la production de miel et de cire." },
             { name: "Laitue", latin: "Lactuca sativa", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Salade la plus commune, cultivée pour ses feuilles tendres." },
-            { name: "Mélèze", latin: "Larix decidua", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Seul conifère d'Europe à perdre ses aiguilles en hiver." },
+            { name: "Mélèze", latin: "Larix decidua", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Seul conifère d'Europe à perdre ses aiguilles en hiver.",
+                commemoration: {
+                    title: "Mort de Toussaint Louverture (An XI)",
+                    description: "Figure majeure de la Révolution haïtienne, mort en captivité au Fort de Joux."
+                }			},
             { name: "Ciguë", latin: "Conium maculatum", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante très toxique à fleurs blanches en ombelles, poison de Socrate." },
             { name: "Radis", latin: "Raphanus sativus", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Petite racine croquante et piquante, consommée crue." },
             { name: "Ruche", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Habitat construit par l'homme pour héberger une colonie d'abeilles." },
@@ -355,11 +1187,23 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: "Romaine", latin: "Lactuca sativa var. longifolia", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Variété de laitue aux feuilles longues et croquantes." },
             { name: "Marronnier", latin: "Aesculus hippocastanum", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Grand arbre d'ornement aux fleurs en épis (blanches ou roses) et fruits non comestibles (marrons d'Inde)." },
             { name: "Roquette", latin: "Eruca vesicaria / Diplotaxis tenuifolia", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Salade au goût poivré et piquant." },
-            { name: "Pigeon", latin: "Columba livia domestica", author: "(Gmelin 1789)", urlImage: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Columba_livia_Luc_Viatour.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Columba_(oiseau)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PIGEON", description: "Premier oiseau domestiqué par les humains, c’est d’abord un animal élevé pour être mangé. Durant le 18ème siècle, le pigeon des villes achève de remplacer le pigeon biset (son ancêtre) et l’utilisation des pigeons voyageurs comme porteurs de messages se généralise avec le succès que l’on connaît." },
+            { name: "Pigeon", latin: "Columba livia domestica", author: "(Gmelin 1789)", urlImage: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Columba_livia_Luc_Viatour.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Columba_(oiseau)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PIGEON", description: "Oiseau commun des villes et campagnes, élevé pour sa chair ou comme messager." },
             { name: "Lilas (commun)", latin: "Syringa vulgaris", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/LILAC", urlImage: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Lilac_%282%29.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Syringa_vulgaris", description: "Arbuste très parfumé aux grappes de fleurs mauves ou blanches au printemps." },
-            { name: "Anémone", latin: "Anemone", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ANEMONE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/d/db/Colorful-Anemone-coronaria-Zachi-Evenor.jpg", urlWiki: "https://fr.wikipedia.org/wiki/An%C3%A9mone", description: "Genre de plantes à fleurs délicates, souvent printanières (ex: Anémone des bois)." },
-            { name: "Pensée", latin: "Viola tricolor / Viola x wittrockiana", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PENS%C3%89E", urlImage: "https://upload.wikimedia.org/wikipedia/commons/1/1c/JDCANO_Viola_Cazorlensis.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Viola_(plante)", description: "Fleur colorée et veloutée, symbole de souvenir." },
-            { name: "Myrtille", latin: "Vaccinium myrtillus", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/MYRTILLE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Myrtille_Vaccinium_myrtillus.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Vaccinium_myrtillus", description: "Petite baie bleu foncé sauvage ou cultivée, riche en antioxydants." },
+            { name: "Anémone", latin: "Anemone", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ANEMONE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/d/db/Colorful-Anemone-coronaria-Zachi-Evenor.jpg", urlWiki: "https://fr.wikipedia.org/wiki/An%C3%A9mone", description: "Genre de plantes à fleurs délicates, souvent printanières (ex: Anémone des bois).",
+			commemoration: {
+                    title: "Pâques véronaises (27 Germinal An V)",
+                    description: "Les citoyens de Vérone débutent une révolte infructueuse de huit jours contre les occupants Français."
+            } },
+            { name: "Pensée", latin: "Viola tricolor / Viola x wittrockiana", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PENS%C3%89E", urlImage: "https://upload.wikimedia.org/wikipedia/commons/1/1c/JDCANO_Viola_Cazorlensis.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Viola_(plante)", description: "Fleur colorée et veloutée, symbole de souvenir.",
+			commemoration: {
+                    title: "Bataille de San Juan de Porto Rico (28 Germinal An V)",
+                    description: "La bataille de San Juan de Porto Rico est un affrontement qui a lieu du 17 avril au 2 mai 1797, au cours duquel Ralph Abercromby à la tête d'une armée de 6 000 hommes, tente de prendre la colonie de Porto Rico au nom de la couronne britannique."
+            } },
+			{ name: "Myrtille", latin: "Vaccinium myrtillus", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/MYRTILLE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Myrtille_Vaccinium_myrtillus.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Vaccinium_myrtillus", description: "Petite baie bleu foncé sauvage ou cultivée, riche en antioxydants.",
+			commemoration: {
+                    title: "Traité de Leoben (29 Germinal An V)",
+                    description: "Le Traité de Leoben, signé en avril 1797 entre Napoléon Bonaparte pour la France et l'Autriche, constitue les préliminaires de paix qui ont mis fin à la première campagne d'Italie. Cet accord prévoyait notamment la cession des Pays-Bas autrichiens à la France et contenait des clauses secrètes organisant le partage de la République de Venise, préparant le terrain pour le Traité de Campo Formio."
+            } },
             { name: "Greffoir", latin: "", author: "", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/GREFFOIR", urlImage: "https://www.promessedefleurs.com/blogwp/wp-content/uploads/2021/06/greffoir-couteau.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Greffoir", description: "Outil tranchant utilisé pour réaliser des greffes sur les arbres fruitiers ou d'ornement." }
         ],
 		
@@ -541,13 +1385,22 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Jour de la Révolution", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Commémoration de la chute de la monarchie et fondation de la République (seulement les années sextiles)." }
     ];
 
+
+
     // --- Fonctions Utilitaires ---
     function isGregorianLeap(year) {
+        if (year === 0) return false;
         return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
     }
 
+    function isJulianLeap(year) {
+         if (year <= 0) return false;
+        return year % 4 === 0;
+    }
+
     function isRepublicanSextileRomme(an) {
-        if (an <= 0) return false;
+        // Applique règle Grégorienne au numéro d'an Rép. pour Romme
+        if (an === 0) return false;
         return (an % 4 === 0 && an % 100 !== 0) || (an % 400 === 0);
     }
 
@@ -555,11 +1408,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (m <= 2) { y -= 1; m += 12; }
         const A = Math.floor(y / 100);
         const B = 2 - A + Math.floor(A / 4);
-        const JDN = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
-        return Math.floor(JDN);
+        const jdn = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
+        return Math.floor(jdn);
     }
 
-    function jdnToGregorian(jdn) { // Utile pour le debug ou l'affichage si besoin
+    function julianToJDN(d, m, y) {
+        if (m <= 2) { y -= 1; m += 12; }
+        const jdn = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d - 1524.5;
+        return Math.floor(jdn);
+    }
+
+    function jdnToGregorian(jdn) { // Utile pour débug
         const L = jdn + 68569;
         const N = Math.floor(4 * L / 146097);
         const L2 = L - Math.floor((146097 * N + 3) / 4);
@@ -573,429 +1432,271 @@ document.addEventListener('DOMContentLoaded', () => {
         return { day: D, month: M, year: Y };
     }
 
-    function toRoman(num) {
-        if (num <= 0 || num >= 4000) return num; // Limite simple
+    function toRoman(num) { // Gère les négatifs pour An -I etc.
+        if (num === 0) return "0?"; // Ne devrait pas arriver avec la logique An -I
+        if (num < 0) return `-${toRoman(Math.abs(num))}`;
+        if (num >= 4000) return num.toString();
+
         const romanMap = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 };
         let roman = '';
+        let currentNum = num;
         for (let key in romanMap) {
-            while (num >= romanMap[key]) {
+            while (currentNum >= romanMap[key]) {
                 roman += key;
-                num -= romanMap[key];
+                currentNum -= romanMap[key];
             }
         }
         return roman;
     }
 
-    // --- Pré-calcul des JDN des Équinoxes ---
+    // --- Pré-calcul des JDN des Équinoxes & Détermination de la Plage ---
     let equinoxJDNs = {};
-// MODIFICATION POUR DEBUGGING
-function precomputeEquinoxJDNs() {
-    console.log("Début precomputeEquinoxJDNs..."); // Vérifie si la fonction est appelée
-    equinoxJDNs = {}; // Réinitialise au cas où
-    let count = 0;
-    try {
-        for (const year in equinoxDates) {
-            if (equinoxDates.hasOwnProperty(year)) {
-                const date = equinoxDates[year];
-                 // Ajout d'une vérification plus robuste des données
-                 if (date && typeof date.day === 'number' && typeof date.month === 'number' && !isNaN(parseInt(year, 10))) {
-                    equinoxJDNs[year] = gregorianToJDN(date.day, date.month, parseInt(year, 10));
-                    count++;
-                    // Log pour les années importantes
-                    if (year === '1792' || year === '2199') {
-                        console.log(`JDN précalculé pour ${year}: ${equinoxJDNs[year]}`);
-                    }
-                 } else {
-                     console.error(`Donnée invalide dans equinoxDates pour l'année ${year}:`, date);
-                 }
+    function precomputeEquinoxJDNs() {
+        console.log("Début pré-calcul JDN équinoxes...");
+        equinoxJDNs = {}; minEquinoxDataYear = null; maxEquinoxDataYear = null; // Reset
+        let count = 0;
+        const yearsInData = Object.keys(equinoxDates).map(Number).filter(y => !isNaN(y));
+        if (yearsInData.length === 0) { console.error("Aucune donnée valide dans equinoxDates !"); return; }
+
+        yearsInData.sort((a, b) => a - b);
+        minEquinoxDataYear = yearsInData[0];
+        maxEquinoxDataYear = yearsInData[yearsInData.length - 1];
+        console.log(`Années trouvées dans equinoxDates: ${minEquinoxDataYear} à ${maxEquinoxDataYear}`);
+
+        try {
+            for (const year of yearsInData) {
+                 const date = equinoxDates[year];
+                 if (date && typeof date.day === 'number' && typeof date.month === 'number') {
+                     equinoxJDNs[year] = gregorianToJDN(date.day, date.month, year);
+                     count++;
+                 } else { console.warn(`Donnée équinoxe invalide pour ${year}.`); }
             }
-        }
-        console.log(`Nombre d'années traitées dans equinoxDates: ${count}`);
+            console.log(`Nombre de JDN équinoxes calculés: ${count}`);
 
-        // Ajouter l'entrée pour l'année après maxYear (2200)
-        const lastKnownYear = 2199;
-        if (equinoxJDNs[lastKnownYear]) { // Vérifie si le JDN pour 2199 existe
-             const anApprox2199 = lastKnownYear - 1791;
-             const jdnAn2200Approx = equinoxJDNs[lastKnownYear] + (isRepublicanSextileRomme(anApprox2199) ? 366 : 365);
-             equinoxJDNs[lastKnownYear + 1] = jdnAn2200Approx;
-             console.log(`JDN estimé pour ${lastKnownYear + 1}: ${equinoxJDNs[lastKnownYear + 1]}`);
-        } else {
-             console.error(`Impossible de précalculer JDN pour ${lastKnownYear}, JDN pour ${lastKnownYear + 1} ne peut être estimé.`);
-        }
-        console.log("Fin precomputeEquinoxJDNs.");
-
-    } catch (error) {
-         console.error("Erreur pendant precomputeEquinoxJDNs:", error);
+            // Estimer JDN pour l'année SUIVANT la dernière année connue
+            if (equinoxJDNs[maxEquinoxDataYear]) {
+                 const anApproxMax = (maxEquinoxDataYear >= 1792) ? (maxEquinoxDataYear - 1791) : (maxEquinoxDataYear - 1792); // Utilise skip 0 pour estimer l'année approx
+                 const daysInLastYear = isRepublicanSextileRomme(anApproxMax) ? 366 : 365; // Utilise Romme pour *estimer* la longueur
+                 const jdnNextYearApprox = equinoxJDNs[maxEquinoxDataYear] + daysInLastYear;
+                 equinoxJDNs[maxEquinoxDataYear + 1] = jdnNextYearApprox;
+                 console.log(`JDN estimé pour début année ${maxEquinoxDataYear + 1}: ${equinoxJDNs[maxEquinoxDataYear + 1]}`);
+            } else if (maxEquinoxDataYear) { console.error(`Impossible d'estimer JDN pour ${maxEquinoxDataYear + 1}.`); }
+             console.log("Fin pré-calcul JDN équinoxes.");
+        } catch (error) { console.error("Erreur pendant pré-calcul:", error); }
     }
-}
-// FIN MODIFICATION POUR DEBUGGING
 
-    // --- Calcul Principal (Méthode Équinoxe) ---
-    function calculateEquinoxDate(gDay, gMonth, gYear) {
-        const minYear = 1792;
-        const maxYear = 2199; // Limite des données d'équinoxe
 
-        // ... (Validation date grégorienne reste identique) ...
-        if (!gDay || !gMonth || !gYear) return { error: "Date grégorienne incomplète." };
-        const daysInMonth = [0, 31, isGregorianLeap(gYear) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        if (gMonth < 1 || gMonth > 12 || gDay < 1 || gDay > daysInMonth[gMonth]) {
-             return { error: "Date grégorienne invalide." };
+    // --- Mise à jour de l'interface utilisateur avec la plage dynamique ---
+    function updateUIRange() {
+        // Vérifie si on a au moins un début et une fin (estimée)
+        if (minEquinoxDataYear && maxEquinoxDataYear && equinoxJDNs[maxEquinoxDataYear + 1]) {
+            const lastRepYear = (maxEquinoxDataYear >= 1792) ? (maxEquinoxDataYear - 1791) : (maxEquinoxDataYear - 1792); // Utilise skip 0
+            const lastRepYearDisplay = `An ${toRoman(lastRepYear)}`;
+
+             supportedRangeInfo.textContent = `Calcul basé sur Équinoxe possible env. de Sep ${minEquinoxDataYear} à Sep ${maxEquinoxDataYear + 1} (fin ${lastRepYearDisplay}).`;
+             yearInput.max = maxEquinoxDataYear; // Set max on input as a hint
+             yearInput.title = `Année (min 1, max basé sur données équinoxe: ${maxEquinoxDataYear})`;
+        } else {
+            supportedRangeInfo.textContent = "Données d'équinoxe insuffisantes pour le calcul basé sur l'équinoxe.";
+            yearInput.removeAttribute('max'); // Pas de limite max si données insuffisantes
+            yearInput.title = `Année (min 1)`;
+        }
+    }
+
+
+    // --- Calcul Principal (Méthode Équinoxe - Version An -I, -II...) ---
+    function calculateEquinoxDateUsingJDN(inputJDN) {
+        if (!inputJDN || isNaN(inputJDN)) { return { error: "JDN invalide fourni.", missingData: false }; }
+
+        const yearsAvailable = Object.keys(equinoxJDNs).map(Number).sort((a, b) => a - b);
+        if (yearsAvailable.length < 2) { return { error: "Données d'équinoxe insuffisantes.", missingData: true }; }
+
+        const firstAvailableYear = yearsAvailable[0];
+        const firstAvailableJDN = equinoxJDNs[firstAvailableYear];
+        const lastAvailableYearPlus1 = yearsAvailable[yearsAvailable.length - 1];
+        const lastAvailableJDNPlus1 = equinoxJDNs[lastAvailableYearPlus1];
+
+        if (inputJDN < firstAvailableJDN) { return { error: `Données équinoxe non disponibles (avant ${firstAvailableYear}).`, missingData: true }; }
+        if (!lastAvailableJDNPlus1 || inputJDN >= lastAvailableJDNPlus1) { const lastActualDataYear = lastAvailableYearPlus1 - 1; const lastRepAn = (lastActualDataYear >= 1792) ? (lastActualDataYear - 1791) : (lastActualDataYear - 1792); return { error: `Date hors plage des données équinoxe (après An ${toRoman(lastRepAn)}).`, missingData: true }; }
+
+        let targetYear = -1, startAnJDN = -1, nextStartAnJDN = -1;
+        for (let i = 0; i < yearsAvailable.length - 1; i++) {
+            const currentYear = yearsAvailable[i], nextYear = yearsAvailable[i+1];
+            const currentStartJDN = equinoxJDNs[currentYear], nextJDN = equinoxJDNs[nextYear];
+            if (currentStartJDN === undefined || nextJDN === undefined) { continue; }
+            if (inputJDN >= currentStartJDN && inputJDN < nextJDN) { targetYear = currentYear; startAnJDN = currentStartJDN; nextStartAnJDN = nextJDN; break; }
         }
 
-        const inputJDN = gregorianToJDN(gDay, gMonth, gYear);
-        const firstEquinoxJDN = equinoxJDNs[minYear];
-        const nextEquinoxJDN = equinoxJDNs[maxYear + 1]; // JDN début An qui commence en 2200
+        if (targetYear === -1) { return { error: "Impossible de trouver l'intervalle d'année (Erreur interne).", missingData: true }; }
 
-        if (!firstEquinoxJDN || !nextEquinoxJDN) {
-            return { error: "Données JDN équinoxe manquantes." };
-        }
-        if (inputJDN < firstEquinoxJDN) {
-            return { error: "Date antérieure au 1er Vendémiaire An I (22 Sept 1792)." };
-        }
-        if (inputJDN >= nextEquinoxJDN) {
-             return { error: `Date postérieure à la fin de l'An ${maxYear-1791} (données d'équinoxe limitées à ${maxYear}). Méthode Romme seulement.`, useRommeOnly: true };
-        }
+        let currentAn = (targetYear >= 1792) ? (targetYear - 1791) : (targetYear - 1792); // Skip 0 logic
+        if (isNaN(currentAn)) { return { error: "Erreur calcul An Rép." }; }
+        const currentAnDisplay = `An ${toRoman(currentAn)}`;
 
-        // Trouver l'année républicaine (An) correspondante
-        let currentAn = 1;
-        let startAnJDN = -1;
-        let endAnJDN = -1;
-        // Optmisation : on peut estimer l'année grégorienne de départ
-        let startLookupYear = Math.max(minYear, gYear - 1);
-
-        for (let year = startLookupYear; year <= maxYear + 1; year++) { // Itérer sur les années grégoriennes où commencent les années républicaines
-            const an = year - 1791; // An républicain qui commence cette année grégorienne
-            const currentStartJDN = equinoxJDNs[year];
-            const nextStartJDN = equinoxJDNs[year + 1]; // Peut être undefined si year = maxYear + 1
-
-            if (currentStartJDN === undefined) continue; // Skip si donnée JDN manque pour l'année
-
-            // Cas spécial : dernière année de données
-            if (year === maxYear + 1 && inputJDN >= currentStartJDN) {
-                // Si la date est >= au début de l'année APRES la dernière année connue (ex: 2200)
-                // Ceci est normalement attrapé par la validation initiale, mais sécurité
-                 return { error: `Date postérieure à la fin de l'An ${maxYear-1791}.`, useRommeOnly: true };
-            }
-
-            if (nextStartJDN === undefined && year <= maxYear) {
-                 // Ne devrait pas arriver avec le précalcul, mais sécurité
-                 return { error: `Données JDN équinoxe manquantes pour l'année ${year + 1}.` };
-            }
-
-            // Si la date est dans l'année républicaine 'an' qui commence en 'year'
-            if (inputJDN >= currentStartJDN && (nextStartJDN === undefined || inputJDN < nextStartJDN)) {
-                currentAn = an;
-                startAnJDN = currentStartJDN;
-                endAnJDN = nextStartJDN; // Peut être undefined si on est dans la toute dernière année calculée (ne devrait pas arriver ici)
-                break;
-            }
-             // Si on a dépassé la date sans la trouver (ne devrait pas arriver)
-             if(currentStartJDN > inputJDN) {
-                // console.error("Overshot JDN search");
-                 break;
-             }
-        }
-
-
-        if (startAnJDN === -1 || endAnJDN === undefined) { // Vérifier si on a trouvé et si la fin est définie
-            return { error: "Impossible de déterminer l'année républicaine (Équinoxe)." };
-        }
-
-        // Calculer le jour dans l'année républicaine (base 1)
         const dayOfYear = inputJDN - startAnJDN + 1;
-        const yearLength = endAnJDN - startAnJDN;
+        const yearLength = nextStartAnJDN - startAnJDN;
         const isSextile = (yearLength === 366);
 
-        // Déterminer mois, jour, nom du jour, fête
-        let republicanDay, republicanMonthIndex, decadeDayName;
-        let formattedDate = "";
-        let feteInfo = { name: "Inconnue", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "" };
+        let republicanDay, republicanMonthIndex, decadeDayName, formattedDate = "";
+        let feteInfo = { name: "Inconnue", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "", commemoration: undefined };
 
         if (dayOfYear > 360) { // Jour complémentaire
-            const complementaryDayIndex = dayOfYear - 361; // Index 0-based
-            if (complementaryDayIndex < 0 || complementaryDayIndex >= (isSextile ? 6 : 5)) {
-                return { error: "Erreur: Jour complémentaire invalide." };
-            }
-            // Utiliser le nom générique pour la date formatée
-            formattedDate = `${complementaryDaysNames[complementaryDayIndex]} An ${toRoman(currentAn)}`;
-            // Récupérer les détails depuis complementaryItems
-            if(complementaryItems[complementaryDayIndex]) {
-                feteInfo = complementaryItems[complementaryDayIndex];
-            } else {
-                feteInfo.name = complementaryDaysNames[complementaryDayIndex]; // Fallback
-            }
-
+            const complementaryDayIndex = dayOfYear - 361;
+            if (complementaryDayIndex < 0 || complementaryDayIndex >= (isSextile ? 6 : 5)) { return { error: "Erreur: Jour complémentaire invalide." }; }
+            const compDayName = (complementaryDaysNames && complementaryDaysNames[complementaryDayIndex]) ? complementaryDaysNames[complementaryDayIndex] : `Jour Comp. ${complementaryDayIndex + 1}`;
+            formattedDate = `${compDayName} ${currentAnDisplay}`;
+            if (complementaryItems && complementaryItems[complementaryDayIndex]) { feteInfo = { ...feteInfo, ...complementaryItems[complementaryDayIndex] }; }
+            else if (compDayName) { feteInfo.name = compDayName; }
         } else { // Jour normal
-            republicanMonthIndex = Math.floor((dayOfYear - 1) / 30);
-            republicanDay = (dayOfYear - 1) % 30 + 1;
-            decadeDayName = decadeDays[(republicanDay - 1) % 10];
-            const republicanMonthName = republicanMonths[republicanMonthIndex];
-            formattedDate = `${decadeDayName} ${republicanDay} ${republicanMonthName} An ${toRoman(currentAn)}`;
-
-            // Récupérer les détails depuis dailyItems
-            try {
-                 // dayIndex est l'index dans le tableau du mois (0 à 29)
-                 const dayIndex = (dayOfYear - 1) % 30;
-                 if (dailyItems[republicanMonthIndex] && dailyItems[republicanMonthIndex][dayIndex]) {
-                    feteInfo = dailyItems[republicanMonthIndex][dayIndex];
-                 }
-            } catch (e) {
-                console.error(`Erreur accès dailyItems[${republicanMonthIndex}][${(dayOfYear - 1) % 30}]`, e);
-                // feteInfo reste "Inconnue"
-            }
+            republicanMonthIndex = Math.floor((dayOfYear - 1) / 30); republicanDay = (dayOfYear - 1) % 30 + 1;
+            if (republicanMonthIndex < 0 || republicanMonthIndex >= 12 || republicanDay < 1 || republicanDay > 30) { return { error: "Erreur calcul mois/jour Rép."}; }
+            decadeDayName = decadeDays[(republicanDay - 1) % 10]; const republicanMonthName = republicanMonths[republicanMonthIndex];
+            formattedDate = `${decadeDayName} ${republicanDay} ${republicanMonthName} ${currentAnDisplay}`;
+            try { const dayIndex = republicanDay - 1; if (dailyItems && dailyItems[republicanMonthIndex] && dailyItems[republicanMonthIndex][dayIndex]) { feteInfo = { ...feteInfo, ...dailyItems[republicanMonthIndex][dayIndex] }; } }
+            catch (e) { console.error(`Erreur accès dailyItems[${republicanMonthIndex}][${republicanDay - 1}]`, e); }
         }
 
-        return { 
-    date: formattedDate, 
-    fete: feteInfo.name, 
-    latin: feteInfo.latin, 
-    author: feteInfo.author, // Ajouté
-    description: feteInfo.description,
-    urlImage: feteInfo.urlImage, // Ajouté
-    urlWiki: feteInfo.urlWiki,   // Ajouté
-    urlEncy: feteInfo.urlEncy    // Ajouté
-};
-    }
+        return { date: formattedDate, fete: feteInfo.name, latin: feteInfo.latin, author: feteInfo.author, description: feteInfo.description, urlImage: feteInfo.urlImage, urlWiki: feteInfo.urlWiki, urlEncy: feteInfo.urlEncy, commemoration: feteInfo.commemoration };
+    } // Fin calculateEquinoxDateUsingJDN
 
 
-// --- Calcul Secondaire (Méthode Romme) ---
-    function calculateRommeDate(gDay, gMonth, gYear) {
-         // Validation simple (on suppose la date grégorienne valide si elle passe l'autre fonction)
-        if (!gDay || !gMonth || !gYear) return { error: "Date grégorienne incomplète." };
+    // --- Calcul Secondaire (Méthode Romme - Reste >= An I) ---
+    function calculateRommeDateUsingJDN(inputJDN) {
+        if (!inputJDN || isNaN(inputJDN)) { return { error: "JDN invalide fourni (Romme)." }; }
+        const republicanEpochJDN = 2375840; // Start of 1 Vendémiaire An I
+        if (inputJDN < republicanEpochJDN) { return { date: "N/A (avant An I)" }; }
 
-        const inputJDN = gregorianToJDN(gDay, gMonth, gYear);
-        const republicanEpochJDN = 2375839; // 1 Vendémiaire An I
-
-        if (inputJDN < republicanEpochJDN) {
-             // Pas d'erreur ici, car l'autre fonction gère déjà ça.
-             // On pourrait retourner une string vide ou null.
-            return { date: "N/A (avant An I)" };
-        }
-
-        // Déterminer l'année républicaine (An) selon Romme
-        let currentAnRomme = 1;
-        let startOfYearJDNRomme = republicanEpochJDN;
-        let nextYearStartJDNRomme;
-
+        let currentAnRomme = 1; let startOfYearJDNRomme = republicanEpochJDN;
         while (true) {
-            const daysInCurrentAnRomme = isRepublicanSextileRomme(currentAnRomme) ? 366 : 365;
-            nextYearStartJDNRomme = startOfYearJDNRomme + daysInCurrentAnRomme;
-
-            if (inputJDN >= startOfYearJDNRomme && inputJDN < nextYearStartJDNRomme) {
-                break; // Found the correct An
-            }
-            if (inputJDN < startOfYearJDNRomme) { // Safeguard
-                 return { error: "Erreur calcul An (Romme)." };
-            }
-            startOfYearJDNRomme = nextYearStartJDNRomme;
-            currentAnRomme++;
-            if (currentAnRomme > 2000) return { error: "Erreur boucle An (Romme)."}; // Safety break
+            const isSextileRomme = isRepublicanSextileRomme(currentAnRomme);
+            const daysInCurrentAnRomme = isSextileRomme ? 366 : 365;
+            const nextYearStartJDNRomme = startOfYearJDNRomme + daysInCurrentAnRomme;
+            if (inputJDN >= startOfYearJDNRomme && inputJDN < nextYearStartJDNRomme) { break; }
+            if (inputJDN < startOfYearJDNRomme) { return { error: "Erreur calcul An (Romme)." }; }
+            startOfYearJDNRomme = nextYearStartJDNRomme; currentAnRomme++;
+            if (currentAnRomme > 4000) { return { error: "Erreur boucle An (Romme > 4000)."}; }
         }
-
-        // Calculer le jour dans l'année (Romme)
         const dayOfYearRomme = inputJDN - startOfYearJDNRomme + 1;
         const isSextileRomme = isRepublicanSextileRomme(currentAnRomme);
-
-        // Formatter la date Romme
         let formattedDateRomme = "";
-        if (dayOfYearRomme > 360) { // Jour complémentaire (Romme)
-            const complementaryDayIndexRomme = dayOfYearRomme - 360 - 1;
-            if (complementaryDayIndexRomme < 0 || complementaryDayIndexRomme >= (isSextileRomme ? 6 : 5)) {
-                 return { error: "Erreur: Jour complémentaire invalide (Romme)." };
-            }
-             // On affiche juste le nom simplifié ici
-             formattedDateRomme = `Jour Comp. ${complementaryDayIndexRomme + 1} An ${toRoman(currentAnRomme)}`;
-        } else { // Jour normal (Romme)
-            const monthIndexRomme = Math.floor((dayOfYearRomme - 1) / 30);
-            const dayRomme = (dayOfYearRomme - 1) % 30 + 1;
+        if (dayOfYearRomme > 360) {
+            const complementaryDayIndexRomme = dayOfYearRomme - 361;
+            if (complementaryDayIndexRomme < 0 || complementaryDayIndexRomme >= (isSextileRomme ? 6 : 5)) { return { error: "Erreur: Jour complémentaire invalide (Romme)." }; }
+            const compDayName = (complementaryDaysNames && complementaryDaysNames[complementaryDayIndexRomme]) ? complementaryDaysNames[complementaryDayIndexRomme] : `Jour Comp. ${complementaryDayIndexRomme + 1}`;
+            formattedDateRomme = `${compDayName} An ${toRoman(currentAnRomme)}`;
+        } else {
+            const monthIndexRomme = Math.floor((dayOfYearRomme - 1) / 30); const dayRomme = (dayOfYearRomme - 1) % 30 + 1;
+            if (monthIndexRomme < 0 || monthIndexRomme >= 12 || dayRomme < 1 || dayRomme > 30) { return { error: "Erreur calcul mois/jour Rép. (Romme)."}; }
             const monthNameRomme = republicanMonths[monthIndexRomme];
-             // Version simplifiée sans nom de décade pour la note
-             formattedDateRomme = `${dayRomme} ${monthNameRomme} An ${toRoman(currentAnRomme)}`;
+            formattedDateRomme = `${dayRomme} ${monthNameRomme} An ${toRoman(currentAnRomme)}`;
         }
-
         return { date: formattedDateRomme };
     }
 
-// --- Event Listener ---
+
+    // --- Event Listener ---
     convertButton.addEventListener('click', () => {
-        // Récupération des valeurs d'entrée
-        const day = parseInt(dayInput.value, 10);
-        const month = parseInt(monthInput.value, 10);
-        const year = parseInt(yearInput.value, 10);
+        // --- Récupération et Reset ---
+        const day = parseInt(dayInput.value, 10); const month = parseInt(monthInput.value, 10); const year = parseInt(yearInput.value, 10);
+        // Reset affichages
+        errorDisplay.textContent = ''; errorDisplay.style.display = 'none'; calendarInfoDisplay.textContent = '';
+        resultDisplayEquinox.textContent = '---'; resultDisplayRomme.textContent = 'Date selon méthode Romme : ---';
+        feteNameDisplay.textContent = 'Fête du jour : ---'; feteLatinDisplay.textContent = ''; feteAuthorDisplay.textContent = '';
+        feteLatinAuthorLine.style.display = 'none'; feteDescriptionDisplay.textContent = '---';
+        leftColumnTitle.textContent = 'Illustration'; wikiLink.style.display = 'none'; wikiLink.href = '#'; wikiLink.removeAttribute('target');
+        image.style.display = 'none'; image.src = ''; image.alt = ''; imagePlaceholder.style.display = 'block';
+        encycloFrame.style.display = 'none'; encycloFrame.src = 'about:blank'; encycloPlaceholder.style.display = 'block';
+        if (commemorationArea) commemorationArea.style.display = 'none'; if (commemorationTitle) commemorationTitle.textContent = ''; if (commemorationDesc) commemorationDesc.textContent = '';
 
-        // Références aux éléments d'affichage (vérifiez que toutes sont bien déclarées au début du script)
-        const resultDisplayEquinox = document.getElementById('republican-date-equinox');
-        const feteNameDisplay = document.getElementById('fete-name'); 
-        const feteLatinDisplay = document.getElementById('fete-latin');
-        const feteAuthorDisplay = document.getElementById('fete-author');
-        const feteLatinAuthorLine = document.getElementById('fete-latin-author');
-        const feteDescriptionDisplay = document.getElementById('fete-description');
-        const resultDisplayRomme = document.getElementById('romme-date-info');
-        const errorDisplay = document.getElementById('error-area');
-        const leftColumnTitle = document.getElementById('left-column-title'); // Titre colonne gauche
-        const wikiLink = document.getElementById('fete-wiki-link');
-        const image = document.getElementById('fete-image');
-        const imagePlaceholder = document.getElementById('image-placeholder');
-        const encycloFrame = document.getElementById('encyclopedia-frame');
-        const encycloPlaceholder = document.getElementById('encyclopedia-placeholder');
 
-        // --- Reset de tous les affichages ---
-        errorDisplay.textContent = '';
-        errorDisplay.style.display = 'none';
-        resultDisplayEquinox.textContent = '---';
-        feteNameDisplay.textContent = 'Fête du jour : ---';
-        feteLatinDisplay.textContent = '';
-        feteAuthorDisplay.textContent = '';
-        feteLatinAuthorLine.style.display = 'none'; // Cacher par défaut
-        feteDescriptionDisplay.textContent = '---';
-        resultDisplayRomme.textContent = 'Date selon méthode Romme : ---';
-        leftColumnTitle.textContent = 'Illustration'; // Titre colonne gauche par défaut
-        // Reset colonne gauche
-        wikiLink.style.display = 'none';
-        wikiLink.href = '#';
-        wikiLink.removeAttribute('target'); // Assurer qu'il n'y a pas de target si pas de lien
-        image.style.display = 'none';
-        image.src = '';
-        image.alt = '';
-        imagePlaceholder.style.display = 'block';
-        // Reset colonne droite
-        encycloFrame.style.display = 'none';
-        encycloFrame.src = 'about:blank';
-        encycloPlaceholder.style.display = 'block';
-
-        // --- Calcul et Affichage (Méthode Équinoxe) ---
-        const resultEquinox = calculateEquinoxDate(day, month, year);
-
-        // --- Gestion des Erreurs et Affichage ---
-        if (resultEquinox.error && !resultEquinox.useRommeOnly) {
-            // Erreur bloquante (date invalide, avant An I, etc.)
-            errorDisplay.textContent = resultEquinox.error;
-            errorDisplay.style.display = 'block';
-            // Assurer que tout est bien reset (déjà fait au début, mais par sécurité)
-            leftColumnTitle.textContent = 'Illustration'; 
-            feteLatinAuthorLine.style.display = 'none';
-
-        } else { 
-            // Pas d'erreur bloquante OU date hors plage équinoxe
-
-            // Affichage principal basé sur Equinoxe (si dans la plage)
-            if (resultEquinox.date) { 
-                // Mise à jour colonne centrale
-                resultDisplayEquinox.textContent = resultEquinox.date;
-                leftColumnTitle.textContent = resultEquinox.date; // Met à jour le titre de la colonne gauche
-                feteNameDisplay.textContent = `Fête du jour : ${resultEquinox.fete || 'Inconnue'}`;
-                feteLatinDisplay.textContent = resultEquinox.latin || '';
-                feteAuthorDisplay.textContent = resultEquinox.author || '';
-                feteDescriptionDisplay.textContent = resultEquinox.description || '';
-
-                // Afficher la ligne Latin/Auteur seulement si l'un des deux existe
-                if (resultEquinox.latin || resultEquinox.author) {
-                    feteLatinAuthorLine.style.display = 'block'; 
-                } else {
-                    feteLatinAuthorLine.style.display = 'none';
-                }
-
-                // Mise à jour Colonne Gauche (Image/Wiki)
-                if (resultEquinox.urlImage) {
-                    image.src = resultEquinox.urlImage;
-                    image.alt = `Illustration pour ${resultEquinox.fete || 'fête du jour'}`;
-                    image.style.display = 'block';
-                    wikiLink.style.display = 'inline-block'; 
-                    imagePlaceholder.style.display = 'none';
-                    // Mettre le lien Wiki s'il existe
-                    if (resultEquinox.urlWiki) {
-                        wikiLink.href = resultEquinox.urlWiki;
-                        wikiLink.target = '_blank'; // Ouvrir dans un nouvel onglet
-                    } else {
-                        wikiLink.href = '#'; // Lien désactivé si pas d'URL Wiki
-                        wikiLink.removeAttribute('target');
-                    }
-                } else {
-                    // Pas d'image: s'assurer que le placeholder est visible
-                    imagePlaceholder.style.display = 'block';
-                    wikiLink.style.display = 'none';
-                    image.style.display = 'none';
-                }
-
-                // Mise à jour Colonne Droite (Encyclopédie)
-                if (resultEquinox.urlEncy) {
-                    encycloFrame.src = resultEquinox.urlEncy;
-                    encycloFrame.style.display = 'block';
-                    encycloPlaceholder.style.display = 'none';
-                } else {
-                    // Pas d'URL encyclopédie: s'assurer que le placeholder est visible
-                    encycloPlaceholder.style.display = 'block';
-                    encycloFrame.style.display = 'none';
-                    encycloFrame.src = 'about:blank';
-                }
+        // --- Validation et Calcul JDN ---
+        if (!day || !month || !year || isNaN(day) || isNaN(month) || isNaN(year) || year === 0) { errorDisplay.textContent = "Date invalide/incomplète."; errorDisplay.style.display = 'block'; return; }
+        let inputJDN; let calendarUsed = 'Gregorian';
+        const GREGORIAN_REFORM_YEAR = 1582; const GREGORIAN_REFORM_MONTH = 10; const GREGORIAN_REFORM_DAY_JULIAN_END = 4; const GREGORIAN_REFORM_DAY_GREGORIAN_START = 15;
+        const isPreGregorianReform = year < GREGORIAN_REFORM_YEAR || (year === GREGORIAN_REFORM_YEAR && month < GREGORIAN_REFORM_MONTH) || (year === GREGORIAN_REFORM_YEAR && month === GREGORIAN_REFORM_MONTH && day <= GREGORIAN_REFORM_DAY_JULIAN_END);
+        const isSkippedDate = (year === GREGORIAN_REFORM_YEAR && month === GREGORIAN_REFORM_MONTH && day > GREGORIAN_REFORM_DAY_JULIAN_END && day < GREGORIAN_REFORM_DAY_GREGORIAN_START);
+        if (isSkippedDate) { errorDisplay.textContent = `Date invalide: ${day} Oct 1582 n'existe pas.`; errorDisplay.style.display = 'block'; return; }
+        try {
+            if (isPreGregorianReform) {
+                const daysInJulianMonth = [0, 31, isJulianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                if (month < 1 || month > 12 || day < 1 || day > daysInJulianMonth[month]) { throw new Error(`Date Julienne invalide.`); }
+                inputJDN = julianToJDN(day, month, year); calendarUsed = 'Julian';
+                calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Julienne.`;
+            } else {
+                 const daysInGregorianMonth = [0, 31, isGregorianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                 if (month < 1 || month > 12 || day < 1 || day > daysInGregorianMonth[month]) { throw new Error(`Date Grégorienne invalide.`); }
+                inputJDN = gregorianToJDN(day, month, year); calendarUsed = 'Gregorian';
+                calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Grégorienne.`;
             }
-            
-            // Gestion spécifique si date hors plage équinoxe (après 2199)
-             if (resultEquinox.useRommeOnly) {
-                 resultDisplayEquinox.textContent = 'N/A (hors plage équinoxe)';
-                 leftColumnTitle.textContent = 'Date hors plage équinoxe'; // Indiquer pourquoi il n'y a pas d'infos associées
-                 feteNameDisplay.textContent = 'Fête du jour : N/A';
-                 feteLatinDisplay.textContent = '';
-                 feteAuthorDisplay.textContent = '';
-                 feteLatinAuthorLine.style.display = 'none';
-                 feteDescriptionDisplay.textContent = '';
-                 // Les colonnes latérales restent à leur état reset (placeholders visibles)
-                 errorDisplay.textContent = resultEquinox.error; // Afficher l'info/erreur
-                 errorDisplay.style.display = 'block';
-             }
+            console.log(`Using ${calendarUsed} calendar. JDN: ${inputJDN}`);
 
-             // --- Calcul et Affichage (Méthode Romme) ---
-             // Calculer et afficher Romme dans tous les cas où la date est valide (>= An I)
-             const inputJDNCheck = gregorianToJDN(day, month, year);
-             const republicanEpochJDN = 2375840; // JDN pour 22 Sept 1792
-             if (inputJDNCheck >= republicanEpochJDN) {
-                  const resultRomme = calculateRommeDate(day, month, year);
-                  if (resultRomme.error) {
-                      resultDisplayRomme.textContent = `Date selon méthode Romme : Erreur (${resultRomme.error})`;
-                  } else if (resultRomme.date) {
-                      resultDisplayRomme.textContent = `Date selon méthode Romme : ${resultRomme.date}`;
-                  }
-             } else {
-                 // Si la date est avant An I (normalement déjà géré par resultEquinox.error)
-                 resultDisplayRomme.textContent = `Date selon méthode Romme : N/A (avant An I)`;
-             }
-        }
-    }); // Fin de l'event listener
-	
-	
+            // --- Appel Calcul Républicain ---
+            const resultEquinox = calculateEquinoxDateUsingJDN(inputJDN);
+            const resultRomme = calculateRommeDateUsingJDN(inputJDN); // Toujours calculer (peut retourner N/A)
+
+            // --- Affichage ---
+            if (resultEquinox.error) {
+                 resultDisplayEquinox.textContent = resultEquinox.error; // Affiche message d'excuse ou autre
+                 // Pas de détails fête/image/commemoration si erreur Equinoxe
+            } else if (resultEquinox.date) {
+                 // Affichage normal Equinox + détails ...
+                 resultDisplayEquinox.textContent = resultEquinox.date; leftColumnTitle.textContent = resultEquinox.date;
+                 feteNameDisplay.textContent = `Fête du jour : ${resultEquinox.fete}`;
+                 if (resultEquinox.latin || resultEquinox.author) { feteLatinDisplay.textContent = resultEquinox.latin || ''; feteAuthorDisplay.textContent = resultEquinox.author || ''; feteLatinAuthorLine.style.display = 'block'; } else {feteLatinAuthorLine.style.display = 'none';}
+                 feteDescriptionDisplay.textContent = resultEquinox.description || 'Pas de description.';
+                 if (resultEquinox.urlImage) { image.src = resultEquinox.urlImage; image.alt = `Illustration pour ${resultEquinox.fete}`; image.style.display = 'block'; imagePlaceholder.style.display = 'none'; if (resultEquinox.urlWiki) { wikiLink.href = resultEquinox.urlWiki; wikiLink.target = '_blank'; wikiLink.style.display = 'inline-block'; } else {wikiLink.style.display = 'none';}} else {imagePlaceholder.style.display = 'block'; image.style.display = 'none'; wikiLink.style.display = 'none';}
+                 if (resultEquinox.urlEncy) { encycloFrame.src = resultEquinox.urlEncy; encycloFrame.style.display = 'block'; encycloPlaceholder.style.display = 'none'; } else {encycloFrame.style.display = 'none'; encycloPlaceholder.style.display = 'block'; encycloFrame.src = 'about:blank';}
+                 // Affichage Commémoration
+                 if (commemorationArea && resultEquinox.commemoration && resultEquinox.commemoration.title && resultEquinox.commemoration.description) { if(commemorationTitle) commemorationTitle.textContent = resultEquinox.commemoration.title; if(commemorationDesc) commemorationDesc.textContent = resultEquinox.commemoration.description; commemorationArea.style.display = 'block'; } else { if (commemorationArea) commemorationArea.style.display = 'none'; }
+            }
+
+            // Affichage Romme
+            if (resultRomme.error) { resultDisplayRomme.textContent = `Date selon méthode Romme : Erreur (${resultRomme.error})`; }
+            else if (resultRomme.date) { resultDisplayRomme.textContent = `Date selon méthode Romme : ${resultRomme.date}`; }
+            else { resultDisplayRomme.textContent = `Date selon méthode Romme : Erreur inconnue`; }
+
+        } catch (e) { console.error("Erreur:", e); errorDisplay.textContent = e.message || "Erreur."; errorDisplay.style.display = 'block'; }
+    }); // Fin Event Listener
+
     // --- Initialisation ---
-    precomputeEquinoxJDNs();
-    yearInput.max = 2199;
-	
-	    // --- Pré-remplir et Convertir la Date Actuelle ---
+    precomputeEquinoxJDNs(); // Prépare JDNs & détermine min/max year
+    updateUIRange();       // Met à jour UI avec plage supportée
+    yearInput.min = 1;     // Définit l'année minimale autorisée
+
+    // --- Pré-remplir Date Actuelle ---
     function prefillAndConvertCurrentDate() {
-        const today = new Date();
-        const currentDay = today.getDate();
-        const currentMonth = today.getMonth() + 1; // getMonth() est 0-indexé (Janvier = 0)
-        const currentYear = today.getFullYear();
+        try {
+            const today = new Date();
+            // Use current date: Wednesday, April 16, 2025 at 4:12:31 PM CEST
+            const currentDay = 16;
+            const currentMonth = 4; // April
+            const currentYear = 2025;
 
-        // Vérifier si la date actuelle est dans la plage valide (pour les données d'équinoxe)
-        if (currentYear >= 1792 && currentYear <= 2199) {
-            // Mettre les valeurs dans les champs input
-            dayInput.value = currentDay;
-            monthInput.value = currentMonth;
-            yearInput.value = currentYear;
+            console.log(`Pré-remplissage avec date: ${currentDay}/${currentMonth}/${currentYear}`);
+            dayInput.value = currentDay; monthInput.value = currentMonth; yearInput.value = currentYear;
 
-            // Déclencher programmatiquement le clic sur le bouton de conversion
-            // Cela exécutera la logique déjà présente dans l'event listener du bouton
-            convertButton.click(); 
-            
-            console.log(`Pré-rempli avec la date : ${currentDay}/${currentMonth}/${currentYear} et conversion déclenchée.`);
-        } else {
-            // Si la date actuelle est hors plage, on ne pré-remplit pas pour éviter les erreurs
-            // liées aux données d'équinoxe manquantes pour la date principale.
-            console.log(`La date actuelle (${currentDay}/${currentMonth}/${currentYear}) est hors de la plage supportée (1792-2199) pour le pré-remplissage automatique.`);
-            // Optionnel : on pourrait quand même pré-remplir et afficher N/A, 
-            // mais il est plus simple de ne rien faire ici.
-        }
+            // Déclencher conversion si date actuelle est dans plage de données equinoxe
+            if (minEquinoxDataYear && maxEquinoxDataYear && equinoxJDNs[maxEquinoxDataYear + 1]) {
+                const currentJDN = gregorianToJDN(currentDay, currentMonth, currentYear);
+                const firstEquinoxJDN = equinoxJDNs[minEquinoxDataYear];
+                const endEquinoxJDN = equinoxJDNs[maxEquinoxDataYear + 1];
+
+                if (currentJDN >= firstEquinoxJDN && currentJDN < endEquinoxJDN) {
+                     convertButton.click();
+                     console.log(`Pré-rempli et conversion auto déclenchée.`);
+                } else if (currentJDN >= firstEquinoxJDN) {
+                     convertButton.click(); // Tenter pour Romme et erreur Equinoxe
+                     console.log(`Pré-rempli. Conversion auto partielle (Equinoxe hors données).`);
+                } else {
+                     console.log(`Date actuelle antérieure aux données d'équinoxe.`);
+                     calendarInfoDisplay.textContent = `Note: Date actuelle (${currentDay}/${currentMonth}/${currentYear}) traitée comme Grégorienne.`;
+                }
+            } else {
+                 console.log("Pré-remplissage: Pas assez de données équinoxe pour conversion auto.");
+                 calendarInfoDisplay.textContent = `Note: Date actuelle (${currentDay}/${currentMonth}/${currentYear}) traitée comme Grégorienne.`;
+            }
+        } catch(e) { console.error("Erreur lors du pré-remplissage:", e); }
     }
+    prefillAndConvertCurrentDate(); // Appeler la fonction au chargement
 
-    prefillAndConvertCurrentDate(); // Appeler la fonction pour exécuter la logique
-
-
-});
+}); // Fin DOMContentLoaded
