@@ -11,10 +11,11 @@
 
         <div class="center-column">
             <div class="converter-container">
-                <h1>Convertisseur Grégorien vers Républicain</h1>
+                <h1>Convertisseur Grégorien/Julien vers Républicain</h1>
                 <p>
-                    Entrez une date grégorienne (22 Sept 1792 - 31 Déc 2199).
-                    <br><em>Affichage basé sur l'équinoxe réel & données associées.</em>
+                    Entrez une date (Grégorienne ou Julienne, à partir de l'an 1).
+                    <br><em>Les dates avant le 15 Octobre 1582 sont traitées comme Juliennes.</em>
+                    <br><em id="supported-range-info">Calcul basé sur Équinoxe possible pour la plage de données fournie.</em>
                 </p>
 
                 <div class="input-group">
@@ -25,11 +26,11 @@
                     <input type="number" id="month" min="1" max="12" placeholder="MM" required>
 
                     <label for="year">Année:</label>
-                    <input type="number" id="year" min="1792" max="2199" placeholder="AAAA" required>
+                    <input type="number" id="year" min="1" placeholder="AAAA" required>
                 </div>
 
                 <button id="convert-button">Convertir</button>
-
+                <p id="calendar-info"></p>
                 <div id="result-area">
                     <h2>Date Républicaine (basée Équinoxe):</h2>
                     <p id="republican-date-equinox">---</p>
@@ -44,31 +45,37 @@
                     <p id="romme-date-info" style="font-size: 0.85em; color: #555;">Date selon méthode Romme : ---</p>
                 </div>
 
+                 <div id="commemoration-area" class="commemoration-block" style="display: none;">
+                     <h4 id="commemoration-title"></h4>
+                     <p id="commemoration-description"></p>
+                 </div>
+
                 <div id="error-area" class="error-message" style="display: none;"></div>
             </div>
         </div>
 
-<div class="left-column">
-            <h3 id="left-column-title">Illustration</h3> 
+         <div class="left-column">
+            <h3 id="left-column-title">Illustration</h3>
             <div id="image-container">
-                <a id="fete-wiki-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
-                    <img id="fete-image" src="" alt="Illustration Fête du Jour" style="display: none; max-width: 100%; height: auto; border: 1px solid #ccc;">
-                </a>
-                <p id="image-placeholder" style="display: block; color: #888;">(Pas d'illustration disponible)</p>
+                 <a id="fete-wiki-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
+                    <img id="fete-image" src="" alt="Illustration Fête du Jour" style="display: none;">
+                 </a>
+                 <div id="image-placeholder">(Pas d'illustration disponible)</div>
             </div>
         </div>
 
-        <div class="right-column">
+         <div class="right-column">
             <h3>Encyclopédie (première édition)</h3>
             <div id="encyclopedia-container">
-                 <iframe id="encyclopedia-frame" src="about:blank" width="100%" style="border: 1px solid #ccc; display: none;"></iframe>
-                 <p id="encyclopedia-placeholder" style="display: block; color: #888;">(Pas d'article lié disponible)</p>
+                 <iframe id="encyclopedia-frame" src="about:blank" style="display: none;"></iframe>
+                 <div id="encyclopedia-placeholder">(Pas d'article lié disponible)</div>
                   <p style="font-size: 0.8em; text-align: center; margin-top: 10px;">
                      <a href="https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition" target="_blank">Accéder à l'Encyclopédie</a>
                  </p>
             </div>
         </div>
 
-    </div> <script src="script.js"></script>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
