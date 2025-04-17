@@ -1,57 +1,155 @@
 *, *::before, *::after {
-    box-sizing: border-box;
+    box-sizing: border-box; /* Applique le modèle de boîte standard */
 }
 
 /* Styles généraux */
 body {
-    display: block; padding: 20px; background-color: #f4f4f4;
-    font-family: sans-serif; color: #333; line-height: 1.4;
+    display: block;
+    padding: 20px;
+    background-color: #f4f4f4;
+    font-family: sans-serif;
+    color: #333;
+    line-height: 1.4;
 }
 
 /* Conteneur principal de la grille */
 .main-grid-container {
     display: grid;
-    /* Colonnes: Centre (1.5), Gauche (2), Droite (2) */
+    /* Utilise les proportions originales : Centre (1.5), Gauche (2), Droite (2) */
     grid-template-columns: 1.5fr 2fr 2fr;
-    gap: 40px; max-width: 1700px; margin: 0 auto; align-items: start;
+    gap: 40px; /* Espace entre les colonnes */
+    max-width: 1700px;
+    margin: 0 auto;
+    align-items: start;
 }
+/* L'ordre visuel suit l'ordre HTML: Centre, Gauche, Droite */
+
 
 /* Styles pour les colonnes */
 .center-column, .left-column, .right-column {
-    background-color: #fff; padding: 20px; border-radius: 8px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08); min-height: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    min-height: 300px;
 }
 
 /* Titres Colonne 2 et 3 */
-.left-column h3, .right-column h3 {
-    text-align: center; margin-top: 0; margin-bottom: 20px; color: #2c3e50;
-    border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 1.2em;
+/* Utilise les ID originaux si présents dans l'HTML ci-dessus */
+#left-column-title, .right-column h3 { /* Cibler par ID ou classe si nécessaire */
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-size: 1.2em;
 }
 
-/* === Styles Colonne 1: Convertisseur === */
-.converter-container { width: 100%; text-align: center; padding: 0; }
-.converter-container h1 { color: #2c3e50; margin-bottom: 15px; margin-top: 0; }
-.converter-container > p:first-of-type { color: #555; margin-bottom: 25px; font-size: 0.9em; line-height: 1.5; }
-#calendar-info { font-size: smaller; color: grey; margin-top: 15px; margin-bottom: 15px; min-height: 1em; text-align: center; }
-.input-group { display: flex; justify-content: space-around; align-items: center; margin-bottom: 25px; gap: 10px; flex-wrap: wrap; }
+/* Conteneurs pour l'image et l'iframe */
+#image-container, #encyclopedia-container {
+    text-align: center;
+}
+
+/* Styles pour l'image et son lien */
+#fete-wiki-link {
+    display: none;
+    cursor: pointer;
+     margin-bottom: 10px;
+}
+#fete-image {
+    display: none;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#image-placeholder {
+    display: block;
+    color: #888;
+    font-style: italic;
+    padding: 20px 0;
+    min-height: 50px;
+    border: 1px dashed #ccc;
+     margin-bottom: 10px;
+}
+
+/* Styles pour l'iframe et son placeholder */
+#encyclopedia-frame {
+    border: 1px solid #ccc;
+    display: none;
+    width: 100%;
+    height: 65vh; /* Hauteur adaptative */
+    border-radius: 4px;
+}
+#encyclopedia-placeholder {
+    display: block;
+    color: #888;
+    font-style: italic;
+    padding: 20px 0;
+    min-height: 50px;
+    border: 1px dashed #ccc;
+}
+
+/* Styles pour la colonne centrale (convertisseur) */
+.converter-container {
+     width: 100%;
+     border-radius: 8px;
+     text-align: center;
+     box-shadow: none;
+     border: none;
+     padding: 0; /* Padding géré par .center-column */
+}
+
+/* Styles généraux du convertisseur */
+.converter-container h1 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+     margin-top: 0;
+}
+.converter-container > p:first-of-type { /* Intro text */
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+#calendar-info { /* Note Julian/Gregorian */
+    font-size: smaller;
+    color: grey;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    min-height: 1em;
+    text-align: center;
+}
+.input-group { /* Input date fields */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
 .input-group label { margin-bottom: 5px; display: block; text-align: left; width: auto; margin-right: 5px; }
 .input-group input[type="number"] { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; width: 65px; text-align: center; -moz-appearance: number-input; -webkit-appearance: number-input; appearance: number-input; }
 #year { width: 80px; }
 button#convert-button { background-color: #3498db; color: white; border: none; padding: 12px 25px; font-size: 1.1em; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; width: 100%; margin-top: 10px; margin-bottom: 10px; }
 button#convert-button:hover { background-color: #2980b9; }
 
-#conversion-output-area { /* Zone pour dates converties seulement */
-    margin-top: 20px; background-color: #eaf6ff; /* Conserve fond bleu pâle */
-    padding: 15px; /* Ajoute un peu de padding */ border-radius: 5px;
-    border: 1px solid #bde0ff; text-align: center;
+#conversion-output-area { /* Zone pour dates converties */
+    margin-top: 20px;
+    background-color: #eaf6ff; /* Fond bleu pâle */
+    padding: 15px; /* Padding interne */
+    border-radius: 5px;
+    border: 1px solid #bde0ff;
+    text-align: center;
 }
-#republican-date-equinox { /* Date Equinoxe (avec An Romain + Arabe) */
-    font-size: 1.15em; /* Ajusté */ font-weight: bold; color: #0056b3;
-    margin-bottom: 5px; /* Espace réduit */ min-height: 1.3em;
+#republican-date-equinox { /* Date Equinoxe (Romain+Arabe) */
+    font-size: 1.15em; font-weight: bold; color: #0056b3;
+    margin-bottom: 5px; min-height: auto; /* Reset min-height */
 }
 #romme-date-info { /* Date Romme */
-    font-size: 0.85em; color: #555; margin-top: 8px; /* Espace ajusté */
-    border-top: none; padding-top: 0; margin-bottom: 0; /* Pas d'espace en bas */
+    font-size: 0.85em; color: #555; margin-top: 8px;
+    border-top: none; padding-top: 0; margin-bottom: 0;
 }
 .error-message { color: #d9534f; background-color: #f2dede; border: 1px solid #ebccd1; padding: 12px; border-radius: 4px; margin-top: 20px; font-weight: bold; text-align: center; display: none; }
 
@@ -59,11 +157,11 @@ button#convert-button:hover { background-color: #2980b9; }
 /* === Styles Colonne 2: Détails === */
 .column-2-details { text-align: left; }
 
-#details-column-title { /* Titre H3 Col 2 */
+#left-column-title { /* Titre H3 Col 2 */
     text-align: center; margin-top: 0; margin-bottom: 15px; color: #2c3e50;
     border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 1.2em;
 }
-h4#fete-date-display { /* Nouveau: Décadi + Fête */
+h4#fete-date-display { /* Nouveau: Décadi - Fête */
     font-size: 1.2em; font-weight: bold; color: #333; text-align: center;
     margin-top: 0; margin-bottom: 20px; min-height: 1.3em;
 }
@@ -87,12 +185,12 @@ h4#fete-date-display { /* Nouveau: Décadi + Fête */
 
 /* Styles Commémoration (Col 2, sous image) */
 .commemoration-block {
-    display: none; margin-top: 20px; padding: 15px; border: 1px solid #d9534f;
+    display: none; margin-top: 20px; /* Espace après image */ padding: 15px; border: 1px solid #d9534f;
     background-color: #f2dede; border-radius: 5px; text-align: left;
 }
 .commemoration-block h4 { margin-top: 0; margin-bottom: 8px; color: #a94442; font-size: 1.1em; }
 .commemoration-tagline { font-weight: normal; font-style: italic; margin-right: 5px; }
-.commemoration-block p { font-size: 0.9em; color: #a94442; line-height: 1.4; margin-bottom: 0; }
+.commemoration-block p { font-size: 0.9em; color: #a94442; line-height: 1.4; margin-bottom: 0; text-align: justify;}
 
 
 /* === Styles Colonne 3: Encyclopédie === */
@@ -104,7 +202,7 @@ h4#fete-date-display { /* Nouveau: Décadi + Fête */
 /* === Media Queries === */
 @media (max-width: 1024px) {
     .main-grid-container { grid-template-columns: 1fr; gap: 20px; }
-    .column-1-converter, .column-2-details, .column-3-encyclopedia { grid-column: auto; grid-row: auto; order: initial; padding: 15px; }
+    .center-column, .left-column, .right-column { grid-column: auto; grid-row: auto; order: initial; padding: 15px; }
     #encyclopedia-frame { height: 50vh; }
     .converter-container { padding: 0; }
 }
@@ -117,7 +215,7 @@ h4#fete-date-display { /* Nouveau: Décadi + Fête */
      h1 { font-size: 1.5em; }
      #republican-date-equinox { font-size: 1.1em; } /* Ajusté */
      /* Ajustements Col 2 Mobile */
-     .column-2-details h3 { font-size: 1.1em; }
+     #left-column-title { font-size: 1.1em; } /* Réutiliser ID ou classe */
      h4#fete-date-display { font-size: 1.1em; margin-bottom: 10px;}
      #fete-details-area { padding-top: 10px; margin-top: 10px; margin-bottom: 15px; }
 }
