@@ -4,31 +4,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthInput = document.getElementById('month');
     const yearInput = document.getElementById('year');
     const convertButton = document.getElementById('convert-button');
-    const resultDisplayEquinox = document.getElementById('republican-date-equinox');
-    const resultDisplayRomme = document.getElementById('romme-date-info');
     const errorDisplay = document.getElementById('error-area');
     const calendarInfoDisplay = document.getElementById('calendar-info');
-    const supportedRangeInfo = document.getElementById('supported-range-info'); // For dynamic range text
-    const feteNameDisplay = document.getElementById('fete-name');
+    const supportedRangeInfo = document.getElementById('supported-range-info');
+
+    // Column 1 Elements
+    const republicanDateEquinoxCol1 = document.getElementById('republican-date-equinox');
+    const rommeDateInfoCol1 = document.getElementById('romme-date-info');
+
+    // Column 2 Elements
+    const detailsColumnTitle = document.getElementById('left-column-title'); // Assuming reuse of this ID for Col 2 Title
+    const feteDateDisplay = document.getElementById('fete-date-display'); // <<< H4 for Combined Fête + Date
+    // const republicanDateDisplayCol2 = document.getElementById('republican-date-display-col2'); // Removed this element/logic
     const feteLatinDisplay = document.getElementById('fete-latin');
     const feteAuthorDisplay = document.getElementById('fete-author');
     const feteLatinAuthorLine = document.getElementById('fete-latin-author');
     const feteDescriptionDisplay = document.getElementById('fete-description');
-    const leftColumnTitle = document.getElementById('left-column-title');
+    const imageContainer = document.getElementById('image-container');
     const wikiLink = document.getElementById('fete-wiki-link');
     const image = document.getElementById('fete-image');
     const imagePlaceholder = document.getElementById('image-placeholder');
-    const encycloFrame = document.getElementById('encyclopedia-frame');
-    const encycloPlaceholder = document.getElementById('encyclopedia-placeholder');
-    // ** NOUVELLES RÉFÉRENCES pour Commémoration **
     const commemorationArea = document.getElementById('commemoration-area');
     const commemorationTitle = document.getElementById('commemoration-title');
     const commemorationDesc = document.getElementById('commemoration-description');
 
+
+    // Column 3 Elements
+    const encycloFrame = document.getElementById('encyclopedia-frame');
+    const encycloPlaceholder = document.getElementById('encyclopedia-placeholder');
+
     // --- Global variables for data range ---
     let minEquinoxDataYear = null;
     let maxEquinoxDataYear = null;
-
+	
     // --- Constantes Calendrier Républicain ---
     const republicanMonths = [
         "Vendémiaire", "Brumaire", "Frimaire", "Nivôse", "Pluviôse", "Ventôse",
@@ -1209,38 +1217,38 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 		// , author: "", urlEncy: "", urlImage: "", urlWiki: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "
         // Floréal (Printemps) - Mois 8
-        [
-           { name: "Rose", latin: "Rosa", author: "(Linné 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ROSE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Rose_Papa_Meilland.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Rose_(fleur)", description: "Fleur emblématique, symbole d'amour et de beauté, cultivée pour son parfum et son esthétique." },
-           { name: "Chêne", latin: "Quercus", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Arbre majestueux et robuste, symbole de force et de longévité, produisant des glands." },
-           { name: "Fougère", latin: "Pteridophyta", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante sans fleur se reproduisant par spores, typique des sous-bois humides." },
-           { name: "Aubépine", latin: "Crataegus monogyna", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Arbuste épineux aux fleurs blanches ou roses parfumées ('épine blanche')." },
-           { name: "Rossignol", latin: "Luscinia megarhynchos", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Oiseau chanteur au chant mélodieux, souvent nocturne." },
-           { name: "Ancolie", latin: "Aquilegia vulgaris", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante vivace aux fleurs originales en forme d'éperon." },
-           { name: "Muguet", latin: "Convallaria majalis", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante à clochettes blanches très parfumées, symbole du 1er mai, mais toxique." },
-           { name: "Champignon", latin: "Fungi", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Organisme ni végétal ni animal, dont certains sont comestibles (ex: Cèpe) et d'autres vénéneux." }, // Très générique ici
-           { name: "Hyacinthe", latin: "Hyacinthus orientalis", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante à bulbe aux fleurs très parfumées en grappes denses." },
-           { name: "Râteau", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Outil de jardinage pour rassembler feuilles ou débris, ou niveler la terre." },
-           { name: "Rhubarbe", latin: "Rheum rhabarbarum", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante dont on consomme les pétioles (tiges) acides, souvent en tarte ou compote." },
-           { name: "Sainfoin", latin: "Onobrychis viciifolia", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante fourragère mellifère, aux fleurs roses en épis." },
-           { name: "Bâton-d'or", latin: "Asphodeline lutea", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante vivace méditerranéenne à hautes tiges florales jaunes." }, // Asphodèle jaune
-           { name: "Chamerops", latin: "Chamaerops humilis", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Seul palmier nain originaire d'Europe continentale." },
-           { name: "Ver à soie", latin: "Bombyx mori", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Chenille du papillon bombyx du mûrier, qui produit un cocon utilisé pour fabriquer la soie." },
-           { name: "Consoude", latin: "Symphytum officinale", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante aux propriétés cicatrisantes ('Oreille d'âne'), riche en potasse (purin)." },
-           { name: "Pimprenelle", latin: "Sanguisorba minor", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante dont les jeunes feuilles au goût de concombre sont utilisées en salade." },
-           { name: "Corbeille d'or", latin: "Aurinia saxatilis", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante tapissante couverte de petites fleurs jaunes au printemps." },
-           { name: "Arroche", latin: "Atriplex hortensis", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Légume feuille ancien, similaire à l'épinard, existant en variétés vertes ou rouges." },
-           { name: "Sarcloir", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Outil de jardinage pour désherber en coupant les mauvaises herbes à ras du sol." },
-           { name: "Statice", latin: "Limonium", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante dont les fleurs (souvent bleues, roses, blanches) sèchent bien ('Immortelle bleue')." },
-           { name: "Fritillaire", latin: "Fritillaria meleagris", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante à bulbe aux fleurs pendantes en damier pourpre ('Pintade')." },
-           { name: "Bourrache", latin: "Borago officinalis", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante velue aux fleurs bleues comestibles, mellifère et médicinale." },
-           { name: "Valériane", latin: "Valeriana officinalis", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante dont la racine a des propriétés calmantes et sédatives." },
-           { name: "Carpe", latin: "Cyprinus carpio", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Poisson d'eau douce commun, élevé en étang." },
-           { name: "Fusain", latin: "Euonymus europaeus", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Arbuste dont les fruits roses et oranges sont toxiques ('Bonnet d'évêque')." },
-           { name: "Civette", latin: "Allium schoenoprasum", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante aromatique proche de l'oignon, dont on utilise les fines feuilles ciselées." }, // Ciboulette
-           { name: "Buglosse", latin: "Anchusa / Lycopsis", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante à fleurs bleues, souvent rêche au toucher, de la famille de la bourrache." },
-           { name: "Sénevé", latin: "Sinapis alba / Brassica nigra", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante dont les graines servent à faire la moutarde." },
-           { name: "Houlette", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Long bâton de berger terminé par une plaque de fer ou une crosse." }
-        ],
+[
+    { name: "Rose", latin: "Rosa", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ROSE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Rose_Papa_Meilland.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Rose_(fleur)", description: "Fleur emblématique, symbole d'amour et de beauté, cultivée pour son parfum et son esthétique." },
+    { name: "Chêne", latin: "Quercus", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/CH%C3%8ANE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/c/c6/Gustave_Courbet_-_Le_Gros_Ch%C3%AAne_%281843%29.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Ch%C3%AAne", description: "Arbre majestueux et robuste, symbole de force et de longévité, produisant des glands." },
+    { name: "Fougère", latin: "Pteridophyta", author: "", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/FOUGERE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Sa-fern.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Pteridophyta", description: "Plante sans fleur se reproduisant par spores, typique des sous-bois humides." }, // Rank: Division
+    { name: "Aubépine", latin: "Crataegus monogyna", author: "(Jacq., 1775)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/AUBEPINE_ou_AUBEPIN", urlImage: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Crataegus_monogyna%2803%29.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Crataegus_monogyna", description: "Arbuste épineux aux fleurs blanches ou roses parfumées ('épine blanche')." }, // Rank: Species // Corrected Ency URL
+    { name: "Rossignol", latin: "Luscinia megarhynchos", author: "(Brehm, CL, 1831)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ROSSIGNOL_ou_ROUSSIGNOL", urlImage: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Rossinyol_03_%28Luscinia_megarhynchos%29.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Rossignol_philom%C3%A8le", description: "Oiseau chanteur au chant mélodieux, souvent nocturne." }, // Rank: Species
+    { name: "Ancolie", latin: "Aquilegia vulgaris", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ANCOLIE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Aquilegia_vulgaris_Gaffard.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Aquilegia_vulgaris", description: "Plante vivace aux fleurs originales en forme d'éperon." }, // Rank: Species
+    { name: "Muguet", latin: "Convallaria majalis", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/MUGUET", urlImage: "https://upload.wikimedia.org/wikipedia/commons/4/49/Maigl%C3%B6ckchen_am_Sylvensteinsee_Mai_2018.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Muguet_de_mai", description: "Plante à clochettes blanches très parfumées, symbole du 1er mai, mais toxique." }, // Rank: Species
+    { name: "Champignon", latin: "Fungi", author: "", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/CHAMPIGNON", urlImage: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Fliegenpilz_fly_agaric_Amanita_muscaria.JPG", urlWiki: "https://fr.wikipedia.org/wiki/Fungi", description: "Organisme ni végétal ni animal, dont certains sont comestibles (ex: Cèpe) et d'autres vénéneux." }, // Rank: Kingdom
+    { name: "Hyacinthe", latin: "Hyacinthus orientalis", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/JACINTE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/7/74/Hyacinthus_orientalis_%28blue_cultivar%29_01.JPG", urlWiki: "https://fr.wikipedia.org/wiki/Jacinthe_d%27Orient", description: "Plante à bulbe aux fleurs très parfumées en grappes denses." }, // Rank: Species // Ency uses JACINTHE
+    { name: "Râteau", latin: "", author: "", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/R%C3%82TEAU", urlImage: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Fan-shaped_leaf_rake.jpg", urlWiki: "https://fr.wikipedia.org/wiki/R%C3%A2teau", description: "Outil de jardinage pour rassembler feuilles ou débris, ou niveler la terre." }, // Item: Tool
+    { name: "Rhubarbe", latin: "Rheum rhabarbarum", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/RHUBARBE", urlImage: "https://upload.wikimedia.org/wikipedia/commons/3/33/April_22%2C_Rhubarb.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Rhubarbe", description: "Plante dont on consomme les pétioles (tiges) acides, souvent en tarte ou compote." }, // Rank: Species
+    { name: "Sainfoin", latin: "Onobrychis viciifolia", author: "(Scop., 1772)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/SAINFOIN", urlImage: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Onobrychis_viciifolia_%28plant%29.jpg", urlWiki: "https://fr.wikipedia.org/wiki/Sainfoin_cultiv%C3%A9", description: "Plante fourragère mellifère, aux fleurs roses en épis." }, // Rank: Species
+    { name: "Bâton-d'or", latin: "Asphodeline lutea", author: "((L.) Rchb., 1830)", urlEncy: "", urlImage: "https://upload.wikimedia.org/wikipedia/commons/5/53/Aspholedine_lutea_-_Jardin_des_Plantes.JPG", urlWiki: "https://fr.wikipedia.org/wiki/Asphodeline_lutea", description: "Plante vivace méditerranéenne à hautes tiges florales jaunes." }, // Rank: Species // No specific Ency entry
+    { name: "Chamerops", latin: "Chamaerops humilis", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/CHAMEROPS", urlImage: "chameropsPicture", urlWiki: "https://fr.wikipedia.org/wiki/Chamaerops_humilis", description: "Seul palmier nain originaire d'Europe continentale." }, // Rank: Species
+    { name: "Ver à soie", latin: "Bombyx mori", author: "(L., 1758)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/SOIE", urlImage: "verASoiePicture", urlWiki: "https://fr.wikipedia.org/wiki/Bombyx_du_m%C3%BBrier", description: "Chenille du papillon bombyx du mûrier, qui produit un cocon utilisé pour fabriquer la soie." }, // Rank: Species // Ency uses SOIE
+    { name: "Consoude", latin: "Symphytum officinale", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/CONSOUDE", urlImage: "consoudePicture", urlWiki: "https://fr.wikipedia.org/wiki/Consoude_officinale", description: "Plante aux propriétés cicatrisantes ('Oreille d'âne'), riche en potasse (purin)." }, // Rank: Species
+    { name: "Pimprenelle", latin: "Sanguisorba minor", author: "(Scop., 1771)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PIMPRENELLE", urlImage: "pimprenellePicture", urlWiki: "https://fr.wikipedia.org/wiki/Petite_pimprenelle", description: "Plante dont les jeunes feuilles au goût de concombre sont utilisées en salade." }, // Rank: Species
+    { name: "Corbeille d'or", latin: "Aurinia saxatilis", author: "((L.) Desv., 1815)", urlEncy: "", urlImage: "corbeilleDOrPicture", urlWiki: "https://fr.wikipedia.org/wiki/Corbeille_d%27or", description: "Plante tapissante couverte de petites fleurs jaunes au printemps." }, // Rank: Species // No specific Ency entry
+    { name: "Arroche", latin: "Atriplex hortensis", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ARROCHE", urlImage: "arrochePicture", urlWiki: "https://fr.wikipedia.org/wiki/Arroche_des_jardins", description: "Légume feuille ancien, similaire à l'épinard, existant en variétés vertes ou rouges." }, // Rank: Species
+    { name: "Sarcloir", latin: "", author: "", urlEncy: "", urlImage: "sarcloirPicture", urlWiki: "https://fr.wikipedia.org/wiki/Sarcloir", description: "Outil de jardinage pour désherber en coupant les mauvaises herbes à ras du sol." }, // Item: Tool // No specific Ency entry
+    { name: "Statice", latin: "Limonium", author: "(Mill., 1754)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/STATICE", urlImage: "staticePicture", urlWiki: "https://fr.wikipedia.org/wiki/Limonium", description: "Plante dont les fleurs (souvent bleues, roses, blanches) sèchent bien ('Immortelle bleue')." }, // Rank: Genus
+    { name: "Fritillaire", latin: "Fritillaria meleagris", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/FRITILLAIRE", urlImage: "fritillairePicture", urlWiki: "https://fr.wikipedia.org/wiki/Fritillaire_pintade", description: "Plante à bulbe aux fleurs pendantes en damier pourpre ('Pintade')." }, // Rank: Species
+    { name: "Bourrache", latin: "Borago officinalis", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/BOURRACHE", urlImage: "bourrachePicture", urlWiki: "https://fr.wikipedia.org/wiki/Bourrache_officinale", description: "Plante velue aux fleurs bleues comestibles, mellifère et médicinale." }, // Rank: Species
+    { name: "Valériane", latin: "Valeriana officinalis", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/VALERIANE", urlImage: "valerianePicture", urlWiki: "https://fr.wikipedia.org/wiki/Val%C3%A9riane_officinale", description: "Plante dont la racine a des propriétés calmantes et sédatives." }, // Rank: Species // Ency uses VALERIANE
+    { name: "Carpe", latin: "Cyprinus carpio", author: "(L., 1758)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/CARPE", urlImage: "carpePicture", urlWiki: "https://fr.wikipedia.org/wiki/Carpe_commune", description: "Poisson d'eau douce commun, élevé en étang." }, // Rank: Species
+    { name: "Fusain", latin: "Euonymus europaeus", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/FUSAIN", urlImage: "fusainPicture", urlWiki: "https://fr.wikipedia.org/wiki/Fusain_d%27Europe", description: "Arbuste dont les fruits roses et oranges sont toxiques ('Bonnet d'évêque')." }, // Rank: Species
+    { name: "Civette", latin: "Allium schoenoprasum", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/CIBOULETTE", urlImage: "civettePicture", urlWiki: "https://fr.wikipedia.org/wiki/Ciboulette", description: "Plante aromatique proche de l'oignon, dont on utilise les fines feuilles ciselées." }, // Rank: Species (Ciboulette) // Ency uses CIBOULETTE
+    { name: "Buglosse", latin: "Anchusa", author: "(L., 1753)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/BUGLOSSE", urlImage: "buglossePicture", urlWiki: "https://fr.wikipedia.org/wiki/Buglosse", description: "Plante à fleurs bleues, souvent rêche au toucher, de la famille de la bourrache." }, // Rank: Genus
+    { name: "Sénevé", latin: "Brassica nigra", author: "((L.) W.D.J.Koch, 1833)", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/S%C3%89NEV%C3%89", urlImage: "senevePicture", urlWiki: "https://fr.wikipedia.org/wiki/Moutarde_noire", description: "Plante dont les graines servent à faire la moutarde." }, // Rank: Species (Moutarde noire)
+    { name: "Houlette", latin: "", author: "", urlEncy: "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/HOULETTE", urlImage: "houlettePicture", urlWiki: "https://fr.wikipedia.org/wiki/Houlette_(berger)", description: "Long bâton de berger terminé par une plaque de fer ou une crosse." } // Item: Tool
+],
           // Prairial (Printemps) - Mois 9
         [
             { name: "Luzerne", latin: "Medicago sativa", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "Plante fourragère très nutritive, riche en protéines, améliore le sol (légumineuse)." },
@@ -1399,15 +1407,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function isRepublicanSextileRomme(an) {
-        // Applique règle Grégorienne au numéro d'an Rép. pour Romme
         if (an === 0) return false;
         return (an % 4 === 0 && an % 100 !== 0) || (an % 400 === 0);
     }
 
     function gregorianToJDN(d, m, y) {
         if (m <= 2) { y -= 1; m += 12; }
-        const A = Math.floor(y / 100);
-        const B = 2 - A + Math.floor(A / 4);
+        const A = Math.floor(y / 100); const B = 2 - A + Math.floor(A / 4);
         const jdn = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
         return Math.floor(jdn);
     }
@@ -1418,34 +1424,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(jdn);
     }
 
-    function jdnToGregorian(jdn) { // Utile pour débug
-        const L = jdn + 68569;
-        const N = Math.floor(4 * L / 146097);
-        const L2 = L - Math.floor((146097 * N + 3) / 4);
-        const I = Math.floor(4000 * (L2 + 1) / 1461001);
-        const L3 = L2 - Math.floor(1461 * I / 4) + 31;
-        const J = Math.floor(80 * L3 / 2447);
-        const D = L3 - Math.floor(2447 * J / 80);
-        const L4 = Math.floor(J / 11);
-        const M = J + 2 - 12 * L4;
-        const Y = 100 * (N - 49) + I + L4;
+    function jdnToGregorian(jdn) {
+        const L = jdn + 68569; const N = Math.floor(4 * L / 146097);
+        const L2 = L - Math.floor((146097 * N + 3) / 4); const I = Math.floor(4000 * (L2 + 1) / 1461001);
+        const L3 = L2 - Math.floor(1461 * I / 4) + 31; const J = Math.floor(80 * L3 / 2447);
+        const D = L3 - Math.floor(2447 * J / 80); const L4 = Math.floor(J / 11);
+        const M = J + 2 - 12 * L4; const Y = 100 * (N - 49) + I + L4;
         return { day: D, month: M, year: Y };
     }
 
-    function toRoman(num) { // Gère les négatifs pour An -I etc.
-        if (num === 0) return "0?"; // Ne devrait pas arriver avec la logique An -I
-        if (num < 0) return `-${toRoman(Math.abs(num))}`;
-        if (num >= 4000) return num.toString();
-
+    function toRoman(num) {
+        if (num === 0) return "0?"; if (num < 0) return `-${toRoman(Math.abs(num))}`; if (num >= 4000) return num.toString();
         const romanMap = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 };
-        let roman = '';
-        let currentNum = num;
-        for (let key in romanMap) {
-            while (currentNum >= romanMap[key]) {
-                roman += key;
-                currentNum -= romanMap[key];
-            }
-        }
+        let roman = ''; let currentNum = num;
+        for (let key in romanMap) { while (currentNum >= romanMap[key]) { roman += key; currentNum -= romanMap[key]; } }
         return roman;
     }
 
@@ -1453,161 +1445,112 @@ document.addEventListener('DOMContentLoaded', () => {
     let equinoxJDNs = {};
     function precomputeEquinoxJDNs() {
         console.log("Début pré-calcul JDN équinoxes...");
-        equinoxJDNs = {}; minEquinoxDataYear = null; maxEquinoxDataYear = null; // Reset
-        let count = 0;
+        equinoxJDNs = {}; minEquinoxDataYear = null; maxEquinoxDataYear = null; let count = 0;
         const yearsInData = Object.keys(equinoxDates).map(Number).filter(y => !isNaN(y));
         if (yearsInData.length === 0) { console.error("Aucune donnée valide dans equinoxDates !"); return; }
-
-        yearsInData.sort((a, b) => a - b);
-        minEquinoxDataYear = yearsInData[0];
-        maxEquinoxDataYear = yearsInData[yearsInData.length - 1];
-        console.log(`Années trouvées dans equinoxDates: ${minEquinoxDataYear} à ${maxEquinoxDataYear}`);
-
+        yearsInData.sort((a, b) => a - b); minEquinoxDataYear = yearsInData[0]; maxEquinoxDataYear = yearsInData[yearsInData.length - 1];
+        console.log(`Années trouvées: ${minEquinoxDataYear} à ${maxEquinoxDataYear}`);
         try {
-            for (const year of yearsInData) {
-                 const date = equinoxDates[year];
-                 if (date && typeof date.day === 'number' && typeof date.month === 'number') {
-                     equinoxJDNs[year] = gregorianToJDN(date.day, date.month, year);
-                     count++;
-                 } else { console.warn(`Donnée équinoxe invalide pour ${year}.`); }
-            }
-            console.log(`Nombre de JDN équinoxes calculés: ${count}`);
-
-            // Estimer JDN pour l'année SUIVANT la dernière année connue
-            if (equinoxJDNs[maxEquinoxDataYear]) {
-                 const anApproxMax = (maxEquinoxDataYear >= 1792) ? (maxEquinoxDataYear - 1791) : (maxEquinoxDataYear - 1792); // Utilise skip 0 pour estimer l'année approx
-                 const daysInLastYear = isRepublicanSextileRomme(anApproxMax) ? 366 : 365; // Utilise Romme pour *estimer* la longueur
-                 const jdnNextYearApprox = equinoxJDNs[maxEquinoxDataYear] + daysInLastYear;
-                 equinoxJDNs[maxEquinoxDataYear + 1] = jdnNextYearApprox;
-                 console.log(`JDN estimé pour début année ${maxEquinoxDataYear + 1}: ${equinoxJDNs[maxEquinoxDataYear + 1]}`);
-            } else if (maxEquinoxDataYear) { console.error(`Impossible d'estimer JDN pour ${maxEquinoxDataYear + 1}.`); }
-             console.log("Fin pré-calcul JDN équinoxes.");
-        } catch (error) { console.error("Erreur pendant pré-calcul:", error); }
+            for (const year of yearsInData) { const date = equinoxDates[year]; if (date && typeof date.day === 'number' && typeof date.month === 'number') { equinoxJDNs[year] = gregorianToJDN(date.day, date.month, year); count++; } else { console.warn(`Donnée invalide pour ${year}.`); } }
+            console.log(`JDN équinoxes calculés: ${count}`);
+            if (equinoxJDNs[maxEquinoxDataYear]) { const anApproxMax = (maxEquinoxDataYear >= 1792) ? (maxEquinoxDataYear - 1791) : (maxEquinoxDataYear - 1792); const daysInLastYear = isRepublicanSextileRomme(anApproxMax) ? 366 : 365; const jdnNextYearApprox = equinoxJDNs[maxEquinoxDataYear] + daysInLastYear; equinoxJDNs[maxEquinoxDataYear + 1] = jdnNextYearApprox; console.log(`JDN estimé pour début année ${maxEquinoxDataYear + 1}: ${equinoxJDNs[maxEquinoxDataYear + 1]}`); }
+            else if (maxEquinoxDataYear) { console.error(`Impossible d'estimer JDN pour ${maxEquinoxDataYear + 1}.`); }
+             console.log("Fin pré-calcul.");
+        } catch (error) { console.error("Erreur pré-calcul:", error); }
     }
-
 
     // --- Mise à jour de l'interface utilisateur avec la plage dynamique ---
     function updateUIRange() {
-        // Vérifie si on a au moins un début et une fin (estimée)
         if (minEquinoxDataYear && maxEquinoxDataYear && equinoxJDNs[maxEquinoxDataYear + 1]) {
-            const lastRepYear = (maxEquinoxDataYear >= 1792) ? (maxEquinoxDataYear - 1791) : (maxEquinoxDataYear - 1792); // Utilise skip 0
+            const lastRepYear = (maxEquinoxDataYear >= 1792) ? (maxEquinoxDataYear - 1791) : (maxEquinoxDataYear - 1792);
             const lastRepYearDisplay = `An ${toRoman(lastRepYear)}`;
-
-             supportedRangeInfo.textContent = `Calcul basé sur Équinoxe possible env. de Sep ${minEquinoxDataYear} à Sep ${maxEquinoxDataYear + 1} (fin ${lastRepYearDisplay}).`;
-             yearInput.max = maxEquinoxDataYear; // Set max on input as a hint
-             yearInput.title = `Année (min 1, max basé sur données équinoxe: ${maxEquinoxDataYear})`;
-        } else {
-            supportedRangeInfo.textContent = "Données d'équinoxe insuffisantes pour le calcul basé sur l'équinoxe.";
-            yearInput.removeAttribute('max'); // Pas de limite max si données insuffisantes
-            yearInput.title = `Année (min 1)`;
-        }
+             supportedRangeInfo.textContent = `Calcul Équinoxe possible env. de Sep ${minEquinoxDataYear} à Sep ${maxEquinoxDataYear + 1} (fin ${lastRepYearDisplay}).`;
+             yearInput.max = maxEquinoxDataYear; yearInput.title = `Année (min 1, max: ${maxEquinoxDataYear})`;
+        } else { supportedRangeInfo.textContent = "Données équinoxe insuffisantes pour le calcul."; yearInput.removeAttribute('max'); yearInput.title = `Année (min 1)`; }
     }
 
 
-    // --- Calcul Principal (Méthode Équinoxe - Version An -I, -II...) ---
+// --- Calcul Principal (Méthode Équinoxe - Révisé pour retourner jour/mois) ---
     function calculateEquinoxDateUsingJDN(inputJDN) {
+        // ... (Validation JDN, recherche intervalle, calcul targetYear, startAnJDN, nextStartAnJDN inchangés) ...
         if (!inputJDN || isNaN(inputJDN)) { return { error: "JDN invalide fourni.", missingData: false }; }
-
         const yearsAvailable = Object.keys(equinoxJDNs).map(Number).sort((a, b) => a - b);
         if (yearsAvailable.length < 2) { return { error: "Données d'équinoxe insuffisantes.", missingData: true }; }
-
-        const firstAvailableYear = yearsAvailable[0];
-        const firstAvailableJDN = equinoxJDNs[firstAvailableYear];
-        const lastAvailableYearPlus1 = yearsAvailable[yearsAvailable.length - 1];
-        const lastAvailableJDNPlus1 = equinoxJDNs[lastAvailableYearPlus1];
-
+        const firstAvailableYear = yearsAvailable[0]; const firstAvailableJDN = equinoxJDNs[firstAvailableYear];
+        const lastAvailableYearPlus1 = yearsAvailable[yearsAvailable.length - 1]; const lastAvailableJDNPlus1 = equinoxJDNs[lastAvailableYearPlus1];
         if (inputJDN < firstAvailableJDN) { return { error: `Données équinoxe non disponibles (avant ${firstAvailableYear}).`, missingData: true }; }
         if (!lastAvailableJDNPlus1 || inputJDN >= lastAvailableJDNPlus1) { const lastActualDataYear = lastAvailableYearPlus1 - 1; const lastRepAn = (lastActualDataYear >= 1792) ? (lastActualDataYear - 1791) : (lastActualDataYear - 1792); return { error: `Date hors plage des données équinoxe (après An ${toRoman(lastRepAn)}).`, missingData: true }; }
-
         let targetYear = -1, startAnJDN = -1, nextStartAnJDN = -1;
-        for (let i = 0; i < yearsAvailable.length - 1; i++) {
-            const currentYear = yearsAvailable[i], nextYear = yearsAvailable[i+1];
-            const currentStartJDN = equinoxJDNs[currentYear], nextJDN = equinoxJDNs[nextYear];
-            if (currentStartJDN === undefined || nextJDN === undefined) { continue; }
-            if (inputJDN >= currentStartJDN && inputJDN < nextJDN) { targetYear = currentYear; startAnJDN = currentStartJDN; nextStartAnJDN = nextJDN; break; }
-        }
-
+        for (let i = 0; i < yearsAvailable.length - 1; i++) { const currentYear = yearsAvailable[i], nextYear = yearsAvailable[i+1]; const currentStartJDN = equinoxJDNs[currentYear], nextJDN = equinoxJDNs[nextYear]; if (currentStartJDN === undefined || nextJDN === undefined) { continue; } if (inputJDN >= currentStartJDN && inputJDN < nextJDN) { targetYear = currentYear; startAnJDN = currentStartJDN; nextStartAnJDN = nextJDN; break; } }
         if (targetYear === -1) { return { error: "Impossible de trouver l'intervalle d'année (Erreur interne).", missingData: true }; }
-
-        let currentAn = (targetYear >= 1792) ? (targetYear - 1791) : (targetYear - 1792); // Skip 0 logic
+        let currentAn = (targetYear >= 1792) ? (targetYear - 1791) : (targetYear - 1792);
         if (isNaN(currentAn)) { return { error: "Erreur calcul An Rép." }; }
-        const currentAnDisplay = `An ${toRoman(currentAn)}`;
+        const dayOfYear = inputJDN - startAnJDN + 1; const yearLength = nextStartAnJDN - startAnJDN; const isSextile = (yearLength === 366);
 
-        const dayOfYear = inputJDN - startAnJDN + 1;
-        const yearLength = nextStartAnJDN - startAnJDN;
-        const isSextile = (yearLength === 366);
-
-        let republicanDay, republicanMonthIndex, decadeDayName, formattedDate = "";
+        let republicanDay = 0, republicanMonthIndex = -1, decadeDayName = "", monthName = "", dayPrefix = "";
+        let isComplementary = false;
         let feteInfo = { name: "Inconnue", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "", commemoration: undefined };
 
-        if (dayOfYear > 360) { // Jour complémentaire
-            const complementaryDayIndex = dayOfYear - 361;
+        if (dayOfYear > 360) {
+            isComplementary = true; const complementaryDayIndex = dayOfYear - 361;
             if (complementaryDayIndex < 0 || complementaryDayIndex >= (isSextile ? 6 : 5)) { return { error: "Erreur: Jour complémentaire invalide." }; }
             const compDayName = (complementaryDaysNames && complementaryDaysNames[complementaryDayIndex]) ? complementaryDaysNames[complementaryDayIndex] : `Jour Comp. ${complementaryDayIndex + 1}`;
-            formattedDate = `${compDayName} ${currentAnDisplay}`;
-            if (complementaryItems && complementaryItems[complementaryDayIndex]) { feteInfo = { ...feteInfo, ...complementaryItems[complementaryDayIndex] }; }
-            else if (compDayName) { feteInfo.name = compDayName; }
-        } else { // Jour normal
-            republicanMonthIndex = Math.floor((dayOfYear - 1) / 30); republicanDay = (dayOfYear - 1) % 30 + 1;
+            dayPrefix = compDayName; decadeDayName = ""; monthName = ""; republicanDay = complementaryDayIndex + 1; // Use index+1 for day number in comp days
+            if (complementaryItems && complementaryItems[complementaryDayIndex]) { feteInfo = { ...feteInfo, ...complementaryItems[complementaryDayIndex] }; } else if (compDayName) { feteInfo.name = compDayName; }
+        } else {
+            isComplementary = false; republicanMonthIndex = Math.floor((dayOfYear - 1) / 30); republicanDay = (dayOfYear - 1) % 30 + 1;
             if (republicanMonthIndex < 0 || republicanMonthIndex >= 12 || republicanDay < 1 || republicanDay > 30) { return { error: "Erreur calcul mois/jour Rép."}; }
-            decadeDayName = decadeDays[(republicanDay - 1) % 10]; const republicanMonthName = republicanMonths[republicanMonthIndex];
-            formattedDate = `${decadeDayName} ${republicanDay} ${republicanMonthName} ${currentAnDisplay}`;
+            decadeDayName = decadeDays[(republicanDay - 1) % 10]; monthName = republicanMonths[republicanMonthIndex];
+            dayPrefix = `${decadeDayName} ${republicanDay} ${monthName}`;
             try { const dayIndex = republicanDay - 1; if (dailyItems && dailyItems[republicanMonthIndex] && dailyItems[republicanMonthIndex][dayIndex]) { feteInfo = { ...feteInfo, ...dailyItems[republicanMonthIndex][dayIndex] }; } }
             catch (e) { console.error(`Erreur accès dailyItems[${republicanMonthIndex}][${republicanDay - 1}]`, e); }
         }
 
-        return { date: formattedDate, fete: feteInfo.name, latin: feteInfo.latin, author: feteInfo.author, description: feteInfo.description, urlImage: feteInfo.urlImage, urlWiki: feteInfo.urlWiki, urlEncy: feteInfo.urlEncy, commemoration: feteInfo.commemoration };
+        // ** MODIFICATION : Retourner plus de composants pour formatage flexible **
+        return {
+            datePrefix: dayPrefix,          // Ex: "Octidi 28 Germinal" ou "Jour de la Vertu"
+            decadeDay: decadeDayName,       // Ex: "Octidi" ou ""
+            day: republicanDay,             // Ex: 28 ou 1 (pour 1er jour comp)
+            month: monthName,               // Ex: "Germinal" ou ""
+            currentAn: currentAn,           // Ex: 233, -11 etc. (Numérique)
+            isComplementary: isComplementary,// Boolean
+            // Reste des infos
+            fete: feteInfo.name, latin: feteInfo.latin, author: feteInfo.author,
+            description: feteInfo.description, urlImage: feteInfo.urlImage,
+            urlWiki: feteInfo.urlWiki, urlEncy: feteInfo.urlEncy,
+            commemoration: feteInfo.commemoration
+        };
     } // Fin calculateEquinoxDateUsingJDN
-
-
+	
     // --- Calcul Secondaire (Méthode Romme - Reste >= An I) ---
     function calculateRommeDateUsingJDN(inputJDN) {
+        // Identique à la version précédente
         if (!inputJDN || isNaN(inputJDN)) { return { error: "JDN invalide fourni (Romme)." }; }
-        const republicanEpochJDN = 2375840; // Start of 1 Vendémiaire An I
-        if (inputJDN < republicanEpochJDN) { return { date: "N/A (avant An I)" }; }
-
+        const republicanEpochJDN = 2375840; if (inputJDN < republicanEpochJDN) { return { date: "N/A (avant An I)" }; }
         let currentAnRomme = 1; let startOfYearJDNRomme = republicanEpochJDN;
-        while (true) {
-            const isSextileRomme = isRepublicanSextileRomme(currentAnRomme);
-            const daysInCurrentAnRomme = isSextileRomme ? 366 : 365;
-            const nextYearStartJDNRomme = startOfYearJDNRomme + daysInCurrentAnRomme;
-            if (inputJDN >= startOfYearJDNRomme && inputJDN < nextYearStartJDNRomme) { break; }
-            if (inputJDN < startOfYearJDNRomme) { return { error: "Erreur calcul An (Romme)." }; }
-            startOfYearJDNRomme = nextYearStartJDNRomme; currentAnRomme++;
-            if (currentAnRomme > 4000) { return { error: "Erreur boucle An (Romme > 4000)."}; }
-        }
-        const dayOfYearRomme = inputJDN - startOfYearJDNRomme + 1;
-        const isSextileRomme = isRepublicanSextileRomme(currentAnRomme);
-        let formattedDateRomme = "";
-        if (dayOfYearRomme > 360) {
-            const complementaryDayIndexRomme = dayOfYearRomme - 361;
-            if (complementaryDayIndexRomme < 0 || complementaryDayIndexRomme >= (isSextileRomme ? 6 : 5)) { return { error: "Erreur: Jour complémentaire invalide (Romme)." }; }
-            const compDayName = (complementaryDaysNames && complementaryDaysNames[complementaryDayIndexRomme]) ? complementaryDaysNames[complementaryDayIndexRomme] : `Jour Comp. ${complementaryDayIndexRomme + 1}`;
-            formattedDateRomme = `${compDayName} An ${toRoman(currentAnRomme)}`;
-        } else {
-            const monthIndexRomme = Math.floor((dayOfYearRomme - 1) / 30); const dayRomme = (dayOfYearRomme - 1) % 30 + 1;
-            if (monthIndexRomme < 0 || monthIndexRomme >= 12 || dayRomme < 1 || dayRomme > 30) { return { error: "Erreur calcul mois/jour Rép. (Romme)."}; }
-            const monthNameRomme = republicanMonths[monthIndexRomme];
-            formattedDateRomme = `${dayRomme} ${monthNameRomme} An ${toRoman(currentAnRomme)}`;
-        }
+        while (true) { const isSextileRomme = isRepublicanSextileRomme(currentAnRomme); const daysInCurrentAnRomme = isSextileRomme ? 366 : 365; const nextYearStartJDNRomme = startOfYearJDNRomme + daysInCurrentAnRomme; if (inputJDN >= startOfYearJDNRomme && inputJDN < nextYearStartJDNRomme) { break; } if (inputJDN < startOfYearJDNRomme) { return { error: "Erreur calcul An (Romme)." }; } startOfYearJDNRomme = nextYearStartJDNRomme; currentAnRomme++; if (currentAnRomme > 4000) { return { error: "Erreur boucle An (Romme > 4000)."}; } }
+        const dayOfYearRomme = inputJDN - startOfYearJDNRomme + 1; const isSextileRomme = isRepublicanSextileRomme(currentAnRomme); let formattedDateRomme = "";
+        if (dayOfYearRomme > 360) { const complementaryDayIndexRomme = dayOfYearRomme - 361; if (complementaryDayIndexRomme < 0 || complementaryDayIndexRomme >= (isSextileRomme ? 6 : 5)) { return { error: "Erreur: Jour complémentaire invalide (Romme)." }; } const compDayName = (complementaryDaysNames && complementaryDaysNames[complementaryDayIndexRomme]) ? complementaryDaysNames[complementaryDayIndexRomme] : `Jour Comp. ${complementaryDayIndexRomme + 1}`; formattedDateRomme = `${compDayName} An ${toRoman(currentAnRomme)}`; }
+        else { const monthIndexRomme = Math.floor((dayOfYearRomme - 1) / 30); const dayRomme = (dayOfYearRomme - 1) % 30 + 1; if (monthIndexRomme < 0 || monthIndexRomme >= 12 || dayRomme < 1 || dayRomme > 30) { return { error: "Erreur calcul mois/jour Rép. (Romme)."}; } const monthNameRomme = republicanMonths[monthIndexRomme]; formattedDateRomme = `${dayRomme} ${monthNameRomme} An ${toRoman(currentAnRomme)}`; }
         return { date: formattedDateRomme };
     }
 
 
-    // --- Event Listener ---
+    // --- Event Listener (MODIFIÉ pour nouvelle logique d'affichage) ---
     convertButton.addEventListener('click', () => {
-        // --- Récupération et Reset ---
+        // --- Récupération ---
         const day = parseInt(dayInput.value, 10); const month = parseInt(monthInput.value, 10); const year = parseInt(yearInput.value, 10);
-        // Reset affichages
-        errorDisplay.textContent = ''; errorDisplay.style.display = 'none'; calendarInfoDisplay.textContent = '';
-        resultDisplayEquinox.textContent = '---'; resultDisplayRomme.textContent = 'Date selon méthode Romme : ---';
-        feteNameDisplay.textContent = 'Fête du jour : ---'; feteLatinDisplay.textContent = ''; feteAuthorDisplay.textContent = '';
-        feteLatinAuthorLine.style.display = 'none'; feteDescriptionDisplay.textContent = '---';
-        leftColumnTitle.textContent = 'Illustration'; wikiLink.style.display = 'none'; wikiLink.href = '#'; wikiLink.removeAttribute('target');
-        image.style.display = 'none'; image.src = ''; image.alt = ''; imagePlaceholder.style.display = 'block';
-        encycloFrame.style.display = 'none'; encycloFrame.src = 'about:blank'; encycloPlaceholder.style.display = 'block';
-        if (commemorationArea) commemorationArea.style.display = 'none'; if (commemorationTitle) commemorationTitle.textContent = ''; if (commemorationDesc) commemorationDesc.textContent = '';
 
+        // --- Reset affichages ---
+        errorDisplay.textContent = ''; errorDisplay.style.display = 'none'; calendarInfoDisplay.textContent = '';
+        republicanDateEquinoxCol1.textContent = '---'; rommeDateInfoCol1.textContent = 'Date selon méthode Romme : ---';
+        if (detailsColumnTitle) detailsColumnTitle.textContent = 'Détails du Jour Républicain';
+        if (feteDateDisplay) feteDateDisplay.textContent = '---';
+        if (feteLatinAuthorLine) { feteLatinDisplay.textContent = ''; feteAuthorDisplay.textContent = ''; feteLatinAuthorLine.style.display = 'none'; }
+        if (feteDescriptionDisplay) feteDescriptionDisplay.textContent = '---';
+        if (commemorationArea) { commemorationArea.style.display = 'none'; if (commemorationTitle) commemorationTitle.textContent = ''; if (commemorationDesc) commemorationDesc.textContent = ''; }
+        if (imageContainer) { wikiLink.style.display = 'none'; wikiLink.href = '#'; wikiLink.removeAttribute('target'); image.style.display = 'none'; image.src = ''; image.alt = ''; imagePlaceholder.style.display = 'block'; }
+        if(encycloFrame) { encycloFrame.style.display = 'none'; encycloFrame.src = 'about:blank'; } if(encycloPlaceholder) encycloPlaceholder.style.display = 'block';
 
         // --- Validation et Calcul JDN ---
         if (!day || !month || !year || isNaN(day) || isNaN(month) || isNaN(year) || year === 0) { errorDisplay.textContent = "Date invalide/incomplète."; errorDisplay.style.display = 'block'; return; }
@@ -1617,86 +1560,109 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSkippedDate = (year === GREGORIAN_REFORM_YEAR && month === GREGORIAN_REFORM_MONTH && day > GREGORIAN_REFORM_DAY_JULIAN_END && day < GREGORIAN_REFORM_DAY_GREGORIAN_START);
         if (isSkippedDate) { errorDisplay.textContent = `Date invalide: ${day} Oct 1582 n'existe pas.`; errorDisplay.style.display = 'block'; return; }
         try {
-            if (isPreGregorianReform) {
-                const daysInJulianMonth = [0, 31, isJulianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-                if (month < 1 || month > 12 || day < 1 || day > daysInJulianMonth[month]) { throw new Error(`Date Julienne invalide.`); }
-                inputJDN = julianToJDN(day, month, year); calendarUsed = 'Julian';
-                calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Julienne.`;
-            } else {
-                 const daysInGregorianMonth = [0, 31, isGregorianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-                 if (month < 1 || month > 12 || day < 1 || day > daysInGregorianMonth[month]) { throw new Error(`Date Grégorienne invalide.`); }
-                inputJDN = gregorianToJDN(day, month, year); calendarUsed = 'Gregorian';
-                calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Grégorienne.`;
-            }
+            if (isPreGregorianReform) { const daysInJulianMonth = [0, 31, isJulianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; if (month < 1 || month > 12 || day < 1 || day > daysInJulianMonth[month]) { throw new Error(`Date Julienne invalide.`); } inputJDN = julianToJDN(day, month, year); calendarUsed = 'Julian'; calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Julienne.`; }
+            else { const daysInGregorianMonth = [0, 31, isGregorianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; if (month < 1 || month > 12 || day < 1 || day > daysInGregorianMonth[month]) { throw new Error(`Date Grégorienne invalide.`); } inputJDN = gregorianToJDN(day, month, year); calendarUsed = 'Gregorian'; calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Grégorienne.`; }
             console.log(`Using ${calendarUsed} calendar. JDN: ${inputJDN}`);
 
             // --- Appel Calcul Républicain ---
             const resultEquinox = calculateEquinoxDateUsingJDN(inputJDN);
-            const resultRomme = calculateRommeDateUsingJDN(inputJDN); // Toujours calculer (peut retourner N/A)
+            const resultRomme = calculateRommeDateUsingJDN(inputJDN);
 
-            // --- Affichage ---
+// --- Affichage ---
             if (resultEquinox.error) {
-                 resultDisplayEquinox.textContent = resultEquinox.error; // Affiche message d'excuse ou autre
-                 // Pas de détails fête/image/commemoration si erreur Equinoxe
-            } else if (resultEquinox.date) {
-                 // Affichage normal Equinox + détails ...
-                 resultDisplayEquinox.textContent = resultEquinox.date; leftColumnTitle.textContent = resultEquinox.date;
-                 feteNameDisplay.textContent = `Fête du jour : ${resultEquinox.fete}`;
-                 if (resultEquinox.latin || resultEquinox.author) { feteLatinDisplay.textContent = resultEquinox.latin || ''; feteAuthorDisplay.textContent = resultEquinox.author || ''; feteLatinAuthorLine.style.display = 'block'; } else {feteLatinAuthorLine.style.display = 'none';}
-                 feteDescriptionDisplay.textContent = resultEquinox.description || 'Pas de description.';
-                 if (resultEquinox.urlImage) { image.src = resultEquinox.urlImage; image.alt = `Illustration pour ${resultEquinox.fete}`; image.style.display = 'block'; imagePlaceholder.style.display = 'none'; if (resultEquinox.urlWiki) { wikiLink.href = resultEquinox.urlWiki; wikiLink.target = '_blank'; wikiLink.style.display = 'inline-block'; } else {wikiLink.style.display = 'none';}} else {imagePlaceholder.style.display = 'block'; image.style.display = 'none'; wikiLink.style.display = 'none';}
-                 if (resultEquinox.urlEncy) { encycloFrame.src = resultEquinox.urlEncy; encycloFrame.style.display = 'block'; encycloPlaceholder.style.display = 'none'; } else {encycloFrame.style.display = 'none'; encycloPlaceholder.style.display = 'block'; encycloFrame.src = 'about:blank';}
-                 // Affichage Commémoration
-                 if (commemorationArea && resultEquinox.commemoration && resultEquinox.commemoration.title && resultEquinox.commemoration.description) { if(commemorationTitle) commemorationTitle.textContent = resultEquinox.commemoration.title; if(commemorationDesc) commemorationDesc.textContent = resultEquinox.commemoration.description; commemorationArea.style.display = 'block'; } else { if (commemorationArea) commemorationArea.style.display = 'none'; }
+                 // Colonne 1: Afficher l'erreur pour Equinoxe
+                 republicanDateEquinoxCol1.textContent = resultEquinox.error;
+                 // Colonne 2: Reset Titre
+                 if (detailsColumnTitle) detailsColumnTitle.textContent = 'Détails du Jour Républicain';
+                 if (feteDateDisplay) feteDateDisplay.textContent = '---';
+                 // (Les autres éléments Col 2 sont déjà reset)
+            } else if (resultEquinox.datePrefix !== undefined && resultEquinox.currentAn !== undefined) {
+                 // ** COLONNE 1 **
+                 // Afficher Date Equinoxe avec An Romain ET An Arabe
+                 republicanDateEquinoxCol1.textContent = `${resultEquinox.datePrefix} An ${toRoman(resultEquinox.currentAn)} (${resultEquinox.currentAn})`;
+
+                 // ** COLONNE 2 **
+                 if (detailsColumnTitle) detailsColumnTitle.textContent = `Détails du Jour Républicain`;
+
+                 // ** NOUVEAU TITRE COMBINÉ: "Jour Mois - Fête" ou "Nom Jour Comp." **
+                 let feteDateHeading = "";
+                 if (resultEquinox.isComplementary) {
+                     // Pour jours comp., affiche juste le nom du jour/fête
+                     feteDateHeading = resultEquinox.fete;
+                 } else {
+                      // Pour jours normaux: "NumJour NomMois – NomFête"
+                      feteDateHeading = `${resultEquinox.day} ${resultEquinox.month} – ${resultEquinox.fete}`;
+                 }
+                 if (feteDateDisplay) {
+                     feteDateDisplay.textContent = feteDateHeading;
+                     feteDateDisplay.style.display = 'block'; // Assure la visibilité
+                 }
+                 // ** FIN NOUVEAU TITRE COMBINÉ **
+
+
+                 // Détails fête (latin, desc)
+                 if (feteLatinAuthorLine) { // Vérifie si l'élément conteneur existe
+                    if (resultEquinox.latin || resultEquinox.author) {
+                         if(feteLatinDisplay) feteLatinDisplay.textContent = resultEquinox.latin || '';
+                         if(feteAuthorDisplay) feteAuthorDisplay.textContent = resultEquinox.author || '';
+                         feteLatinAuthorLine.style.display = 'block';
+                    } else {
+                         feteLatinAuthorLine.style.display = 'none';
+                    }
+                 }
+                 if(feteDescriptionDisplay) feteDescriptionDisplay.textContent = resultEquinox.description || 'Pas de description.';
+
+                 // Image / Wiki
+                 if (resultEquinox.urlImage && imageContainer) { image.src = resultEquinox.urlImage; image.alt = `Illustration pour ${resultEquinox.fete}`; image.style.display = 'block'; imagePlaceholder.style.display = 'none'; if (resultEquinox.urlWiki && wikiLink) { wikiLink.href = resultEquinox.urlWiki; wikiLink.target = '_blank'; wikiLink.style.display = 'inline-block'; } else if (wikiLink) { wikiLink.style.display = 'none'; } }
+                 else if (imageContainer) { imagePlaceholder.style.display = 'block'; image.style.display = 'none'; if (wikiLink) wikiLink.style.display = 'none'; }
+
+                 // Commémoration (sous l'image)
+                 if (commemorationArea && resultEquinox.commemoration && resultEquinox.commemoration.title && resultEquinox.commemoration.description) { if(commemorationTitle) commemorationTitle.innerHTML = `<span class="commemoration-tagline">Ce jour-là :</span> ${resultEquinox.commemoration.title}`; if(commemorationDesc) commemorationDesc.textContent = resultEquinox.commemoration.description; commemorationArea.style.display = 'block'; }
+                 else { if (commemorationArea) commemorationArea.style.display = 'none'; }
+
+                 // ** COLONNE 3 ** Encyclopédie
+                 if (resultEquinox.urlEncy && encycloFrame) {
+                     encycloFrame.src = resultEquinox.urlEncy;
+                     encycloFrame.style.display = 'block';
+                     if(encycloPlaceholder) encycloPlaceholder.style.display = 'none';
+                     console.log("Chargement Encyclopédie: ", resultEquinox.urlEncy);
+                 } else if (encycloFrame) {
+                     // Pas d'URL ou erreur précédente, assure que c'est caché/reset
+                     encycloFrame.style.display = 'none';
+                     if(encycloPlaceholder) encycloPlaceholder.style.display = 'block';
+                     encycloFrame.src = 'about:blank';
+                 }
+            } else {
+                 // Cas d'erreur imprévu
+                 republicanDateEquinoxCol1.textContent = "Erreur résultat Equinoxe";
+                 console.error("Résultat Equinoxe invalide:", resultEquinox);
+                 if (feteDateDisplay) feteDateDisplay.textContent = '---'; // Reset titre col 2 aussi
             }
 
-            // Affichage Romme
-            if (resultRomme.error) { resultDisplayRomme.textContent = `Date selon méthode Romme : Erreur (${resultRomme.error})`; }
-            else if (resultRomme.date) { resultDisplayRomme.textContent = `Date selon méthode Romme : ${resultRomme.date}`; }
-            else { resultDisplayRomme.textContent = `Date selon méthode Romme : Erreur inconnue`; }
 
+            // Affichage Romme (toujours en Col 1)
+            if (resultRomme.error) { rommeDateInfoCol1.textContent = `Date selon méthode Romme : Erreur (${resultRomme.error})`; }
+            else if (resultRomme.date) { rommeDateInfoCol1.textContent = `Date selon méthode Romme : ${resultRomme.date}`; }
+            else { rommeDateInfoCol1.textContent = `Date selon méthode Romme : Erreur inconnue`; }
+			
         } catch (e) { console.error("Erreur:", e); errorDisplay.textContent = e.message || "Erreur."; errorDisplay.style.display = 'block'; }
     }); // Fin Event Listener
 
     // --- Initialisation ---
-    precomputeEquinoxJDNs(); // Prépare JDNs & détermine min/max year
-    updateUIRange();       // Met à jour UI avec plage supportée
-    yearInput.min = 1;     // Définit l'année minimale autorisée
+    precomputeEquinoxJDNs();
+    updateUIRange();
+    yearInput.min = 1;
 
     // --- Pré-remplir Date Actuelle ---
     function prefillAndConvertCurrentDate() {
         try {
             const today = new Date();
-            // Use current date: Wednesday, April 16, 2025 at 4:12:31 PM CEST
-            const currentDay = 16;
-            const currentMonth = 4; // April
-            const currentYear = 2025;
-
-            console.log(`Pré-remplissage avec date: ${currentDay}/${currentMonth}/${currentYear}`);
+            const currentDay = today.getDate(); const currentMonth = today.getMonth() + 1; const currentYear = today.getFullYear();
+            console.log(`Pré-remplissage avec date dynamique: ${currentDay}/${currentMonth}/${currentYear}`);
             dayInput.value = currentDay; monthInput.value = currentMonth; yearInput.value = currentYear;
-
-            // Déclencher conversion si date actuelle est dans plage de données equinoxe
-            if (minEquinoxDataYear && maxEquinoxDataYear && equinoxJDNs[maxEquinoxDataYear + 1]) {
-                const currentJDN = gregorianToJDN(currentDay, currentMonth, currentYear);
-                const firstEquinoxJDN = equinoxJDNs[minEquinoxDataYear];
-                const endEquinoxJDN = equinoxJDNs[maxEquinoxDataYear + 1];
-
-                if (currentJDN >= firstEquinoxJDN && currentJDN < endEquinoxJDN) {
-                     convertButton.click();
-                     console.log(`Pré-rempli et conversion auto déclenchée.`);
-                } else if (currentJDN >= firstEquinoxJDN) {
-                     convertButton.click(); // Tenter pour Romme et erreur Equinoxe
-                     console.log(`Pré-rempli. Conversion auto partielle (Equinoxe hors données).`);
-                } else {
-                     console.log(`Date actuelle antérieure aux données d'équinoxe.`);
-                     calendarInfoDisplay.textContent = `Note: Date actuelle (${currentDay}/${currentMonth}/${currentYear}) traitée comme Grégorienne.`;
-                }
-            } else {
-                 console.log("Pré-remplissage: Pas assez de données équinoxe pour conversion auto.");
-                 calendarInfoDisplay.textContent = `Note: Date actuelle (${currentDay}/${currentMonth}/${currentYear}) traitée comme Grégorienne.`;
-            }
+            convertButton.click(); // Toujours déclencher
         } catch(e) { console.error("Erreur lors du pré-remplissage:", e); }
     }
-    prefillAndConvertCurrentDate(); // Appeler la fonction au chargement
+    prefillAndConvertCurrentDate();
 
 }); // Fin DOMContentLoaded
