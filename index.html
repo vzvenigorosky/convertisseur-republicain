@@ -9,8 +9,7 @@
 <body>
     <div class="main-grid-container">
 
-        <div class="center-column">
-            <div class="converter-container">
+        <div class="center-column"> <div class="converter-container">
                 <h1>Convertisseur Grégorien/Julien vers Républicain</h1>
                 <p>
                     Entrez une date (Grégorienne ou Julienne, à partir de l'an 1).
@@ -31,41 +30,39 @@
 
                 <button id="convert-button">Convertir</button>
                 <p id="calendar-info"></p>
-                <div id="result-area">
-                    <h2>Date Républicaine (basée Équinoxe):</h2>
-                    <p id="republican-date-equinox">---</p>
 
-                    <p id="fete-name" style="font-style: italic; font-size: 1em; margin-bottom: 2px;">Fête du jour : ---</p>
-                    <p id="fete-latin-author" style="font-size: 0.9em; color: #666; margin-top: 0px; margin-bottom: 5px; display: none;">
-                        <i id="fete-latin"></i> <span id="fete-author" style="margin-left: 5px;"></span>
-                    </p>
-                    <p id="fete-description" style="font-size: 0.85em; color: #333; margin-bottom: 15px;">---</p>
-
-                    <hr style="margin: 15px 0;">
-                    <p id="romme-date-info" style="font-size: 0.85em; color: #555;">Date selon méthode Romme : ---</p>
+                <div id="conversion-output-area">
+                     <p id="republican-date-equinox">---</p>
+                     <p id="romme-date-info">Date selon méthode Romme : ---</p>
                 </div>
-
-                 <div id="commemoration-area" class="commemoration-block" style="display: none;">
-                     <h4 id="commemoration-title"></h4>
-                     <p id="commemoration-description"></p>
-                 </div>
 
                 <div id="error-area" class="error-message" style="display: none;"></div>
             </div>
         </div>
 
-         <div class="left-column">
-            <h3 id="left-column-title">Illustration</h3>
-            <div id="image-container">
-                 <a id="fete-wiki-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
-                    <img id="fete-image" src="" alt="Illustration Fête du Jour" style="display: none;">
-                 </a>
-                 <div id="image-placeholder">(Pas d'illustration disponible)</div>
-            </div>
+        <div class="left-column"> <h3 id="left-column-title">Détails du Jour Républicain</h3> <h4 id="fete-date-display">---</h4>
+
+             <div id="fete-details-area">
+                  <p id="fete-latin-author" style="display: none;">
+                      <i id="fete-latin"></i> <span id="fete-author"></span>
+                  </p>
+                  <p id="fete-description">---</p>
+             </div>
+
+             <div id="image-container">
+                  <a id="fete-wiki-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
+                     <img id="fete-image" src="" alt="Illustration Fête du Jour" style="display: none;">
+                  </a>
+                  <div id="image-placeholder">(Pas d'illustration disponible)</div>
+             </div>
+
+             <div id="commemoration-area" class="commemoration-block" style="display: none;">
+                 <h4 id="commemoration-title"><span class="commemoration-tagline">Ce jour-là :</span> </h4>
+                 <p id="commemoration-description"></p>
+             </div>
         </div>
 
-         <div class="right-column">
-            <h3>Encyclopédie (première édition)</h3>
+        <div class="right-column"> <h3>Encyclopédie (première édition)</h3>
             <div id="encyclopedia-container">
                  <iframe id="encyclopedia-frame" src="about:blank" style="display: none;"></iframe>
                  <div id="encyclopedia-placeholder">(Pas d'article lié disponible)</div>
