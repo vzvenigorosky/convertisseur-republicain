@@ -2422,36 +2422,36 @@
         "name": "Jasmin",
         "latin": "Jasminum officinale",
         "author": "",
-        "urlEncy": "",
-        "urlImage": "",
-        "urlWiki": "",
+        "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/JASMIN",
+        "urlImage": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Jasminum_officinale_-_Bot._Mag._31%2C_1787.jpg",
+        "urlWiki": "https://fr.wikipedia.org/wiki/Jasminum_officinale",
         "description": "Plante grimpante aux fleurs blanches très parfumées, utilisée en parfumerie."
       },
       {
         "name": "Verveine",
         "latin": "Verbena officinalis / Aloysia citrodora",
         "author": "",
-        "urlEncy": "",
-        "urlImage": "",
-        "urlWiki": "",
+        "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/VERVEINE,_VERVENE",
+        "urlImage": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Illustration_Verbena_officinalis0.jpg",
+        "urlWiki": "https://fr.wikipedia.org/wiki/Verveine_officinale",
         "description": "Plante médicinale (V. officinale) ou aromatique au parfum citronné (V. odorante)."
       },
       {
         "name": "Thym",
         "latin": "Thymus vulgaris",
         "author": "",
-        "urlEncy": "",
-        "urlImage": "",
-        "urlWiki": "",
+        "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/THYM,_ou_THIM",
+        "urlImage": "https://upload.wikimedia.org/wikipedia/commons/1/12/Thymus_vulgaris_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-271.jpg",
+        "urlWiki": "https://fr.wikipedia.org/wiki/Thym_commun",
         "description": "Arbrisseau aromatique des garrigues, incontournable en cuisine méditerranéenne."
       },
       {
         "name": "Pivoine",
         "latin": "Paeonia",
         "author": "",
-        "urlEncy": "",
-        "urlImage": "",
-        "urlWiki": "",
+        "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PIVOINE",
+        "urlImage": "https://upload.wikimedia.org/wikipedia/commons/6/68/Pivoine_Desjardins.jpg",
+        "urlWiki": "https://fr.wikipedia.org/wiki/Pivoine",
         "description": "Plante vivace ou arbustive aux grosses fleurs spectaculaires, roses, rouges ou blanches."
       },
       {
