@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="Illustration non disponible">
+    <!-- Fond parchemin -->
+    <rect width="400" height="300" fill="#f9f4e8"/>
+    <rect x="6" y="6" width="388" height="288" fill="none" stroke="#c9a96e" stroke-width="2"/>
+    <rect x="12" y="12" width="376" height="276" fill="none" stroke="#8b6914" stroke-width="1"/>
+
+    <!-- Couronne de laurier stylisée -->
+    <g transform="translate(200,118)" fill="none" stroke="#1a2657" stroke-width="2.2" stroke-linecap="round">
+        <path d="M0,46 C-34,40 -52,14 -50,-22"/>
+        <path d="M0,46 C34,40 52,14 50,-22"/>
+        <!-- feuilles gauche -->
+        <path d="M-46,-16 q-13,-5 -19,-17 q12,1 19,9" fill="#1a2657" stroke="none"/>
+        <path d="M-50,2 q-14,-3 -21,-14 q12,-1 20,6" fill="#1a2657" stroke="none"/>
+        <path d="M-49,22 q-14,0 -22,-9 q11,-3 20,1" fill="#1a2657" stroke="none"/>
+        <!-- feuilles droite -->
+        <path d="M46,-16 q13,-5 19,-17 q-12,1 -19,9" fill="#1a2657" stroke="none"/>
+        <path d="M50,2 q14,-3 21,-14 q-12,-1 -20,6" fill="#1a2657" stroke="none"/>
+        <path d="M49,22 q14,0 22,-9 q-11,-3 -20,1" fill="#1a2657" stroke="none"/>
+    </g>
+
+    <!-- Bonnet phrygien minimaliste au centre -->
+    <g transform="translate(200,108)">
+        <path d="M-22,18 C-22,-8 -6,-22 12,-26 C2,-14 -2,-2 -2,18 Z" fill="#8b3a2a"/>
+        <rect x="-24" y="16" width="48" height="9" rx="3" fill="#1a2657"/>
+    </g>
+
+    <!-- Textes -->
+    <text x="200" y="208" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="700" fill="#1a2657">Illustration non disponible</text>
+    <text x="200" y="236" text-anchor="middle" font-family="'Crimson Text', Georgia, serif" font-size="14" font-style="italic" fill="#8b6914">Aucune image en accès libre pour ce jour</text>
+
+    <!-- Petite règle décorative -->
+    <line x1="120" y1="252" x2="280" y2="252" stroke="#c9a96e" stroke-width="1.5"/>
+</svg>

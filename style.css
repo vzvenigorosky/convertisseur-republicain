@@ -1,221 +1,364 @@
 *, *::before, *::after {
-    box-sizing: border-box; /* Applique le modèle de boîte standard */
+    box-sizing: border-box;
 }
 
-/* Styles généraux */
 body {
     display: block;
     padding: 20px;
-    background-color: #f4f4f4;
-    font-family: sans-serif;
-    color: #333;
-    line-height: 1.4;
+    background-color: #f5f0e8;
+    font-family: 'Crimson Text', Georgia, serif;
+    color: #3d2b1f;
+    line-height: 1.5;
 }
 
-/* Conteneur principal de la grille */
+/* === Masthead === */
+.masthead {
+    text-align: center;
+    max-width: 1700px;
+    margin: 0 auto 28px;
+}
+.masthead-rule {
+    border: none;
+    border-top: 3px solid #8b6914;
+    border-bottom: 1px solid #c9a96e;
+    height: 5px;
+    margin: 8px 0;
+}
+.masthead-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8em;
+    color: #1a2657;
+    margin: 14px 0 4px;
+    letter-spacing: 0.03em;
+    font-weight: 700;
+}
+.masthead-subtitle {
+    font-family: 'Crimson Text', serif;
+    font-size: 0.95em;
+    color: #8b6914;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 4px 0 14px;
+}
+
+/* === Main Grid === */
 .main-grid-container {
     display: grid;
-    /* Utilise les proportions originales : Centre (1.5), Gauche (2), Droite (2) */
     grid-template-columns: 1.5fr 2fr 2fr;
-    gap: 40px; /* Espace entre les colonnes */
+    gap: 30px;
     max-width: 1700px;
     margin: 0 auto;
     align-items: start;
 }
-/* L'ordre visuel suit l'ordre HTML: Centre, Gauche, Droite */
 
-
-/* Styles pour les colonnes */
+/* === Columns === */
 .center-column, .left-column, .right-column {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    background-color: #fffdf7;
+    padding: 22px;
+    border-radius: 2px;
+    border: 1px solid #c9a96e;
+    box-shadow: 2px 3px 12px rgba(139, 105, 20, 0.13);
     min-height: 300px;
 }
 
-/* Titres Colonne 2 et 3 */
-/* Utilise les ID originaux si présents dans l'HTML ci-dessus */
-#left-column-title, .right-column h3 { /* Cibler par ID ou classe si nécessaire */
+/* === Column h3 headings === */
+#left-column-title, .right-column h3 {
+    font-family: 'Playfair Display', serif;
     text-align: center;
     margin-top: 0;
-    margin-bottom: 20px;
-    color: #2c3e50;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+    margin-bottom: 18px;
+    color: #1a2657;
     font-size: 1.2em;
+    border-bottom: 3px double #8b6914;
+    padding-bottom: 10px;
 }
 
-/* Conteneurs pour l'image et l'iframe */
-#image-container, #encyclopedia-container {
+/* === Center column converter === */
+.converter-container {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+}
+.converter-container h2 {
+    font-family: 'Playfair Display', serif;
+    color: #1a2657;
+    font-size: 1.2em;
+    margin-bottom: 14px;
+    margin-top: 0;
+    border-bottom: 3px double #8b6914;
+    padding-bottom: 10px;
+}
+.converter-container > p:first-of-type {
+    color: #5a4030;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+    line-height: 1.55;
+}
+
+#calendar-info {
+    font-size: 0.85em;
+    color: #8b6914;
+    font-style: italic;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    min-height: 1em;
     text-align: center;
 }
 
-/* Styles pour l'image et son lien */
+/* === Input group === */
+.input-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.input-group label {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 4px;
+    display: block;
+    text-align: left;
+    width: auto;
+    margin-right: 5px;
+    color: #1a2657;
+    font-size: 0.95em;
+}
+.input-group input[type="number"] {
+    padding: 8px;
+    border: 1px solid #c9a96e;
+    border-radius: 2px;
+    font-size: 1em;
+    font-family: 'Crimson Text', serif;
+    width: 65px;
+    text-align: center;
+    background-color: #fdf8ee;
+    color: #3d2b1f;
+    -moz-appearance: number-input;
+    -webkit-appearance: number-input;
+    appearance: number-input;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-group input[type="number"]:focus {
+    outline: none;
+    border-color: #8b6914;
+    box-shadow: 0 0 0 2px rgba(139, 105, 20, 0.18);
+}
+#year { width: 82px; }
+
+/* === Convert button === */
+button#convert-button {
+    background-color: #1a2657;
+    color: #f5f0e8;
+    border: 1px solid #0e1635;
+    padding: 11px 25px;
+    font-size: 1.05em;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.06em;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+button#convert-button:hover {
+    background-color: #2a3a7a;
+}
+
+/* === Conversion output area === */
+#conversion-output-area {
+    margin-top: 18px;
+    background-color: #eee8d5;
+    padding: 14px;
+    border-radius: 2px;
+    border: 1px solid #c9a96e;
+    text-align: center;
+}
+#republican-date-equinox {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1a2657;
+    margin-bottom: 5px;
+}
+#romme-date-info {
+    font-size: 0.9em;
+    color: #5a4030;
+    font-style: italic;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+.error-message {
+    color: #5a1a0f;
+    background-color: #fde8d8;
+    border: 1px solid #c9703a;
+    padding: 12px;
+    border-radius: 2px;
+    margin-top: 18px;
+    font-weight: 600;
+    text-align: center;
+    display: none;
+}
+
+/* === Left column details === */
+h4#fete-date-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15em;
+    font-weight: 700;
+    color: #1a2657;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 18px;
+    min-height: 1.3em;
+}
+#fete-details-area {
+    margin-top: 14px;
+    margin-bottom: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #c9a96e;
+}
+#fete-latin-author {
+    font-size: 0.9em;
+    color: #8b6914;
+    margin-top: 0;
+    margin-bottom: 8px;
+    display: none;
+}
+#fete-latin-author i { font-style: italic; }
+#fete-latin-author span { margin-left: 5px; }
+#fete-description {
+    font-size: 0.95em;
+    color: #3d2b1f;
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* === Image container & image === */
+#image-container {
+    text-align: center;
+    margin-top: 20px;
+}
 #fete-wiki-link {
     display: none;
     cursor: pointer;
-     margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 #fete-image {
     display: none;
     max-width: 100%;
     height: auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 3px solid #c9a96e;
+    border-radius: 2px;
+    box-shadow: 2px 2px 8px rgba(61, 43, 31, 0.2);
 }
 #image-placeholder {
     display: block;
-    color: #888;
-    font-style: italic;
-    padding: 20px 0;
-    min-height: 50px;
-    border: 1px dashed #ccc;
-     margin-bottom: 10px;
+    padding: 14px;
+    border: 1px dashed #c9a96e;
+    border-radius: 2px;
+    background-color: #f9f4e8;
+    margin-bottom: 10px;
 }
 
-/* Styles pour l'iframe et son placeholder */
+/* === Placeholder illustration & text (image + Encyclopédie) === */
+.placeholder-illustration {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 10px;
+    border-radius: 2px;
+    opacity: 0.92;
+}
+.placeholder-text {
+    color: #8b6914;
+    font-style: italic;
+    font-size: 0.9em;
+    margin: 0;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* === Commemoration block === */
+.commemoration-block {
+    display: none;
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid #8b3a2a;
+    background-color: #fdf0e8;
+    border-radius: 2px;
+    text-align: left;
+}
+.commemoration-block h4 {
+    font-family: 'Playfair Display', serif;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #5a1a0f;
+    font-size: 1.05em;
+}
+.commemoration-tagline {
+    font-weight: normal;
+    font-style: italic;
+    margin-right: 5px;
+}
+.commemoration-block p {
+    font-size: 0.9em;
+    color: #5a1a0f;
+    line-height: 1.5;
+    margin-bottom: 0;
+    text-align: justify;
+}
+
+/* === Encyclopédie column === */
+#encyclopedia-container {
+    text-align: center;
+}
 #encyclopedia-frame {
-    border: 1px solid #ccc;
+    border: 2px solid #c9a96e;
     display: none;
     width: 100%;
-    height: 65vh; /* Hauteur adaptative */
-    border-radius: 4px;
+    height: 65vh;
+    border-radius: 2px;
 }
 #encyclopedia-placeholder {
     display: block;
-    color: #888;
-    font-style: italic;
-    padding: 20px 0;
-    min-height: 50px;
-    border: 1px dashed #ccc;
+    padding: 14px;
+    border: 1px dashed #c9a96e;
+    border-radius: 2px;
+    background-color: #f9f4e8;
 }
-
-/* Styles pour la colonne centrale (convertisseur) */
-.converter-container {
-     width: 100%;
-     border-radius: 8px;
-     text-align: center;
-     box-shadow: none;
-     border: none;
-     padding: 0; /* Padding géré par .center-column */
-}
-
-/* Styles généraux du convertisseur */
-.converter-container h1 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-     margin-top: 0;
-}
-.converter-container > p:first-of-type { /* Intro text */
-    color: #555;
-    margin-bottom: 25px;
-    font-size: 0.9em;
-    line-height: 1.5;
-}
-#calendar-info { /* Note Julian/Gregorian */
-    font-size: smaller;
-    color: grey;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    min-height: 1em;
+.ency-link-p {
+    font-size: 0.85em;
     text-align: center;
+    margin-top: 10px;
 }
-.input-group { /* Input date fields */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 25px;
-    gap: 10px;
-    flex-wrap: wrap;
+.ency-link-p a, #encyclopedia-container a {
+    color: #8b6914;
+    text-decoration: underline;
 }
-.input-group label { margin-bottom: 5px; display: block; text-align: left; width: auto; margin-right: 5px; }
-.input-group input[type="number"] { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; width: 65px; text-align: center; -moz-appearance: number-input; -webkit-appearance: number-input; appearance: number-input; }
-#year { width: 80px; }
-button#convert-button { background-color: #3498db; color: white; border: none; padding: 12px 25px; font-size: 1.1em; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; width: 100%; margin-top: 10px; margin-bottom: 10px; }
-button#convert-button:hover { background-color: #2980b9; }
-
-#conversion-output-area { /* Zone pour dates converties */
-    margin-top: 20px;
-    background-color: #eaf6ff; /* Fond bleu pâle */
-    padding: 15px; /* Padding interne */
-    border-radius: 5px;
-    border: 1px solid #bde0ff;
-    text-align: center;
-}
-#republican-date-equinox { /* Date Equinoxe (Romain+Arabe) */
-    font-size: 1.15em; font-weight: bold; color: #0056b3;
-    margin-bottom: 5px; min-height: auto; /* Reset min-height */
-}
-#romme-date-info { /* Date Romme */
-    font-size: 0.85em; color: #555; margin-top: 8px;
-    border-top: none; padding-top: 0; margin-bottom: 0;
-}
-.error-message { color: #d9534f; background-color: #f2dede; border: 1px solid #ebccd1; padding: 12px; border-radius: 4px; margin-top: 20px; font-weight: bold; text-align: center; display: none; }
-
-
-/* === Styles Colonne 2: Détails === */
-.column-2-details { text-align: left; }
-
-#left-column-title { /* Titre H3 Col 2 */
-    text-align: center; margin-top: 0; margin-bottom: 15px; color: #2c3e50;
-    border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 1.2em;
-}
-h4#fete-date-display { /* Nouveau: Décadi - Fête */
-    font-size: 1.2em; font-weight: bold; color: #333; text-align: center;
-    margin-top: 0; margin-bottom: 20px; min-height: 1.3em;
-}
-#fete-details-area { /* Conteneur pour latin/desc */
-     margin-top: 15px; margin-bottom: 15px;
-     padding-top: 15px; border-top: 1px solid #eee;
-}
-#fete-latin-author { /* Latin / Auteur */
-    font-size: 0.9em; color: #666; margin-top: 0px; margin-bottom: 8px; display: none;
-}
-#fete-latin-author i { font-style: italic; }
-#fete-latin-author span { margin-left: 5px; }
-#fete-description { /* Description fête */
-    font-size: 0.9em; color: #444; margin-bottom: 0; line-height: 1.5;
-}
-
-#image-container { text-align: center; margin-top: 20px; }
-#fete-wiki-link { display: none; cursor: pointer; margin-bottom: 10px; }
-#fete-image { display: none; max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 4px; }
-#image-placeholder { display: block; color: #888; font-style: italic; padding: 20px 0; min-height: 50px; border: 1px dashed #ccc; margin-bottom: 10px; }
-
-/* Styles Commémoration (Col 2, sous image) */
-.commemoration-block {
-    display: none; margin-top: 20px; /* Espace après image */ padding: 15px; border: 1px solid #d9534f;
-    background-color: #f2dede; border-radius: 5px; text-align: left;
-}
-.commemoration-block h4 { margin-top: 0; margin-bottom: 8px; color: #a94442; font-size: 1.1em; }
-.commemoration-tagline { font-weight: normal; font-style: italic; margin-right: 5px; }
-.commemoration-block p { font-size: 0.9em; color: #a94442; line-height: 1.4; margin-bottom: 0; text-align: justify;}
-
-
-/* === Styles Colonne 3: Encyclopédie === */
-#encyclopedia-container { text-align: center; }
-#encyclopedia-frame { border: 1px solid #ccc; display: none; width: 100%; height: 65vh; border-radius: 4px; }
-#encyclopedia-placeholder { display: block; color: #888; font-style: italic; padding: 20px 0; min-height: 50px; border: 1px dashed #ccc; }
-
 
 /* === Media Queries === */
 @media (max-width: 1024px) {
-    .main-grid-container { grid-template-columns: 1fr; gap: 20px; }
-    .center-column, .left-column, .right-column { grid-column: auto; grid-row: auto; order: initial; padding: 15px; }
+    .main-grid-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .center-column, .left-column, .right-column {
+        padding: 15px;
+    }
     #encyclopedia-frame { height: 50vh; }
-    .converter-container { padding: 0; }
+    .masthead-title { font-size: 2.1em; }
 }
 
 @media (max-width: 600px) {
-     .input-group { flex-direction: column; align-items: stretch; }
-     .input-group input[type="number"] { max-width: none; width: 90%; margin: 5px auto; }
-     .input-group label { text-align: center; width: 100%; margin-bottom: 0; }
-     #conversion-output-area { padding: 10px; }
-     h1 { font-size: 1.5em; }
-     #republican-date-equinox { font-size: 1.1em; } /* Ajusté */
-     /* Ajustements Col 2 Mobile */
-     #left-column-title { font-size: 1.1em; } /* Réutiliser ID ou classe */
-     h4#fete-date-display { font-size: 1.1em; margin-bottom: 10px;}
-     #fete-details-area { padding-top: 10px; margin-top: 10px; margin-bottom: 15px; }
+    .masthead-title { font-size: 1.6em; }
+    .masthead-subtitle { font-size: 0.82em; letter-spacing: 0.08em; }
+    .input-group { flex-direction: column; align-items: stretch; }
+    .input-group input[type="number"] { max-width: none; width: 90%; margin: 5px auto; }
+    .input-group label { text-align: center; width: 100%; margin-bottom: 0; }
+    #conversion-output-area { padding: 10px; }
+    #republican-date-equinox { font-size: 1.05em; }
+    #left-column-title { font-size: 1.1em; }
+    h4#fete-date-display { font-size: 1em; margin-bottom: 10px; }
+    #fete-details-area { padding-top: 10px; margin-top: 10px; margin-bottom: 12px; }
 }

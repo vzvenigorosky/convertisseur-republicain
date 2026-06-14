@@ -1613,7 +1613,10 @@ document.addEventListener('DOMContentLoaded', () => {
                  if(feteDescriptionDisplay) feteDescriptionDisplay.textContent = resultEquinox.description || 'Pas de description.';
 
                  // Image / Wiki
-                 if (resultEquinox.urlImage && imageContainer) { image.src = resultEquinox.urlImage; image.alt = `Illustration pour ${resultEquinox.fete}`; image.style.display = 'block'; imagePlaceholder.style.display = 'none'; if (resultEquinox.urlWiki && wikiLink) { wikiLink.href = resultEquinox.urlWiki; wikiLink.target = '_blank'; wikiLink.style.display = 'inline-block'; } else if (wikiLink) { wikiLink.style.display = 'none'; } }
+                 if (resultEquinox.urlImage && imageContainer) {
+                     // Repli vers le placeholder si le lien n'est pas valide (image introuvable)
+                     image.onerror = () => { image.onerror = null; image.style.display = 'none'; image.src = ''; if (wikiLink) wikiLink.style.display = 'none'; imagePlaceholder.style.display = 'block'; };
+                     image.src = resultEquinox.urlImage; image.alt = `Illustration pour ${resultEquinox.fete}`; image.style.display = 'block'; imagePlaceholder.style.display = 'none'; if (resultEquinox.urlWiki && wikiLink) { wikiLink.href = resultEquinox.urlWiki; wikiLink.target = '_blank'; wikiLink.style.display = 'inline-block'; } else if (wikiLink) { wikiLink.style.display = 'none'; } }
                  else if (imageContainer) { imagePlaceholder.style.display = 'block'; image.style.display = 'none'; if (wikiLink) wikiLink.style.display = 'none'; }
 
                  // Commémoration (sous l'image)

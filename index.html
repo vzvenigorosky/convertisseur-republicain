@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendrier Républicain Enrichi</title>
+    <title>Convertisseur Républicain</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="masthead">
+        <div class="masthead-rule"></div>
+        <h1 class="masthead-title">Convertisseur Républicain</h1>
+        <p class="masthead-subtitle">Calendrier de la République Française &middot; An I &ndash; An XIV</p>
+        <div class="masthead-rule"></div>
+    </header>
+
     <div class="main-grid-container">
 
-        <div class="center-column"> <div class="converter-container">
-                <h1>Convertisseur Grégorien/Julien vers Républicain</h1>
+        <div class="center-column">
+            <div class="converter-container">
+                <h2>Grégorien / Julien &rarr; Républicain</h2>
                 <p>
                     Entrez une date (Grégorienne ou Julienne, à partir de l'an 1).
                     <br><em>Les dates avant le 15 Octobre 1582 sont traitées comme Juliennes.</em>
@@ -32,41 +43,52 @@
                 <p id="calendar-info"></p>
 
                 <div id="conversion-output-area">
-                     <p id="republican-date-equinox">---</p> <p id="romme-date-info">Date selon méthode Romme : ---</p> </div>
+                    <p id="republican-date-equinox">---</p>
+                    <p id="romme-date-info">Date selon méthode Romme : ---</p>
+                </div>
 
-                 <div id="commemoration-area" class="commemoration-block" style="display: none;">
-                     <h4 id="commemoration-title"></h4>
-                     <p id="commemoration-description"></p>
-                 </div>
+                <div id="commemoration-area" class="commemoration-block" style="display: none;">
+                    <h4 id="commemoration-title"></h4>
+                    <p id="commemoration-description"></p>
+                </div>
 
                 <div id="error-area" class="error-message" style="display: none;"></div>
             </div>
         </div>
 
-         <div class="left-column"> <h3 id="left-column-title">Détails du Jour Républicain</h3> <h4 id="fete-date-display">---</h4>
+        <div class="left-column">
+            <h3 id="left-column-title">Détails du Jour Républicain</h3>
+            <h4 id="fete-date-display">---</h4>
 
-             <div id="fete-details-area">
-                  <p id="fete-latin-author" style="display: none;">
-                      <i id="fete-latin"></i> <span id="fete-author"></span>
-                  </p>
-                  <p id="fete-description">---</p>
-             </div>
+            <div id="fete-details-area">
+                <p id="fete-latin-author" style="display: none;">
+                    <i id="fete-latin"></i> <span id="fete-author"></span>
+                </p>
+                <p id="fete-description">---</p>
+            </div>
 
-             <div id="image-container">
-                  <a id="fete-wiki-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
-                     <img id="fete-image" src="" alt="Illustration Fête du Jour" style="display: none;">
-                  </a>
-                  <div id="image-placeholder">(Pas d'illustration disponible)</div>
-             </div>
-             </div>
+            <div id="image-container">
+                <a id="fete-wiki-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
+                    <img id="fete-image" src="" alt="Illustration Fête du Jour" style="display: none;">
+                </a>
+                <div id="image-placeholder">
+                    <img src="placeholder.svg" alt="Illustration non disponible" class="placeholder-illustration">
+                    <p class="placeholder-text">Aucune illustration en accès libre n'est disponible pour ce jour.</p>
+                </div>
+            </div>
+        </div>
 
-        <div class="right-column"> <h3>Encyclopédie (première édition)</h3>
+        <div class="right-column">
+            <h3>Encyclopédie (première édition)</h3>
             <div id="encyclopedia-container">
-                 <iframe id="encyclopedia-frame" src="about:blank" style="display: none;"></iframe>
-                 <div id="encyclopedia-placeholder">(Pas d'article lié disponible)</div>
-                  <p style="font-size: 0.8em; text-align: center; margin-top: 10px;">
-                     <a href="https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition" target="_blank">Accéder à l'Encyclopédie</a>
-                 </p>
+                <iframe id="encyclopedia-frame" src="about:blank" style="display: none;"></iframe>
+                <div id="encyclopedia-placeholder">
+                    <img src="placeholder.svg" alt="Article non disponible" class="placeholder-illustration">
+                    <p class="placeholder-text">Aucun article de l'<em>Encyclopédie</em> n'est lié pour ce jour. Vous pouvez néanmoins consulter l'ouvrage complet ci-dessous.</p>
+                </div>
+                <p class="ency-link-p">
+                    <a href="https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition" target="_blank">Accéder à l'Encyclopédie</a>
+                </p>
             </div>
         </div>
 
