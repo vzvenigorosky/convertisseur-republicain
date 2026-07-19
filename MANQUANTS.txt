@@ -1,0 +1,101 @@
+CHAMPS MANQUANTS — Convertisseur Républicain
+====================================================
+Généré le 2026-07-19 depuis data.json (scripts/list_missing.py).
+
+SECTION A — Sans article d'Encyclopédie (25)
+----------------------------------------------------
+Vedette absente de L'Encyclopédie de Diderot (souvent des
+espèces du Nouveau Monde ou quelques outils).
+
+  Vendémiaire 16 — Belle de nuit
+  Vendémiaire 24 — Amaryllis
+  Vendémiaire 26 — Aubergine
+  Brumaire  4 — Betterave
+  Brumaire 18 — Dentelaire
+  Brumaire 21 — Bacchante
+  Brumaire 27 — Macjonc
+  Frimaire  2 — Turneps
+  Frimaire 16 — Ajonc
+  Pluviôse  6 — Laurier-thym
+  Pluviôse 10 — Coignée
+  Pluviôse 22 — Thimelé
+  Pluviôse 24 — Trainel
+  Ventôse 27 — Sylvie
+  Germinal 10 — Couvoir
+  Floréal 13 — Bâton-d'or
+  Floréal 18 — Corbeille d'or
+  Prairial  1 — Luzerne
+  Prairial  7 — Fromental
+  Prairial 24 — Caille-lait
+  Thermidor 27 — Colza
+  Fructidor  3 — Lycoperdon
+  Fructidor  4 — Escourgeon
+  Fructidor  7 — Sucrion
+  Fructidor 17 — Cardère
+
+SECTION B — Autres champs manquants (7)
+----------------------------------------------------
+Lacunes réelles à combler (illustration ou lien Wikipédia).
+
+  Messidor  5 — Mulet  →  urlWiki
+  Jour complémentaire 1 — Jour de la Vertu  →  urlEncy, urlImage, urlWiki, latin
+  Jour complémentaire 2 — Jour du Génie  →  urlEncy, urlImage, urlWiki, latin
+  Jour complémentaire 3 — Jour du Travail  →  urlEncy, urlImage, urlWiki, latin
+  Jour complémentaire 4 — Jour de l'Opinion  →  urlEncy, urlImage, urlWiki, latin
+  Jour complémentaire 5 — Jour des Récompenses  →  urlEncy, urlImage, urlWiki, latin
+  Jour complémentaire 6 — Jour de la Révolution  →  urlEncy, urlImage, urlWiki, latin
+
+SECTION C — Sans nom latin (48) — NORMAL
+----------------------------------------------------
+Jours dédiés à un outil, un minéral ou un produit : aucun nom
+binomial latin ne s'applique. Ce n'est PAS une lacune.
+
+  Vendémiaire 10 — Cuve
+  Vendémiaire 20 — Pressoir
+  Vendémiaire 30 — Tonneau
+  Brumaire 10 — Charrue
+  Brumaire 20 — Herse
+  Brumaire 30 — Rouleau
+  Frimaire  8 — Miel
+  Frimaire 10 — Pioche
+  Frimaire 11 — Cire
+  Frimaire 20 — Hoyau
+  Frimaire 30 — Pelle
+  Nivôse  1 — Tourbe
+  Nivôse  2 — Houille
+  Nivôse  3 — Bitume
+  Nivôse  6 — Lave
+  Nivôse  7 — Terre végétale
+  Nivôse  8 — Fumier
+  Nivôse 10 — Fléau
+  Nivôse 12 — Argile
+  Nivôse 13 — Ardoise
+  Nivôse 16 — Silex
+  Nivôse 17 — Marne
+  Nivôse 20 — Van
+  Nivôse 30 — Crible
+  Pluviôse 10 — Coignée
+  Pluviôse 20 — Serpette
+  Pluviôse 30 — Traîneau
+  Ventôse 10 — Bêche
+  Ventôse 20 — Cordeau
+  Ventôse 30 — Plantoir
+  Germinal 10 — Couvoir
+  Germinal 20 — Ruche
+  Germinal 30 — Greffoir
+  Floréal 10 — Râteau
+  Floréal 20 — Sarcloir
+  Floréal 30 — Houlette
+  Prairial 10 — Faux
+  Prairial 20 — Fourche
+  Prairial 30 — Chariot
+  Messidor 10 — Faucille
+  Messidor 20 — Parc
+  Messidor 30 — Chalemie
+  Thermidor 10 — Arrosoir
+  Thermidor 20 — Écluse
+  Thermidor 30 — Moulin
+  Fructidor 10 — Échelle
+  Fructidor 20 — Hotte
+  Fructidor 30 — Panier
+
