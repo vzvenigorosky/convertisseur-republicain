@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Données Équinoxe Automne (1792-2199) ---
     const equinoxDates = { /* Copiez ici l'objet equinoxData de la réponse précédente */
-        // --- DEBUT extension proleptique -599 (600 av. J.-C.) a 999 ---
+        // --- DEBUT extension proleptique -599 (600 avant l'ère commune) a 999 ---
         // Genere par scripts/gen_equinox.py (Meeus ch.27 + DeltaT Espenak-Meeus,
         // meridien de Paris). Dates proleptiques gregoriennes. Approx. +/-1 jour avant ~1000.
         "-599": { month: 9, day: 23 },
@@ -2581,7 +2581,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Fonctions Utilitaires ---
     function isGregorianLeap(year) {
-        // Numérotation astronomique : l'an 0 (1 av. J.-C.) est bissextile
+        // Numérotation astronomique : l'an 0 (1 avant l'ère commune) est bissextile
         // (divisible par 400). Les règles modulo sont valides pour 0 et négatifs.
         return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
     }
@@ -2644,9 +2644,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) { console.error("Erreur pré-calcul:", error); }
     }
 
-    // Affiche une année astronomique (≤ 0) sous forme « N av. J.-C. » (an 0 = 1 av. J.-C.).
+    // Affiche une année astronomique (≤ 0) sous forme « N avant l'ère commune » (an 0 = 1 avant l'ère commune).
     function formatYearLabel(y) {
-        return (y <= 0) ? `${1 - y} av. J.-C.` : `${y}`;
+        return (y <= 0) ? `${1 - y} avant l'ère commune` : `${y}`;
     }
 
     // --- Mise à jour de l'interface utilisateur avec la plage dynamique ---
@@ -2656,7 +2656,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const lastRepYearDisplay = `An ${toRoman(lastRepYear)}`;
              supportedRangeInfo.textContent = `Calcul Équinoxe possible env. de ${formatYearLabel(minEquinoxDataYear)} à Sep ${maxEquinoxDataYear + 1} (fin ${lastRepYearDisplay}). Avant ~1000 : approximatif (±1 jour, incertitude ΔT).`;
              yearInput.max = maxEquinoxDataYear; yearInput.min = minEquinoxDataYear;
-             yearInput.title = `Année (min ${formatYearLabel(minEquinoxDataYear)}, max: ${maxEquinoxDataYear}) — négatif = astronomique (0 = 1 av. J.-C.)`;
+             yearInput.title = `Année (min ${formatYearLabel(minEquinoxDataYear)}, max: ${maxEquinoxDataYear}) — négatif = astronomique (0 = 1 avant l'ère commune)`;
         } else { supportedRangeInfo.textContent = "Données équinoxe insuffisantes pour le calcul."; yearInput.removeAttribute('max'); yearInput.title = `Année`; }
     }
 
@@ -2745,7 +2745,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(encycloFrame) { encycloFrame.style.display = 'none'; encycloFrame.src = 'about:blank'; } if(encycloPlaceholder) encycloPlaceholder.style.display = 'block';
 
         // --- Validation et Calcul JDN ---
-        // L'an 0 (= 1 av. J.-C.) et les années négatives sont valides (numérotation astronomique).
+        // L'an 0 (= 1 avant l'ère commune) et les années négatives sont valides (numérotation astronomique).
         if (!day || !month || isNaN(day) || isNaN(month) || isNaN(year)) { errorDisplay.textContent = "Date invalide/incomplète."; errorDisplay.style.display = 'block'; return; }
         let inputJDN; let calendarUsed = 'Gregorian';
         const GREGORIAN_REFORM_YEAR = 1582; const GREGORIAN_REFORM_MONTH = 10; const GREGORIAN_REFORM_DAY_JULIAN_END = 4; const GREGORIAN_REFORM_DAY_GREGORIAN_START = 15;
@@ -2854,7 +2854,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initialisation ---
     precomputeEquinoxJDNs();
     updateUIRange();
-    // Autorise les années négatives / l'an 0 (numérotation astronomique, jusqu'à 600 av. J.-C.).
+    // Autorise les années négatives / l'an 0 (numérotation astronomique, jusqu'à 600 avant l'ère commune).
     yearInput.min = minEquinoxDataYear || -599;
 
     // --- Pré-remplir Date Actuelle ---

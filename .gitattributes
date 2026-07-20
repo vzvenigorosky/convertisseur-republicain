@@ -1,0 +1,19 @@
+# Normalise toutes les fins de ligne en LF (dans le dépôt et la copie de travail).
+* text=auto eol=lf
+
+# Types texte explicites du projet.
+*.html  text eol=lf
+*.css   text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.py    text eol=lf
+*.svg   text eol=lf
+*.txt   text eol=lf
+*.md    text eol=lf
+
+# Binaires (jamais de conversion de fins de ligne).
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
