@@ -1784,11 +1784,7 @@
         "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/MELESE",
         "urlImage": "https://upload.wikimedia.org/wikipedia/commons/5/51/Quelques_M%C3%A9l%C3%A8zes.JPG",
         "urlWiki": "https://fr.wikipedia.org/wiki/M%C3%A9l%C3%A8ze",
-        "description": "Seul conifère d'Europe à perdre ses aiguilles en hiver.",
-        "commemoration": {
-          "title": "Mort de Toussaint Louverture (An XI)",
-          "description": "Figure majeure de la Révolution haïtienne, mort en captivité au Fort de Joux."
-        }
+        "description": "Seul conifère d'Europe à perdre ses aiguilles en hiver."
       },
       {
         "name": "Ciguë",
@@ -1878,11 +1874,7 @@
         "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/ANEMONE",
         "urlImage": "https://upload.wikimedia.org/wikipedia/commons/d/db/Colorful-Anemone-coronaria-Zachi-Evenor.jpg",
         "urlWiki": "https://fr.wikipedia.org/wiki/An%C3%A9mone",
-        "description": "Genre de plantes à fleurs délicates, souvent printanières (ex: Anémone des bois).",
-        "commemoration": {
-          "title": "Pâques véronaises (27 Germinal An V)",
-          "description": "Les citoyens de Vérone débutent une révolte infructueuse de huit jours contre les occupants Français."
-        }
+        "description": "Genre de plantes à fleurs délicates, souvent printanières (ex: Anémone des bois)."
       },
       {
         "name": "Pensée",
@@ -1891,11 +1883,7 @@
         "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/PENS%C3%89E",
         "urlImage": "https://upload.wikimedia.org/wikipedia/commons/1/1c/JDCANO_Viola_Cazorlensis.jpg",
         "urlWiki": "https://fr.wikipedia.org/wiki/Viola_(plante)",
-        "description": "Fleur colorée et veloutée, symbole de souvenir.",
-        "commemoration": {
-          "title": "Bataille de San Juan de Porto Rico (28 Germinal An V)",
-          "description": "La bataille de San Juan de Porto Rico est un affrontement qui a lieu du 17 avril au 2 mai 1797, au cours duquel Ralph Abercromby à la tête d'une armée de 6 000 hommes, tente de prendre la colonie de Porto Rico au nom de la couronne britannique."
-        }
+        "description": "Fleur colorée et veloutée, symbole de souvenir."
       },
       {
         "name": "Myrtille",
@@ -1904,11 +1892,7 @@
         "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/MYRTILLE",
         "urlImage": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Myrtille_Vaccinium_myrtillus.jpg",
         "urlWiki": "https://fr.wikipedia.org/wiki/Vaccinium_myrtillus",
-        "description": "Petite baie bleu foncé sauvage ou cultivée, riche en antioxydants.",
-        "commemoration": {
-          "title": "Traité de Leoben (29 Germinal An V)",
-          "description": "Le Traité de Leoben, signé en avril 1797 entre Napoléon Bonaparte pour la France et l'Autriche, constitue les préliminaires de paix qui ont mis fin à la première campagne d'Italie. Cet accord prévoyait notamment la cession des Pays-Bas autrichiens à la France et contenait des clauses secrètes organisant le partage de la République de Venise, préparant le terrain pour le Traité de Campo Formio."
-        }
+        "description": "Petite baie bleu foncé sauvage ou cultivée, riche en antioxydants."
       },
       {
         "name": "Greffoir",
@@ -3330,5 +3314,199 @@
       "urlWiki": "",
       "description": "Commémoration de la chute de la monarchie et fondation de la République (seulement les années sextiles)."
     }
-  ]
+  ],
+  "commemorations": {
+    "04-07": {
+      "title": "Mort de Toussaint Louverture (1803)",
+      "description": "Figure majeure de la Révolution haïtienne, mort en captivité au Fort de Joux."
+    },
+    "04-16": {
+      "title": "Pâques véronaises (1797)",
+      "description": "Les citoyens de Vérone débutent une révolte de huit jours contre l'occupant français."
+    },
+    "04-17": {
+      "title": "Bataille de San Juan de Porto Rico (1797)",
+      "description": "Ralph Abercromby, à la tête de 6 000 hommes, tente en vain de prendre Porto Rico au nom de la couronne britannique (17 avril – 2 mai 1797)."
+    },
+    "04-18": {
+      "title": "Traité de Leoben (1797)",
+      "description": "Préliminaires de paix entre la France de Bonaparte et l'Autriche, mettant fin à la première campagne d'Italie et préparant le partage de Venise."
+    },
+    "01-21": {
+      "title": "Exécution de Louis XVI (1793)",
+      "description": "Le roi déchu est guillotiné place de la Révolution après le vote de la Convention nationale."
+    },
+    "02-04": {
+      "title": "Première abolition de l'esclavage (1794)",
+      "description": "La Convention abolit l'esclavage dans les colonies françaises (16 Pluviôse an II) ; il sera rétabli par Bonaparte en 1802."
+    },
+    "05-07": {
+      "title": "Culte de l'Être suprême décrété (1794)",
+      "description": "Robespierre fait adopter par la Convention le décret instaurant le culte de l'Être suprême."
+    },
+    "06-20": {
+      "title": "Serment du Jeu de paume (1789)",
+      "description": "Les députés du Tiers état jurent de ne pas se séparer avant d'avoir donné une constitution à la France."
+    },
+    "06-21": {
+      "title": "Fuite de Varennes (1791)",
+      "description": "Louis XVI et sa famille sont arrêtés à Varennes lors de leur tentative de fuite, discréditant la monarchie."
+    },
+    "07-13": {
+      "title": "Assassinat de Marat (1793)",
+      "description": "Le journaliste révolutionnaire Jean-Paul Marat est poignardé dans son bain par Charlotte Corday."
+    },
+    "07-14": {
+      "title": "Prise de la Bastille (1789)",
+      "description": "Le peuple de Paris s'empare de la forteresse-prison, événement fondateur de la Révolution et fête nationale française."
+    },
+    "07-27": {
+      "title": "Chute de Robespierre — 9 Thermidor (1794)",
+      "description": "L'arrestation de Robespierre le 9 Thermidor an II met fin à la Terreur ; il est guillotiné le lendemain."
+    },
+    "08-04": {
+      "title": "Abolition des privilèges (1789)",
+      "description": "Dans la nuit du 4 août, l'Assemblée constituante abolit les privilèges féodaux et les droits seigneuriaux."
+    },
+    "08-10": {
+      "title": "Prise des Tuileries (1792)",
+      "description": "L'insurrection parisienne emporte le palais des Tuileries et provoque la chute de la monarchie."
+    },
+    "08-26": {
+      "title": "Déclaration des droits de l'homme et du citoyen (1789)",
+      "description": "L'Assemblée constituante proclame les principes de liberté, d'égalité et de souveraineté de la nation."
+    },
+    "09-20": {
+      "title": "Bataille de Valmy (1792)",
+      "description": "La première victoire de l'armée révolutionnaire face aux Prussiens sauve la Révolution ; la République est proclamée le lendemain."
+    },
+    "09-21": {
+      "title": "Abolition de la royauté (1792)",
+      "description": "La Convention nationale, réunie pour la première fois, abolit la royauté en France."
+    },
+    "09-22": {
+      "title": "Proclamation de la République — an I (1792)",
+      "description": "Premier jour de l'an I : la République française est proclamée, à la date de l'équinoxe d'automne."
+    },
+    "10-05": {
+      "title": "Marche des femmes sur Versailles (1789)",
+      "description": "Des milliers de Parisiennes marchent sur Versailles et ramènent la famille royale à Paris."
+    },
+    "10-16": {
+      "title": "Exécution de Marie-Antoinette (1793)",
+      "description": "L'ancienne reine est guillotinée après un procès expéditif devant le Tribunal révolutionnaire."
+    },
+    "11-09": {
+      "title": "Coup d'État du 18 Brumaire (1799)",
+      "description": "Bonaparte renverse le Directoire, ouvrant la voie au Consulat et à la fin de la Révolution."
+    },
+    "01-01": {
+      "title": "Indépendance d'Haïti (1804)",
+      "description": "Première république noire issue d'une révolte d'esclaves victorieuse, l'indépendance est proclamée à Gonaïves."
+    },
+    "01-22": {
+      "title": "Dimanche rouge à Saint-Pétersbourg (1905)",
+      "description": "La troupe tire sur une manifestation ouvrière pacifique, déclenchant la révolution russe de 1905."
+    },
+    "02-24": {
+      "title": "Proclamation de la IIe République (1848)",
+      "description": "La révolution de Février renverse la monarchie de Juillet ; la République est proclamée à Paris."
+    },
+    "03-08": {
+      "title": "Révolution de Février russe / Journée des femmes (1917)",
+      "description": "Les manifestations d'ouvrières à Petrograd (23 février julien) déclenchent la chute du tsar ; la date devient la Journée internationale des femmes."
+    },
+    "03-18": {
+      "title": "Début de la Commune de Paris (1871)",
+      "description": "Le peuple de Paris refuse de rendre ses canons ; commence l'expérience du gouvernement communard."
+    },
+    "04-14": {
+      "title": "Proclamation de la IIe République espagnole (1931)",
+      "description": "L'exil d'Alphonse XIII ouvre la voie à la République espagnole, porteuse de réformes sociales."
+    },
+    "05-28": {
+      "title": "Semaine sanglante — fin de la Commune (1871)",
+      "description": "L'armée versaillaise écrase la Commune de Paris au terme d'une semaine de répression sanglante."
+    },
+    "11-07": {
+      "title": "Révolution d'Octobre (1917)",
+      "description": "Les bolcheviks prennent le palais d'Hiver à Petrograd (25 octobre julien) et renversent le gouvernement provisoire."
+    },
+    "12-02": {
+      "title": "Coup d'État de Louis-Napoléon Bonaparte (1851)",
+      "description": "Le président de la IIe République dissout l'Assemblée et prépare la restauration de l'Empire."
+    },
+    "01-15": {
+      "title": "Assassinat de Rosa Luxemburg et Karl Liebknecht (1919)",
+      "description": "Les deux dirigeants spartakistes sont assassinés à Berlin par des corps francs pendant la révolution allemande."
+    },
+    "02-21": {
+      "title": "Publication du Manifeste du Parti communiste (1848)",
+      "description": "Marx et Engels publient à Londres le texte fondateur du socialisme moderne."
+    },
+    "03-14": {
+      "title": "Mort de Karl Marx (1883)",
+      "description": "Le théoricien du socialisme scientifique s'éteint à Londres ; il est enterré au cimetière de Highgate."
+    },
+    "04-22": {
+      "title": "Naissance de Lénine (1870)",
+      "description": "Vladimir Ilitch Oulianov, dit Lénine, dirigeant de la révolution d'Octobre, naît à Simbirsk."
+    },
+    "05-01": {
+      "title": "Fête internationale des travailleurs (1er Mai)",
+      "description": "Journée de lutte du mouvement ouvrier, en mémoire des grèves de 1886 pour la journée de huit heures."
+    },
+    "05-04": {
+      "title": "Massacre de Haymarket (1886)",
+      "description": "À Chicago, une bombe et la répression d'un rassemblement ouvrier pour les huit heures font plusieurs morts ; à l'origine du 1er Mai."
+    },
+    "05-05": {
+      "title": "Naissance de Karl Marx (1818)",
+      "description": "Le philosophe et économiste, auteur du Capital, naît à Trèves."
+    },
+    "05-10": {
+      "title": "Journée de mémoire de l'esclavage et de son abolition (France)",
+      "description": "Date retenue en France pour commémorer l'esclavage, la traite et leurs abolitions."
+    },
+    "07-31": {
+      "title": "Assassinat de Jean Jaurès (1914)",
+      "description": "Le tribun socialiste et pacifiste est abattu à Paris à la veille de la Première Guerre mondiale."
+    },
+    "08-05": {
+      "title": "Mort de Friedrich Engels (1895)",
+      "description": "Le compagnon de Marx et cothéoricien du marxisme s'éteint à Londres."
+    },
+    "11-28": {
+      "title": "Naissance de Friedrich Engels (1820)",
+      "description": "Industriel et théoricien socialiste, coauteur du Manifeste communiste, il naît à Barmen."
+    },
+    "12-25": {
+      "title": "Congrès de Tours (1920)",
+      "description": "La majorité de la SFIO se rallie à la IIIe Internationale et fonde la Section française de l'Internationale communiste (futur PCF)."
+    },
+    "04-27": {
+      "title": "Abolition de l'esclavage (1848)",
+      "description": "Sur l'initiative de Victor Schœlcher, la IIe République abolit définitivement l'esclavage dans les colonies françaises."
+    },
+    "06-07": {
+      "title": "Accords Matignon (1936)",
+      "description": "Sous le Front populaire, patronat et syndicats signent des accords instaurant congés payés et hausses de salaires."
+    },
+    "04-21": {
+      "title": "Droit de vote des femmes en France (1944)",
+      "description": "Une ordonnance du Comité français de libération nationale accorde le droit de vote et d'éligibilité aux femmes."
+    },
+    "10-04": {
+      "title": "Création de la Sécurité sociale (1945)",
+      "description": "Les ordonnances de 1945 fondent le régime général de la Sécurité sociale française."
+    },
+    "10-09": {
+      "title": "Abolition de la peine de mort en France (1981)",
+      "description": "La loi portée par Robert Badinter abolit la peine capitale."
+    },
+    "01-17": {
+      "title": "Loi Veil sur l'IVG (1975)",
+      "description": "La loi défendue par Simone Veil dépénalise l'interruption volontaire de grossesse."
+    }
+  }
 }

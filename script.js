@@ -971,6 +971,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Data for Complementary Days ---
     let complementaryItems = []; // chargé depuis data.json
 
+    // --- Commémorations, indexées par date grégorienne "MM-JJ" (anniversaire) ---
+    let commemorations = {}; // chargé depuis data.json
+
 
 
     // --- Fonctions Utilitaires ---
@@ -1146,6 +1149,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultEquinox = calculateEquinoxDateUsingJDN(inputJDN);
             const resultRomme = calculateRommeDateUsingJDN(inputJDN);
 
+            // --- Commémoration : anniversaire par date civile saisie ("MM-JJ") ---
+            const commemKey = `${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const commem = commemorations[commemKey];
+            if (resultEquinox && !resultEquinox.error && commem && commem.title && commem.description) {
+                resultEquinox.commemoration = commem;
+            }
+
 // --- Affichage ---
             if (resultEquinox.error) {
                  // Colonne 1: Afficher l'erreur pour Equinoxe
@@ -1257,7 +1267,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 dailyItems = Array.isArray(data.dailyItems) ? data.dailyItems : [];
                 complementaryItems = Array.isArray(data.complementaryItems) ? data.complementaryItems : [];
-                console.log(`Données chargées : ${dailyItems.length} mois, ${complementaryItems.length} jours complémentaires.`);
+                commemorations = (data.commemorations && typeof data.commemorations === 'object') ? data.commemorations : {};
+                console.log(`Données chargées : ${dailyItems.length} mois, ${complementaryItems.length} jours complémentaires, ${Object.keys(commemorations).length} commémorations.`);
             })
             .catch(err => {
                 // Le calcul de la date républicaine fonctionne toujours sans data.json ;
