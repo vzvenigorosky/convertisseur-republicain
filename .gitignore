@@ -1,0 +1,3 @@
+# Caches Python (scripts utilitaires)
+__pycache__/
+*.pyc
