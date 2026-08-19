@@ -2820,7 +2820,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  else if (imageContainer) { imagePlaceholder.style.display = 'block'; image.style.display = 'none'; if (wikiLink) wikiLink.style.display = 'none'; }
 
                  // Commémoration (sous l'image)
-                 if (commemorationArea && resultEquinox.commemoration && resultEquinox.commemoration.title && resultEquinox.commemoration.description) { if(commemorationTitle) commemorationTitle.innerHTML = `<span class="commemoration-tagline">Ce jour-là :</span> ${resultEquinox.commemoration.title}`; if(commemorationDesc) commemorationDesc.textContent = resultEquinox.commemoration.description; commemorationArea.style.display = 'block'; }
+                 if (commemorationArea && resultEquinox.commemoration && resultEquinox.commemoration.title && resultEquinox.commemoration.description) { if(commemorationTitle) { commemorationTitle.textContent = ''; const tagline = document.createElement('span'); tagline.className = 'commemoration-tagline'; tagline.textContent = 'Ce jour-là :'; commemorationTitle.appendChild(tagline); commemorationTitle.appendChild(document.createTextNode(' ' + resultEquinox.commemoration.title)); } if(commemorationDesc) commemorationDesc.textContent = resultEquinox.commemoration.description; commemorationArea.style.display = 'block'; }
                  else { if (commemorationArea) commemorationArea.style.display = 'none'; }
 
                  // ** COLONNE 3 ** Encyclopédie

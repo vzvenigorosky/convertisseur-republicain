@@ -129,7 +129,7 @@ def equinox_civil_date(year):
 def read_existing_table():
     s = open(SCRIPT, encoding="utf-8").read()
     table = {}
-    for mm in re.finditer(r"(-?\d+):\s*\{\s*month:\s*(\d+),\s*day:\s*(\d+)\s*\}", s):
+    for mm in re.finditer(r'"?(-?\d+)"?:\s*\{\s*month:\s*(\d+),\s*day:\s*(\d+)\s*\}', s):
         y = int(mm.group(1))
         # ne garder que les entrées de la table equinoxDates (années plausibles)
         if -1000 <= y <= 3000:
