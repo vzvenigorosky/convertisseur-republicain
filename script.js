@@ -2709,8 +2709,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reste des infos
             fete: feteInfo.name, latin: feteInfo.latin, author: feteInfo.author,
             description: feteInfo.description, urlImage: feteInfo.urlImage,
-            urlWiki: feteInfo.urlWiki, urlEncy: feteInfo.urlEncy,
-            commemoration: feteInfo.commemoration
+            urlWiki: feteInfo.urlWiki, urlEncy: feteInfo.urlEncy
+            // (commémorations rattachées après coup, par jour républicain)
         };
     } // Fin calculateEquinoxDateUsingJDN
 	
@@ -2761,11 +2761,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultEquinox = calculateEquinoxDateUsingJDN(inputJDN);
             const resultRomme = calculateRommeDateUsingJDN(inputJDN);
 
-            // --- Commémoration : anniversaire par date civile saisie ("MM-JJ") ---
-            const commemKey = `${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-            const commem = commemorations[commemKey];
-            if (resultEquinox && !resultEquinox.error && commem && commem.title && commem.description) {
-                resultEquinox.commemoration = commem;
+            // --- Commémorations : rattachées au JOUR RÉPUBLICAIN (récurrentes chaque an) ---
+            if (resultEquinox && !resultEquinox.error) {
+                const repKey = resultEquinox.isComplementary
+                    ? `Complémentaires-${resultEquinox.day}`
+                    : `${resultEquinox.month}-${resultEquinox.day}`;
+                const list = commemorations[repKey];
+                if (Array.isArray(list) && list.length) { resultEquinox.commemorations = list; }
             }
 
 // --- Affichage ---
@@ -2819,8 +2821,22 @@ document.addEventListener('DOMContentLoaded', () => {
                      image.src = resultEquinox.urlImage; image.alt = `Illustration pour ${resultEquinox.fete}`; image.style.display = 'block'; imagePlaceholder.style.display = 'none'; if (resultEquinox.urlWiki && wikiLink) { wikiLink.href = resultEquinox.urlWiki; wikiLink.target = '_blank'; wikiLink.style.display = 'inline-block'; } else if (wikiLink) { wikiLink.style.display = 'none'; } }
                  else if (imageContainer) { imagePlaceholder.style.display = 'block'; image.style.display = 'none'; if (wikiLink) wikiLink.style.display = 'none'; }
 
-                 // Commémoration (sous l'image)
-                 if (commemorationArea && resultEquinox.commemoration && resultEquinox.commemoration.title && resultEquinox.commemoration.description) { if(commemorationTitle) { commemorationTitle.textContent = ''; const tagline = document.createElement('span'); tagline.className = 'commemoration-tagline'; tagline.textContent = 'Ce jour-là :'; commemorationTitle.appendChild(tagline); commemorationTitle.appendChild(document.createTextNode(' ' + resultEquinox.commemoration.title)); } if(commemorationDesc) commemorationDesc.textContent = resultEquinox.commemoration.description; commemorationArea.style.display = 'block'; }
+                 // Commémorations du jour républicain (sous l'image) — une ou plusieurs
+                 if (commemorationArea && Array.isArray(resultEquinox.commemorations) && resultEquinox.commemorations.length) {
+                     if (commemorationTitle) { commemorationTitle.textContent = ''; const tagline = document.createElement('span'); tagline.className = 'commemoration-tagline'; tagline.textContent = 'Ce jour-là :'; commemorationTitle.appendChild(tagline); }
+                     if (commemorationDesc) {
+                         commemorationDesc.textContent = '';
+                         resultEquinox.commemorations.forEach(c => {
+                             if (!c || !c.title || !c.description) return;
+                             const item = document.createElement('span'); item.className = 'commemoration-item';
+                             const t = document.createElement('strong'); t.textContent = c.title;
+                             item.appendChild(t);
+                             item.appendChild(document.createTextNode(' — ' + c.description));
+                             commemorationDesc.appendChild(item);
+                         });
+                     }
+                     commemorationArea.style.display = 'block';
+                 }
                  else { if (commemorationArea) commemorationArea.style.display = 'none'; }
 
                  // ** COLONNE 3 ** Encyclopédie

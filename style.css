@@ -308,6 +308,15 @@ h4#fete-date-display {
     margin-bottom: 0;
     text-align: justify;
 }
+/* Chaque évènement d'un même jour républicain, empilé */
+.commemoration-item {
+    display: block;
+}
+.commemoration-item + .commemoration-item {
+    margin-top: 0.45em;
+    padding-top: 0.45em;
+    border-top: 1px solid rgba(90, 26, 15, 0.15);
+}
 
 /* === Encyclopédie column === */
 #encyclopedia-container {
