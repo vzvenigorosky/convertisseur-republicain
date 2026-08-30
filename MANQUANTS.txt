@@ -1,6 +1,6 @@
 CHAMPS MANQUANTS — Convertisseur Républicain
 ====================================================
-Généré le 2026-07-19 depuis data.json (scripts/list_missing.py).
+Généré le 2026-08-30 depuis data.json (scripts/list_missing.py).
 
 SECTION A — Sans article d'Encyclopédie (25)
 ----------------------------------------------------
@@ -33,11 +33,10 @@ espèces du Nouveau Monde ou quelques outils).
   Fructidor  7 — Sucrion
   Fructidor 17 — Cardère
 
-SECTION B — Autres champs manquants (7)
+SECTION B — Autres champs manquants (6)
 ----------------------------------------------------
 Lacunes réelles à combler (illustration ou lien Wikipédia).
 
-  Messidor  5 — Mulet  →  urlWiki
   Jour complémentaire 1 — Jour de la Vertu  →  urlEncy, urlImage, urlWiki, latin
   Jour complémentaire 2 — Jour du Génie  →  urlEncy, urlImage, urlWiki, latin
   Jour complémentaire 3 — Jour du Travail  →  urlEncy, urlImage, urlWiki, latin
