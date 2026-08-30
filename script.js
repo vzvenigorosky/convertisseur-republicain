@@ -2829,9 +2829,16 @@ document.addEventListener('DOMContentLoaded', () => {
                          resultEquinox.commemorations.forEach(c => {
                              if (!c || !c.title || !c.description) return;
                              const item = document.createElement('span'); item.className = 'commemoration-item';
-                             const t = document.createElement('strong'); t.textContent = c.title;
+                             const t = document.createElement('strong'); t.className = 'commemoration-event-title'; t.textContent = c.title;
                              item.appendChild(t);
-                             item.appendChild(document.createTextNode(' — ' + c.description));
+                             const dParts = [c.dateG, c.dateR].filter(Boolean);
+                             if (dParts.length) {
+                                 const dl = document.createElement('span'); dl.className = 'commemoration-date';
+                                 dl.textContent = dParts.join(' · ');
+                                 item.appendChild(dl);
+                             }
+                             const dsc = document.createElement('span'); dsc.className = 'commemoration-text'; dsc.textContent = c.description;
+                             item.appendChild(dsc);
                              commemorationDesc.appendChild(item);
                          });
                      }

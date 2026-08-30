@@ -317,6 +317,19 @@ h4#fete-date-display {
     padding-top: 0.45em;
     border-top: 1px solid rgba(90, 26, 15, 0.15);
 }
+.commemoration-event-title {
+    display: block;
+}
+.commemoration-date {
+    display: block;
+    font-style: italic;
+    font-size: 0.82em;
+    opacity: 0.85;
+    margin: 0.1em 0;
+}
+.commemoration-text {
+    display: block;
+}
 
 /* === Encyclopédie column === */
 #encyclopedia-container {

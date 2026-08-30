@@ -3318,281 +3318,377 @@
   "commemorations": {
     "Vendémiaire-1": [
       {
-        "title": "Proclamation de la République — an I (1792)",
+        "title": "Proclamation de la République — an I",
+        "dateG": "22 septembre 1792",
+        "dateR": "1 Vendémiaire an I",
         "description": "Premier jour de l'an I : la République française est proclamée, à la date de l'équinoxe d'automne."
       }
     ],
     "Vendémiaire-12": [
       {
-        "title": "Création de la Sécurité sociale (1945)",
+        "title": "Création de la Sécurité sociale",
+        "dateG": "4 octobre 1945",
+        "dateR": "12 Vendémiaire an CLIV",
         "description": "Les ordonnances de 1945 fondent le régime général de la Sécurité sociale française."
       }
     ],
     "Vendémiaire-14": [
       {
-        "title": "Marche des femmes sur Versailles (1789)",
+        "title": "Marche des femmes sur Versailles",
+        "dateG": "5 octobre 1789",
+        "dateR": "14 Vendémiaire an -III",
         "description": "Des milliers de Parisiennes marchent sur Versailles et ramènent la famille royale à Paris."
       }
     ],
     "Vendémiaire-17": [
       {
-        "title": "Abolition de la peine de mort en France (1981)",
+        "title": "Abolition de la peine de mort en France",
+        "dateG": "9 octobre 1981",
+        "dateR": "17 Vendémiaire an CXC",
         "description": "La loi portée par Robert Badinter abolit la peine capitale."
       }
     ],
     "Vendémiaire-25": [
       {
-        "title": "Exécution de Marie-Antoinette (1793)",
+        "title": "Exécution de Marie-Antoinette",
+        "dateG": "16 octobre 1793",
+        "dateR": "25 Vendémiaire an II",
         "description": "L'ancienne reine est guillotinée après un procès expéditif devant le Tribunal révolutionnaire."
       }
     ],
     "Brumaire-16": [
       {
-        "title": "Révolution d'Octobre (1917)",
+        "title": "Révolution d'Octobre",
+        "dateG": "7 novembre 1917",
+        "dateR": "16 Brumaire an CXXVI",
         "description": "Les bolcheviks prennent le palais d'Hiver à Petrograd (25 octobre julien) et renversent le gouvernement provisoire."
       }
     ],
     "Brumaire-18": [
       {
-        "title": "Coup d'État du 18 Brumaire (1799)",
+        "title": "Coup d'État du 18 Brumaire",
+        "dateG": "9 novembre 1799",
+        "dateR": "18 Brumaire an VIII",
         "description": "Bonaparte renverse le Directoire, ouvrant la voie au Consulat et à la fin de la Révolution."
       }
     ],
     "Frimaire-7": [
       {
-        "title": "Naissance de Friedrich Engels (1820)",
+        "title": "Naissance de Friedrich Engels",
+        "dateG": "28 novembre 1820",
+        "dateR": "7 Frimaire an XXIX",
         "description": "Industriel et théoricien socialiste, coauteur du Manifeste communiste, il naît à Barmen."
       }
     ],
     "Frimaire-11": [
       {
-        "title": "Coup d'État de Louis-Napoléon Bonaparte (1851)",
+        "title": "Coup d'État de Louis-Napoléon Bonaparte",
+        "dateG": "2 décembre 1851",
+        "dateR": "11 Frimaire an LX",
         "description": "Le président de la IIe République dissout l'Assemblée et prépare la restauration de l'Empire."
       }
     ],
     "Nivôse-4": [
       {
-        "title": "Congrès de Tours (1920)",
+        "title": "Congrès de Tours",
+        "dateG": "25 décembre 1920",
+        "dateR": "4 Nivôse an CXXIX",
         "description": "La majorité de la SFIO se rallie à la IIIe Internationale et fonde la Section française de l'Internationale communiste (futur PCF)."
       }
     ],
     "Nivôse-10": [
       {
-        "title": "Indépendance d'Haïti (1804)",
+        "title": "Indépendance d'Haïti",
+        "dateG": "1er janvier 1804",
+        "dateR": "10 Nivôse an XII",
         "description": "Première république noire issue d'une révolte d'esclaves victorieuse, l'indépendance est proclamée à Gonaïves."
       }
     ],
     "Nivôse-25": [
       {
-        "title": "Assassinat de Rosa Luxemburg et Karl Liebknecht (1919)",
+        "title": "Assassinat de Rosa Luxemburg et Karl Liebknecht",
+        "dateG": "15 janvier 1919",
+        "dateR": "25 Nivôse an CXXVII",
         "description": "Les deux dirigeants spartakistes sont assassinés à Berlin par des corps francs pendant la révolution allemande."
       }
     ],
     "Nivôse-27": [
       {
-        "title": "Loi Veil sur l'IVG (1975)",
+        "title": "Loi Veil sur l'IVG",
+        "dateG": "17 janvier 1975",
+        "dateR": "27 Nivôse an CLXXXIII",
         "description": "La loi défendue par Simone Veil dépénalise l'interruption volontaire de grossesse."
       }
     ],
     "Pluviôse-2": [
       {
-        "title": "Exécution de Louis XVI (1793)",
+        "title": "Exécution de Louis XVI",
+        "dateG": "21 janvier 1793",
+        "dateR": "2 Pluviôse an I",
         "description": "Le roi déchu est guillotiné place de la Révolution après le vote de la Convention nationale."
       },
       {
-        "title": "Dimanche rouge à Saint-Pétersbourg (1905)",
+        "title": "Dimanche rouge à Saint-Pétersbourg",
+        "dateG": "22 janvier 1905",
+        "dateR": "2 Pluviôse an CXIII",
         "description": "La troupe tire sur une manifestation ouvrière pacifique, déclenchant la révolution russe de 1905."
       }
     ],
     "Pluviôse-16": [
       {
-        "title": "Première abolition de l'esclavage (1794)",
+        "title": "Première abolition de l'esclavage",
+        "dateG": "4 février 1794",
+        "dateR": "16 Pluviôse an II",
         "description": "La Convention abolit l'esclavage dans les colonies françaises (16 Pluviôse an II) ; il sera rétabli par Bonaparte en 1802."
       }
     ],
     "Ventôse-2": [
       {
-        "title": "Publication du Manifeste du Parti communiste (1848)",
+        "title": "Publication du Manifeste du Parti communiste",
+        "dateG": "21 février 1848",
+        "dateR": "2 Ventôse an LVI",
         "description": "Marx et Engels publient à Londres le texte fondateur du socialisme moderne."
       }
     ],
     "Ventôse-5": [
       {
-        "title": "Proclamation de la IIe République (1848)",
+        "title": "Proclamation de la IIe République",
+        "dateG": "24 février 1848",
+        "dateR": "5 Ventôse an LVI",
         "description": "La révolution de Février renverse la monarchie de Juillet ; la République est proclamée à Paris."
       }
     ],
     "Ventôse-17": [
       {
-        "title": "Révolution de Février russe / Journée des femmes (1917)",
+        "title": "Révolution de Février russe / Journée des femmes",
+        "dateG": "8 mars 1917",
+        "dateR": "17 Ventôse an CXXV",
         "description": "Les manifestations d'ouvrières à Petrograd (23 février julien) déclenchent la chute du tsar ; la date devient la Journée internationale des femmes."
       }
     ],
     "Ventôse-23": [
       {
-        "title": "Mort de Karl Marx (1883)",
+        "title": "Mort de Karl Marx",
+        "dateG": "14 mars 1883",
+        "dateR": "23 Ventôse an XCI",
         "description": "Le théoricien du socialisme scientifique s'éteint à Londres ; il est enterré au cimetière de Highgate."
       }
     ],
     "Ventôse-27": [
       {
-        "title": "Début de la Commune de Paris (1871)",
+        "title": "Début de la Commune de Paris",
+        "dateG": "18 mars 1871",
+        "dateR": "27 Ventôse an LXXIX",
         "description": "Le peuple de Paris refuse de rendre ses canons ; commence l'expérience du gouvernement communard."
       }
     ],
     "Germinal-17": [
       {
-        "title": "Mort de Toussaint Louverture (1803)",
+        "title": "Mort de Toussaint Louverture",
+        "dateG": "7 avril 1803",
+        "dateR": "17 Germinal an XI",
         "description": "Figure majeure de la Révolution haïtienne, mort en captivité au Fort de Joux."
       }
     ],
     "Germinal-24": [
       {
-        "title": "Proclamation de la IIe République espagnole (1931)",
+        "title": "Proclamation de la IIe République espagnole",
+        "dateG": "14 avril 1931",
+        "dateR": "24 Germinal an CXXXIX",
         "description": "L'exil d'Alphonse XIII ouvre la voie à la République espagnole, porteuse de réformes sociales."
       }
     ],
     "Germinal-27": [
       {
-        "title": "Pâques véronaises (1797)",
+        "title": "Pâques véronaises",
+        "dateG": "16 avril 1797",
+        "dateR": "27 Germinal an V",
         "description": "Les citoyens de Vérone débutent une révolte de huit jours contre l'occupant français."
       }
     ],
     "Germinal-28": [
       {
-        "title": "Bataille de San Juan de Porto Rico (1797)",
+        "title": "Bataille de San Juan de Porto Rico",
+        "dateG": "17 avril 1797",
+        "dateR": "28 Germinal an V",
         "description": "Ralph Abercromby, à la tête de 6 000 hommes, tente en vain de prendre Porto Rico au nom de la couronne britannique (17 avril – 2 mai 1797)."
       }
     ],
     "Germinal-29": [
       {
-        "title": "Traité de Leoben (1797)",
+        "title": "Traité de Leoben",
+        "dateG": "18 avril 1797",
+        "dateR": "29 Germinal an V",
         "description": "Préliminaires de paix entre la France de Bonaparte et l'Autriche, mettant fin à la première campagne d'Italie et préparant le partage de Venise."
       }
     ],
     "Floréal-2": [
       {
-        "title": "Naissance de Lénine (1870)",
+        "title": "Naissance de Lénine",
+        "dateG": "22 avril 1870",
+        "dateR": "2 Floréal an LXXVIII",
         "description": "Vladimir Ilitch Oulianov, dit Lénine, dirigeant de la révolution d'Octobre, naît à Simbirsk."
       },
       {
-        "title": "Droit de vote des femmes en France (1944)",
+        "title": "Droit de vote des femmes en France",
+        "dateG": "21 avril 1944",
+        "dateR": "2 Floréal an CLII",
         "description": "Une ordonnance du Comité français de libération nationale accorde le droit de vote et d'éligibilité aux femmes."
       }
     ],
     "Floréal-8": [
       {
-        "title": "Abolition de l'esclavage (1848)",
+        "title": "Abolition de l'esclavage",
+        "dateG": "27 avril 1848",
+        "dateR": "8 Floréal an LVI",
         "description": "Sur l'initiative de Victor Schœlcher, la IIe République abolit définitivement l'esclavage dans les colonies françaises."
       }
     ],
     "Floréal-12": [
       {
         "title": "Fête internationale des travailleurs (1er Mai)",
+        "dateG": "1er mai",
+        "dateR": "12 Floréal",
         "description": "Journée de lutte du mouvement ouvrier, en mémoire des grèves de 1886 pour la journée de huit heures."
       }
     ],
     "Floréal-15": [
       {
-        "title": "Naissance de Karl Marx (1818)",
+        "title": "Naissance de Karl Marx",
+        "dateG": "5 mai 1818",
+        "dateR": "15 Floréal an XXVI",
         "description": "Le philosophe et économiste, auteur du Capital, naît à Trèves."
       },
       {
-        "title": "Massacre de Haymarket (1886)",
+        "title": "Massacre de Haymarket",
+        "dateG": "4 mai 1886",
+        "dateR": "15 Floréal an XCIV",
         "description": "À Chicago, une bombe et la répression d'un rassemblement ouvrier pour les huit heures font plusieurs morts ; à l'origine du 1er Mai."
       }
     ],
     "Floréal-18": [
       {
-        "title": "Culte de l'Être suprême décrété (1794)",
+        "title": "Culte de l'Être suprême décrété",
+        "dateG": "7 mai 1794",
+        "dateR": "18 Floréal an II",
         "description": "Robespierre fait adopter par la Convention le décret instaurant le culte de l'Être suprême."
       }
     ],
     "Floréal-21": [
       {
         "title": "Journée de mémoire de l'esclavage et de son abolition (France)",
+        "dateG": "10 mai",
+        "dateR": "21 Floréal",
         "description": "Date retenue en France pour commémorer l'esclavage, la traite et leurs abolitions."
       }
     ],
     "Prairial-8": [
       {
-        "title": "Semaine sanglante — fin de la Commune (1871)",
+        "title": "Semaine sanglante — fin de la Commune",
+        "dateG": "28 mai 1871",
+        "dateR": "8 Prairial an LXXIX",
         "description": "L'armée versaillaise écrase la Commune de Paris au terme d'une semaine de répression sanglante."
       }
     ],
     "Prairial-19": [
       {
-        "title": "Accords Matignon (1936)",
+        "title": "Accords Matignon",
+        "dateG": "7 juin 1936",
+        "dateR": "19 Prairial an CXLIV",
         "description": "Sous le Front populaire, patronat et syndicats signent des accords instaurant congés payés et hausses de salaires."
       }
     ],
     "Messidor-2": [
       {
-        "title": "Serment du Jeu de paume (1789)",
+        "title": "Serment du Jeu de paume",
+        "dateG": "20 juin 1789",
+        "dateR": "2 Messidor an -IV",
         "description": "Les députés du Tiers état jurent de ne pas se séparer avant d'avoir donné une constitution à la France."
       }
     ],
     "Messidor-3": [
       {
-        "title": "Fuite de Varennes (1791)",
+        "title": "Fuite de Varennes",
+        "dateG": "21 juin 1791",
+        "dateR": "3 Messidor an -II",
         "description": "Louis XVI et sa famille sont arrêtés à Varennes lors de leur tentative de fuite, discréditant la monarchie."
       }
     ],
     "Messidor-25": [
       {
-        "title": "Assassinat de Marat (1793)",
+        "title": "Assassinat de Marat",
+        "dateG": "13 juillet 1793",
+        "dateR": "25 Messidor an I",
         "description": "Le journaliste révolutionnaire Jean-Paul Marat est poignardé dans son bain par Charlotte Corday."
       }
     ],
     "Messidor-26": [
       {
-        "title": "Prise de la Bastille (1789)",
+        "title": "Prise de la Bastille",
+        "dateG": "14 juillet 1789",
+        "dateR": "26 Messidor an -IV",
         "description": "Le peuple de Paris s'empare de la forteresse-prison, événement fondateur de la Révolution et fête nationale française."
       }
     ],
     "Thermidor-9": [
       {
-        "title": "Chute de Robespierre — 9 Thermidor (1794)",
+        "title": "Chute de Robespierre — 9 Thermidor",
+        "dateG": "27 juillet 1794",
+        "dateR": "9 Thermidor an II",
         "description": "L'arrestation de Robespierre le 9 Thermidor an II met fin à la Terreur ; il est guillotiné le lendemain."
       }
     ],
     "Thermidor-12": [
       {
-        "title": "Assassinat de Jean Jaurès (1914)",
+        "title": "Assassinat de Jean Jaurès",
+        "dateG": "31 juillet 1914",
+        "dateR": "12 Thermidor an CXXII",
         "description": "Le tribun socialiste et pacifiste est abattu à Paris à la veille de la Première Guerre mondiale."
       }
     ],
     "Thermidor-17": [
       {
-        "title": "Abolition des privilèges (1789)",
+        "title": "Abolition des privilèges",
+        "dateG": "4 août 1789",
+        "dateR": "17 Thermidor an -IV",
         "description": "Dans la nuit du 4 août, l'Assemblée constituante abolit les privilèges féodaux et les droits seigneuriaux."
       },
       {
-        "title": "Mort de Friedrich Engels (1895)",
+        "title": "Mort de Friedrich Engels",
+        "dateG": "5 août 1895",
+        "dateR": "17 Thermidor an CIII",
         "description": "Le compagnon de Marx et cothéoricien du marxisme s'éteint à Londres."
       }
     ],
     "Thermidor-23": [
       {
-        "title": "Prise des Tuileries (1792)",
+        "title": "Prise des Tuileries",
+        "dateG": "10 août 1792",
+        "dateR": "23 Thermidor an -I",
         "description": "L'insurrection parisienne emporte le palais des Tuileries et provoque la chute de la monarchie."
       }
     ],
     "Fructidor-9": [
       {
-        "title": "Déclaration des droits de l'homme et du citoyen (1789)",
+        "title": "Déclaration des droits de l'homme et du citoyen",
+        "dateG": "26 août 1789",
+        "dateR": "9 Fructidor an -IV",
         "description": "L'Assemblée constituante proclame les principes de liberté, d'égalité et de souveraineté de la nation."
       }
     ],
     "Complémentaires-4": [
       {
-        "title": "Bataille de Valmy (1792)",
+        "title": "Bataille de Valmy",
+        "dateG": "20 septembre 1792",
+        "dateR": "Jour de l'Opinion, an -I",
         "description": "La première victoire de l'armée révolutionnaire face aux Prussiens sauve la Révolution ; la République est proclamée le lendemain."
       }
     ],
     "Complémentaires-5": [
       {
-        "title": "Abolition de la royauté (1792)",
+        "title": "Abolition de la royauté",
+        "dateG": "21 septembre 1792",
+        "dateR": "Jour des Récompenses, an -I",
         "description": "La Convention nationale, réunie pour la première fois, abolit la royauté en France."
       }
     ]
