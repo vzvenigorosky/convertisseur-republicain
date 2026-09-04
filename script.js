@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Journalisation de débogage (désactivée en production) ---
+    const DEBUG = false;
+    const dbg = (...args) => { if (DEBUG) console.log(...args); };
+
     // --- Element References ---
     const dayInput = document.getElementById('day');
     const monthInput = document.getElementById('month');
@@ -2626,21 +2630,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return roman;
     }
 
+    // Rend une année républicaine lisible : « An <romain> (<n>) » pour les années
+    // réelles (≥ An I) ; « An <n> (proleptique) » en chiffres arabes pour les
+    // années extrapolées (≤ 0, avant l'an I) — les chiffres romains négatifs
+    // (ex. « An -MMCCXCII ») étant illisibles.
+    function formatAn(an) {
+        if (an >= 1) return `An ${toRoman(an)} (${an})`;
+        return `An ${an} (proleptique)`;
+    }
+
     // --- Pré-calcul des JDN des Équinoxes & Détermination de la Plage ---
     let equinoxJDNs = {};
     function precomputeEquinoxJDNs() {
-        console.log("Début pré-calcul JDN équinoxes...");
+        dbg("Début pré-calcul JDN équinoxes...");
         equinoxJDNs = {}; minEquinoxDataYear = null; maxEquinoxDataYear = null; let count = 0;
         const yearsInData = Object.keys(equinoxDates).map(Number).filter(y => !isNaN(y));
         if (yearsInData.length === 0) { console.error("Aucune donnée valide dans equinoxDates !"); return; }
         yearsInData.sort((a, b) => a - b); minEquinoxDataYear = yearsInData[0]; maxEquinoxDataYear = yearsInData[yearsInData.length - 1];
-        console.log(`Années trouvées: ${minEquinoxDataYear} à ${maxEquinoxDataYear}`);
+        dbg(`Années trouvées: ${minEquinoxDataYear} à ${maxEquinoxDataYear}`);
         try {
             for (const year of yearsInData) { const date = equinoxDates[year]; if (date && typeof date.day === 'number' && typeof date.month === 'number') { equinoxJDNs[year] = gregorianToJDN(date.day, date.month, year); count++; } else { console.warn(`Donnée invalide pour ${year}.`); } }
-            console.log(`JDN équinoxes calculés: ${count}`);
-            if (equinoxJDNs[maxEquinoxDataYear]) { const anApproxMax = (maxEquinoxDataYear >= 1792) ? (maxEquinoxDataYear - 1791) : (maxEquinoxDataYear - 1792); const daysInLastYear = isRepublicanSextileRomme(anApproxMax) ? 366 : 365; const jdnNextYearApprox = equinoxJDNs[maxEquinoxDataYear] + daysInLastYear; equinoxJDNs[maxEquinoxDataYear + 1] = jdnNextYearApprox; console.log(`JDN estimé pour début année ${maxEquinoxDataYear + 1}: ${equinoxJDNs[maxEquinoxDataYear + 1]}`); }
+            dbg(`JDN équinoxes calculés: ${count}`);
+            if (equinoxJDNs[maxEquinoxDataYear]) { const anApproxMax = (maxEquinoxDataYear >= 1792) ? (maxEquinoxDataYear - 1791) : (maxEquinoxDataYear - 1792); const daysInLastYear = isRepublicanSextileRomme(anApproxMax) ? 366 : 365; const jdnNextYearApprox = equinoxJDNs[maxEquinoxDataYear] + daysInLastYear; equinoxJDNs[maxEquinoxDataYear + 1] = jdnNextYearApprox; dbg(`JDN estimé pour début année ${maxEquinoxDataYear + 1}: ${equinoxJDNs[maxEquinoxDataYear + 1]}`); }
             else if (maxEquinoxDataYear) { console.error(`Impossible d'estimer JDN pour ${maxEquinoxDataYear + 1}.`); }
-             console.log("Fin pré-calcul.");
+             dbg("Fin pré-calcul.");
         } catch (error) { console.error("Erreur pré-calcul:", error); }
     }
 
@@ -2755,7 +2768,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             if (isPreGregorianReform) { const daysInJulianMonth = [0, 31, isJulianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; if (month < 1 || month > 12 || day < 1 || day > daysInJulianMonth[month]) { throw new Error(`Date Julienne invalide.`); } inputJDN = julianToJDN(day, month, year); calendarUsed = 'Julian'; calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Julienne.`; }
             else { const daysInGregorianMonth = [0, 31, isGregorianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; if (month < 1 || month > 12 || day < 1 || day > daysInGregorianMonth[month]) { throw new Error(`Date Grégorienne invalide.`); } inputJDN = gregorianToJDN(day, month, year); calendarUsed = 'Gregorian'; calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Grégorienne.`; }
-            console.log(`Using ${calendarUsed} calendar. JDN: ${inputJDN}`);
+            dbg(`Using ${calendarUsed} calendar. JDN: ${inputJDN}`);
 
             // --- Appel Calcul Républicain ---
             const resultEquinox = calculateEquinoxDateUsingJDN(inputJDN);
@@ -2781,7 +2794,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (resultEquinox.datePrefix !== undefined && resultEquinox.currentAn !== undefined) {
                  // ** COLONNE 1 **
                  // Afficher Date Equinoxe avec An Romain ET An Arabe
-                 republicanDateEquinoxCol1.textContent = `${resultEquinox.datePrefix} An ${toRoman(resultEquinox.currentAn)} (${resultEquinox.currentAn})`;
+                 republicanDateEquinoxCol1.textContent = `${resultEquinox.datePrefix} ${formatAn(resultEquinox.currentAn)}`;
 
                  // ** COLONNE 2 **
                  if (detailsColumnTitle) detailsColumnTitle.textContent = `Détails du Jour Républicain`;
@@ -2851,7 +2864,7 @@ document.addEventListener('DOMContentLoaded', () => {
                      encycloFrame.src = resultEquinox.urlEncy;
                      encycloFrame.style.display = 'block';
                      if(encycloPlaceholder) encycloPlaceholder.style.display = 'none';
-                     console.log("Chargement Encyclopédie: ", resultEquinox.urlEncy);
+                     dbg("Chargement Encyclopédie: ", resultEquinox.urlEncy);
                  } else if (encycloFrame) {
                      // Pas d'URL ou erreur précédente, assure que c'est caché/reset
                      encycloFrame.style.display = 'none';
@@ -2885,7 +2898,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const today = new Date();
             const currentDay = today.getDate(); const currentMonth = today.getMonth() + 1; const currentYear = today.getFullYear();
-            console.log(`Pré-remplissage avec date dynamique: ${currentDay}/${currentMonth}/${currentYear}`);
+            dbg(`Pré-remplissage avec date dynamique: ${currentDay}/${currentMonth}/${currentYear}`);
             dayInput.value = currentDay; monthInput.value = currentMonth; yearInput.value = currentYear;
             convertButton.click(); // Toujours déclencher
         } catch(e) { console.error("Erreur lors du pré-remplissage:", e); }
@@ -2904,7 +2917,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dailyItems = Array.isArray(data.dailyItems) ? data.dailyItems : [];
                 complementaryItems = Array.isArray(data.complementaryItems) ? data.complementaryItems : [];
                 commemorations = (data.commemorations && typeof data.commemorations === 'object') ? data.commemorations : {};
-                console.log(`Données chargées : ${dailyItems.length} mois, ${complementaryItems.length} jours complémentaires, ${Object.keys(commemorations).length} commémorations.`);
+                dbg(`Données chargées : ${dailyItems.length} mois, ${complementaryItems.length} jours complémentaires, ${Object.keys(commemorations).length} commémorations.`);
             })
             .catch(err => {
                 // Le calcul de la date républicaine fonctionne toujours sans data.json ;

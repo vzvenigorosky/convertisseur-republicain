@@ -3328,7 +3328,7 @@
       {
         "title": "Création de la Sécurité sociale",
         "dateG": "4 octobre 1945",
-        "dateR": "12 Vendémiaire an CLIV",
+        "dateR": "12 Vendémiaire",
         "description": "Les ordonnances de 1945 fondent le régime général de la Sécurité sociale française."
       }
     ],
@@ -3336,7 +3336,7 @@
       {
         "title": "Marche des femmes sur Versailles",
         "dateG": "5 octobre 1789",
-        "dateR": "14 Vendémiaire an -III",
+        "dateR": "14 Vendémiaire",
         "description": "Des milliers de Parisiennes marchent sur Versailles et ramènent la famille royale à Paris."
       }
     ],
@@ -3344,7 +3344,7 @@
       {
         "title": "Abolition de la peine de mort en France",
         "dateG": "9 octobre 1981",
-        "dateR": "17 Vendémiaire an CXC",
+        "dateR": "17 Vendémiaire",
         "description": "La loi portée par Robert Badinter abolit la peine capitale."
       }
     ],
@@ -3360,7 +3360,7 @@
       {
         "title": "Révolution d'Octobre",
         "dateG": "7 novembre 1917",
-        "dateR": "16 Brumaire an CXXVI",
+        "dateR": "16 Brumaire",
         "description": "Les bolcheviks prennent le palais d'Hiver à Petrograd (25 octobre julien) et renversent le gouvernement provisoire."
       }
     ],
@@ -3376,7 +3376,7 @@
       {
         "title": "Naissance de Friedrich Engels",
         "dateG": "28 novembre 1820",
-        "dateR": "7 Frimaire an XXIX",
+        "dateR": "7 Frimaire",
         "description": "Industriel et théoricien socialiste, coauteur du Manifeste communiste, il naît à Barmen."
       }
     ],
@@ -3384,7 +3384,7 @@
       {
         "title": "Coup d'État de Louis-Napoléon Bonaparte",
         "dateG": "2 décembre 1851",
-        "dateR": "11 Frimaire an LX",
+        "dateR": "11 Frimaire",
         "description": "Le président de la IIe République dissout l'Assemblée et prépare la restauration de l'Empire."
       }
     ],
@@ -3392,7 +3392,7 @@
       {
         "title": "Congrès de Tours",
         "dateG": "25 décembre 1920",
-        "dateR": "4 Nivôse an CXXIX",
+        "dateR": "4 Nivôse",
         "description": "La majorité de la SFIO se rallie à la IIIe Internationale et fonde la Section française de l'Internationale communiste (futur PCF)."
       }
     ],
@@ -3408,7 +3408,7 @@
       {
         "title": "Assassinat de Rosa Luxemburg et Karl Liebknecht",
         "dateG": "15 janvier 1919",
-        "dateR": "25 Nivôse an CXXVII",
+        "dateR": "25 Nivôse",
         "description": "Les deux dirigeants spartakistes sont assassinés à Berlin par des corps francs pendant la révolution allemande."
       }
     ],
@@ -3416,7 +3416,7 @@
       {
         "title": "Loi Veil sur l'IVG",
         "dateG": "17 janvier 1975",
-        "dateR": "27 Nivôse an CLXXXIII",
+        "dateR": "27 Nivôse",
         "description": "La loi défendue par Simone Veil dépénalise l'interruption volontaire de grossesse."
       }
     ],
@@ -3430,7 +3430,7 @@
       {
         "title": "Dimanche rouge à Saint-Pétersbourg",
         "dateG": "22 janvier 1905",
-        "dateR": "2 Pluviôse an CXIII",
+        "dateR": "2 Pluviôse",
         "description": "La troupe tire sur une manifestation ouvrière pacifique, déclenchant la révolution russe de 1905."
       }
     ],
@@ -3446,7 +3446,7 @@
       {
         "title": "Publication du Manifeste du Parti communiste",
         "dateG": "21 février 1848",
-        "dateR": "2 Ventôse an LVI",
+        "dateR": "2 Ventôse",
         "description": "Marx et Engels publient à Londres le texte fondateur du socialisme moderne."
       }
     ],
@@ -3454,7 +3454,7 @@
       {
         "title": "Proclamation de la IIe République",
         "dateG": "24 février 1848",
-        "dateR": "5 Ventôse an LVI",
+        "dateR": "5 Ventôse",
         "description": "La révolution de Février renverse la monarchie de Juillet ; la République est proclamée à Paris."
       }
     ],
@@ -3462,7 +3462,7 @@
       {
         "title": "Révolution de Février russe / Journée des femmes",
         "dateG": "8 mars 1917",
-        "dateR": "17 Ventôse an CXXV",
+        "dateR": "17 Ventôse",
         "description": "Les manifestations d'ouvrières à Petrograd (23 février julien) déclenchent la chute du tsar ; la date devient la Journée internationale des femmes."
       }
     ],
@@ -3470,7 +3470,7 @@
       {
         "title": "Mort de Karl Marx",
         "dateG": "14 mars 1883",
-        "dateR": "23 Ventôse an XCI",
+        "dateR": "23 Ventôse",
         "description": "Le théoricien du socialisme scientifique s'éteint à Londres ; il est enterré au cimetière de Highgate."
       }
     ],
@@ -3478,7 +3478,7 @@
       {
         "title": "Début de la Commune de Paris",
         "dateG": "18 mars 1871",
-        "dateR": "27 Ventôse an LXXIX",
+        "dateR": "27 Ventôse",
         "description": "Le peuple de Paris refuse de rendre ses canons ; commence l'expérience du gouvernement communard."
       }
     ],
@@ -3494,7 +3494,7 @@
       {
         "title": "Proclamation de la IIe République espagnole",
         "dateG": "14 avril 1931",
-        "dateR": "24 Germinal an CXXXIX",
+        "dateR": "24 Germinal",
         "description": "L'exil d'Alphonse XIII ouvre la voie à la République espagnole, porteuse de réformes sociales."
       }
     ],
@@ -3526,13 +3526,13 @@
       {
         "title": "Naissance de Lénine",
         "dateG": "22 avril 1870",
-        "dateR": "2 Floréal an LXXVIII",
+        "dateR": "2 Floréal",
         "description": "Vladimir Ilitch Oulianov, dit Lénine, dirigeant de la révolution d'Octobre, naît à Simbirsk."
       },
       {
         "title": "Droit de vote des femmes en France",
         "dateG": "21 avril 1944",
-        "dateR": "2 Floréal an CLII",
+        "dateR": "2 Floréal",
         "description": "Une ordonnance du Comité français de libération nationale accorde le droit de vote et d'éligibilité aux femmes."
       }
     ],
@@ -3540,7 +3540,7 @@
       {
         "title": "Abolition de l'esclavage",
         "dateG": "27 avril 1848",
-        "dateR": "8 Floréal an LVI",
+        "dateR": "8 Floréal",
         "description": "Sur l'initiative de Victor Schœlcher, la IIe République abolit définitivement l'esclavage dans les colonies françaises."
       }
     ],
@@ -3556,13 +3556,13 @@
       {
         "title": "Naissance de Karl Marx",
         "dateG": "5 mai 1818",
-        "dateR": "15 Floréal an XXVI",
+        "dateR": "15 Floréal",
         "description": "Le philosophe et économiste, auteur du Capital, naît à Trèves."
       },
       {
         "title": "Massacre de Haymarket",
         "dateG": "4 mai 1886",
-        "dateR": "15 Floréal an XCIV",
+        "dateR": "15 Floréal",
         "description": "À Chicago, une bombe et la répression d'un rassemblement ouvrier pour les huit heures font plusieurs morts ; à l'origine du 1er Mai."
       }
     ],
@@ -3586,7 +3586,7 @@
       {
         "title": "Semaine sanglante — fin de la Commune",
         "dateG": "28 mai 1871",
-        "dateR": "8 Prairial an LXXIX",
+        "dateR": "8 Prairial",
         "description": "L'armée versaillaise écrase la Commune de Paris au terme d'une semaine de répression sanglante."
       }
     ],
@@ -3594,7 +3594,7 @@
       {
         "title": "Accords Matignon",
         "dateG": "7 juin 1936",
-        "dateR": "19 Prairial an CXLIV",
+        "dateR": "19 Prairial",
         "description": "Sous le Front populaire, patronat et syndicats signent des accords instaurant congés payés et hausses de salaires."
       }
     ],
@@ -3602,7 +3602,7 @@
       {
         "title": "Serment du Jeu de paume",
         "dateG": "20 juin 1789",
-        "dateR": "2 Messidor an -IV",
+        "dateR": "2 Messidor",
         "description": "Les députés du Tiers état jurent de ne pas se séparer avant d'avoir donné une constitution à la France."
       }
     ],
@@ -3610,7 +3610,7 @@
       {
         "title": "Fuite de Varennes",
         "dateG": "21 juin 1791",
-        "dateR": "3 Messidor an -II",
+        "dateR": "3 Messidor",
         "description": "Louis XVI et sa famille sont arrêtés à Varennes lors de leur tentative de fuite, discréditant la monarchie."
       }
     ],
@@ -3626,7 +3626,7 @@
       {
         "title": "Prise de la Bastille",
         "dateG": "14 juillet 1789",
-        "dateR": "26 Messidor an -IV",
+        "dateR": "26 Messidor",
         "description": "Le peuple de Paris s'empare de la forteresse-prison, événement fondateur de la Révolution et fête nationale française."
       }
     ],
@@ -3642,7 +3642,7 @@
       {
         "title": "Assassinat de Jean Jaurès",
         "dateG": "31 juillet 1914",
-        "dateR": "12 Thermidor an CXXII",
+        "dateR": "12 Thermidor",
         "description": "Le tribun socialiste et pacifiste est abattu à Paris à la veille de la Première Guerre mondiale."
       }
     ],
@@ -3650,13 +3650,13 @@
       {
         "title": "Abolition des privilèges",
         "dateG": "4 août 1789",
-        "dateR": "17 Thermidor an -IV",
+        "dateR": "17 Thermidor",
         "description": "Dans la nuit du 4 août, l'Assemblée constituante abolit les privilèges féodaux et les droits seigneuriaux."
       },
       {
         "title": "Mort de Friedrich Engels",
         "dateG": "5 août 1895",
-        "dateR": "17 Thermidor an CIII",
+        "dateR": "17 Thermidor",
         "description": "Le compagnon de Marx et cothéoricien du marxisme s'éteint à Londres."
       }
     ],
@@ -3664,7 +3664,7 @@
       {
         "title": "Prise des Tuileries",
         "dateG": "10 août 1792",
-        "dateR": "23 Thermidor an -I",
+        "dateR": "23 Thermidor",
         "description": "L'insurrection parisienne emporte le palais des Tuileries et provoque la chute de la monarchie."
       }
     ],
@@ -3672,7 +3672,7 @@
       {
         "title": "Déclaration des droits de l'homme et du citoyen",
         "dateG": "26 août 1789",
-        "dateR": "9 Fructidor an -IV",
+        "dateR": "9 Fructidor",
         "description": "L'Assemblée constituante proclame les principes de liberté, d'égalité et de souveraineté de la nation."
       }
     ],
@@ -3680,7 +3680,7 @@
       {
         "title": "Bataille de Valmy",
         "dateG": "20 septembre 1792",
-        "dateR": "Jour de l'Opinion, an -I",
+        "dateR": "Jour de l'Opinion",
         "description": "La première victoire de l'armée révolutionnaire face aux Prussiens sauve la Révolution ; la République est proclamée le lendemain."
       }
     ],
@@ -3688,7 +3688,7 @@
       {
         "title": "Abolition de la royauté",
         "dateG": "21 septembre 1792",
-        "dateR": "Jour des Récompenses, an -I",
+        "dateR": "Jour des Récompenses",
         "description": "La Convention nationale, réunie pour la première fois, abolit la royauté en France."
       }
     ]
