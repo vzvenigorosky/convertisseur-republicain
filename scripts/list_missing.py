@@ -44,8 +44,8 @@ def main():
                 other_missing.append((label, ", ".join(missing)))
 
     for j, x in enumerate(compl):
-        missing = [f for f in ("urlEncy", "urlImage", "urlWiki", "latin")
-                   if not x.get(f)]
+        # Jours complémentaires = fêtes civiques : pas de nom latin (sans objet).
+        missing = [f for f in ("urlEncy", "urlImage", "urlWiki") if not x.get(f)]
         if missing:
             other_missing.append((f"Jour complémentaire {j + 1} — {x['name']}",
                                   ", ".join(missing)))

@@ -3269,49 +3269,49 @@
     {
       "name": "Jour de la Vertu",
       "author": "",
-      "urlEncy": "",
-      "urlImage": "",
-      "urlWiki": "",
+      "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/VERTU",
+      "urlImage": "https://upload.wikimedia.org/wikipedia/commons/8/84/R%C3%A9volution_fran%C3%A7aise_Frise_all%C3%A9gorique_%C3%A0_l%27antique_d%27offrandes_faites_%C3%A0_la_Sagesse._1794._Hommage_%C3%A0_la_f%C3%AAte_de_l%27Etre_%2C_G.27118.jpg",
+      "urlWiki": "https://fr.wikipedia.org/wiki/Vertu",
       "description": "Célébration des qualités morales et civiques."
     },
     {
       "name": "Jour du Génie",
       "author": "",
-      "urlEncy": "",
-      "urlImage": "",
-      "urlWiki": "",
+      "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/G%C3%89NIE",
+      "urlImage": "https://upload.wikimedia.org/wikipedia/commons/4/44/G%C3%A9nie_de_la_France_gravant_la_Constitution_de_1791%2C_S482.jpg",
+      "urlWiki": "https://fr.wikipedia.org/wiki/G%C3%A9nie_(personne)",
       "description": "Hommage à l'intelligence créatrice, aux inventeurs et aux artistes."
     },
     {
       "name": "Jour du Travail",
       "author": "",
-      "urlEncy": "",
-      "urlImage": "",
-      "urlWiki": "",
+      "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/TRAVAIL",
+      "urlImage": "https://upload.wikimedia.org/wikipedia/commons/6/69/All%C3%A9gorie_sur_le_travail_-_estampe_-_btv1b8400585w.jpg",
+      "urlWiki": "https://fr.wikipedia.org/wiki/Travail",
       "description": "Reconnaissance de l'effort productif et de l'artisanat."
     },
     {
       "name": "Jour de l'Opinion",
       "author": "",
-      "urlEncy": "",
-      "urlImage": "",
-      "urlWiki": "",
+      "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/OPINION",
+      "urlImage": "https://upload.wikimedia.org/wikipedia/commons/e/e9/La_R%C3%A9volution_fran%C3%A7aise%2C_arriv%C3%A9e_sous_le_regne_de_Louis_XVI_les_14_juillet_1789_et_10_ao%C3%BBt_1792_dedi%C3%A9e_aux_amis_de_la_libert%C3%A9_et_de_l%27%C3%A9galit%C3%A9_-_du_haut_du_ciel%2C_on_voit_l%27auguste_v%C3%A9rit%C3%A9_resplendissante..._-_btv1b69429317.jpg",
+      "urlWiki": "https://fr.wikipedia.org/wiki/Opinion_publique",
       "description": "Fête de la liberté d'expression et du débat public."
     },
     {
       "name": "Jour des Récompenses",
       "author": "",
-      "urlEncy": "",
-      "urlImage": "",
-      "urlWiki": "",
+      "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/RECOMPENSE",
+      "urlImage": "https://upload.wikimedia.org/wikipedia/commons/1/15/La_commune_de_Paris_d%C3%A9cerne_une_%C3%A9p%C3%A9e_et_une_couronne_civique_%C3%A0_C._J._W._Nesham%2C_anglais._le_15_Janvier_1790._G.28020.jpg",
+      "urlWiki": "https://fr.wikipedia.org/wiki/R%C3%A9compense",
       "description": "Cérémonie pour honorer les mérites et les contributions à la nation."
     },
     {
       "name": "Jour de la Révolution",
       "author": "",
-      "urlEncy": "",
-      "urlImage": "",
-      "urlWiki": "",
+      "urlEncy": "https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition/R%C3%89VOLUTION",
+      "urlImage": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Prise_de_la_Bastille.jpg",
+      "urlWiki": "https://fr.wikipedia.org/wiki/R%C3%A9volution_fran%C3%A7aise",
       "description": "Commémoration de la chute de la monarchie et fondation de la République (seulement les années sextiles)."
     }
   ],
