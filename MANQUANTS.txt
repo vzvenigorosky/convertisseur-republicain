@@ -1,16 +1,14 @@
 CHAMPS MANQUANTS — Convertisseur Républicain
 ====================================================
-Généré le 2026-09-04 depuis data.json (scripts/list_missing.py).
+Généré le 2026-09-07 depuis data.json (scripts/list_missing.py).
 
-SECTION A — Sans article d'Encyclopédie (25)
+SECTION A — Sans article d'Encyclopédie (20)
 ----------------------------------------------------
 Vedette absente de L'Encyclopédie de Diderot (souvent des
 espèces du Nouveau Monde ou quelques outils).
 
   Vendémiaire 16 — Belle de nuit
   Vendémiaire 24 — Amaryllis
-  Vendémiaire 26 — Aubergine
-  Brumaire  4 — Betterave
   Brumaire 18 — Dentelaire
   Brumaire 21 — Bacchante
   Brumaire 27 — Macjonc
@@ -26,10 +24,7 @@ espèces du Nouveau Monde ou quelques outils).
   Floréal 18 — Corbeille d'or
   Prairial  1 — Luzerne
   Prairial  7 — Fromental
-  Prairial 24 — Caille-lait
-  Thermidor 27 — Colza
   Fructidor  3 — Lycoperdon
-  Fructidor  4 — Escourgeon
   Fructidor  7 — Sucrion
   Fructidor 17 — Cardère
 
