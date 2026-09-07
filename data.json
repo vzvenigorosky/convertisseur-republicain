@@ -3324,6 +3324,30 @@
         "description": "Premier jour de l'an I : la République française est proclamée, à la date de l'équinoxe d'automne."
       }
     ],
+    "Vendémiaire-7": [
+      {
+        "title": "Fondation de la Première Internationale",
+        "dateG": "28 septembre 1864",
+        "dateR": "7 Vendémiaire",
+        "description": "L'Association internationale des travailleurs est fondée à Londres, unissant le mouvement ouvrier."
+      }
+    ],
+    "Vendémiaire-9": [
+      {
+        "title": "Proclamation de la République populaire de Chine",
+        "dateG": "1er octobre 1949",
+        "dateR": "9 Vendémiaire",
+        "description": "Mao Zedong proclame la République populaire à Pékin au terme de la révolution chinoise."
+      }
+    ],
+    "Vendémiaire-10": [
+      {
+        "title": "Naissance de Gandhi",
+        "dateG": "2 octobre 1869",
+        "dateR": "10 Vendémiaire",
+        "description": "Apôtre de la non-violence et de l'indépendance indienne ; Journée internationale de la non-violence."
+      }
+    ],
     "Vendémiaire-12": [
       {
         "title": "Création de la Sécurité sociale",
@@ -3354,6 +3378,14 @@
         "dateG": "16 octobre 1793",
         "dateR": "25 Vendémiaire an II",
         "description": "L'ancienne reine est guillotinée après un procès expéditif devant le Tribunal révolutionnaire."
+      }
+    ],
+    "Brumaire-10": [
+      {
+        "title": "Toussaint rouge",
+        "dateG": "1er novembre 1954",
+        "dateR": "10 Brumaire",
+        "description": "Le FLN déclenche l'insurrection qui ouvre la guerre d'indépendance de l'Algérie."
       }
     ],
     "Brumaire-16": [
@@ -3674,6 +3706,54 @@
         "dateG": "26 août 1789",
         "dateR": "9 Fructidor",
         "description": "L'Assemblée constituante proclame les principes de liberté, d'égalité et de souveraineté de la nation."
+      }
+    ],
+    "Fructidor-20": [
+      {
+        "title": "Indépendance du Brésil",
+        "dateG": "7 septembre 1822",
+        "dateR": "20 Fructidor",
+        "description": "Dom Pedro proclame l'indépendance du Brésil vis-à-vis du Portugal (« cri d'Ipiranga »)."
+      }
+    ],
+    "Fructidor-22": [
+      {
+        "title": "Rébellion de Stono",
+        "dateG": "9 septembre 1739",
+        "dateR": "22 Fructidor",
+        "description": "Plus grande révolte d'esclaves des colonies britanniques d'Amérique du Nord avant l'indépendance."
+      }
+    ],
+    "Fructidor-25": [
+      {
+        "title": "Coup d’État au Chili",
+        "dateG": "11 septembre 1973",
+        "dateR": "25 Fructidor",
+        "description": "L'armée renverse l'Unité populaire ; le président socialiste Salvador Allende meurt dans le palais de la Moneda."
+      }
+    ],
+    "Fructidor-26": [
+      {
+        "title": "Mort de Steve Biko",
+        "dateG": "12 septembre 1977",
+        "dateR": "26 Fructidor",
+        "description": "Militant sud-africain de la conscience noire, mort sous la torture ; figure de la lutte anti-apartheid."
+      }
+    ],
+    "Fructidor-29": [
+      {
+        "title": "Cri de Dolores",
+        "dateG": "16 septembre 1810",
+        "dateR": "29 Fructidor",
+        "description": "Le curé Miguel Hidalgo lance l'insurrection ouvrant la guerre d'indépendance du Mexique."
+      }
+    ],
+    "Complémentaires-1": [
+      {
+        "title": "Première junte du Chili",
+        "dateG": "18 septembre 1810",
+        "dateR": "Jour de la Vertu",
+        "description": "La junte nationale de Santiago amorce l'indépendance du Chili."
       }
     ],
     "Complémentaires-4": [
