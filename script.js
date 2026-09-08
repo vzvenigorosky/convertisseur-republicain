@@ -2908,7 +2908,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Les illustrations et liens vers l'Encyclopédie vivent désormais dans data.json,
     // et non plus en dur dans le code.
     function loadDailyData() {
-        return fetch('data.json')
+        // no-cache : revalide toujours data.json auprès du serveur (304 si inchangé),
+        // pour éviter d'afficher une version obsolète en cache après mise à jour.
+        return fetch('data.json', { cache: 'no-cache' })
             .then(response => {
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 return response.json();
