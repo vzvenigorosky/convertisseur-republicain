@@ -3716,12 +3716,36 @@
         "description": "Dom Pedro proclame l'indépendance du Brésil vis-à-vis du Portugal (« cri d'Ipiranga »)."
       }
     ],
+    "Fructidor-21": [
+      {
+        "title": "Abolition de la monarchie en Bulgarie",
+        "dateG": "8 septembre 1946",
+        "dateR": "21 Fructidor",
+        "description": "Un référendum abolit la monarchie et proclame la République populaire de Bulgarie."
+      }
+    ],
     "Fructidor-22": [
       {
         "title": "Rébellion de Stono",
         "dateG": "9 septembre 1739",
         "dateR": "22 Fructidor",
         "description": "Plus grande révolte d'esclaves des colonies britanniques d'Amérique du Nord avant l'indépendance."
+      }
+    ],
+    "Fructidor-23": [
+      {
+        "title": "Indépendance de la Guinée-Bissau",
+        "dateG": "10 septembre 1974",
+        "dateR": "23 Fructidor",
+        "description": "Le Portugal reconnaît l'indépendance de la Guinée-Bissau, aboutissement de la lutte de libération menée par le PAIGC d'Amílcar Cabral."
+      }
+    ],
+    "Fructidor-24": [
+      {
+        "title": "Résistance de Christiana",
+        "dateG": "11 septembre 1851",
+        "dateR": "24 Fructidor",
+        "description": "Des esclaves évadés, menés par William Parker, repoussent à Christiana (Pennsylvanie) le propriétaire venu les reprendre ; affaire emblématique du conflit entre esclavagistes et abolitionnistes."
       }
     ],
     "Fructidor-25": [
@@ -3738,6 +3762,22 @@
         "dateG": "12 septembre 1977",
         "dateR": "26 Fructidor",
         "description": "Militant sud-africain de la conscience noire, mort sous la torture ; figure de la lutte anti-apartheid."
+      }
+    ],
+    "Fructidor-27": [
+      {
+        "title": "Proclamation de la République russe",
+        "dateG": "14 septembre 1917",
+        "dateR": "27 Fructidor",
+        "description": "Le gouvernement provisoire proclame officiellement la République, mettant fin à l'Empire russe."
+      }
+    ],
+    "Fructidor-28": [
+      {
+        "title": "Mort de Raoul Villain",
+        "dateG": "14 septembre 1936",
+        "dateR": "28 Fructidor",
+        "description": "L'assassin de Jean Jaurès (1914), acquitté en 1919, est tué à Ibiza par des républicains espagnols au début de la guerre civile."
       }
     ],
     "Fructidor-29": [
