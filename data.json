@@ -3356,6 +3356,14 @@
         "description": "Les ordonnances de 1945 fondent le régime général de la Sécurité sociale française."
       }
     ],
+    "Vendémiaire-13": [
+      {
+        "title": "Proclamation de la République portugaise",
+        "dateG": "5 octobre 1910",
+        "dateR": "13 Vendémiaire",
+        "description": "La révolution du 5 octobre renverse la monarchie et instaure la République au Portugal."
+      }
+    ],
     "Vendémiaire-14": [
       {
         "title": "Marche des femmes sur Versailles",
@@ -3378,6 +3386,14 @@
         "dateG": "16 octobre 1793",
         "dateR": "25 Vendémiaire an II",
         "description": "L'ancienne reine est guillotinée après un procès expéditif devant le Tribunal révolutionnaire."
+      }
+    ],
+    "Brumaire-6": [
+      {
+        "title": "Proclamation de la République turque",
+        "dateG": "29 octobre 1923",
+        "dateR": "6 Brumaire",
+        "description": "Après l'abolition du sultanat ottoman, Mustafa Kemal proclame la République de Turquie."
       }
     ],
     "Brumaire-10": [
@@ -3434,6 +3450,12 @@
         "dateG": "1er janvier 1804",
         "dateR": "10 Nivôse an XII",
         "description": "Première république noire issue d'une révolte d'esclaves victorieuse, l'indépendance est proclamée à Gonaïves."
+      },
+      {
+        "title": "Proclamation de la République de Chine",
+        "dateG": "1er janvier 1912",
+        "dateR": "10 Nivôse",
+        "description": "L'investiture de Sun Yat-sen met fin à l'empire mandchou et à des millénaires de monarchie."
       }
     ],
     "Nivôse-25": [
@@ -3482,12 +3504,28 @@
         "description": "Marx et Engels publient à Londres le texte fondateur du socialisme moderne."
       }
     ],
+    "Ventôse-4": [
+      {
+        "title": "Révolte de Berbice",
+        "dateG": "23 février 1763",
+        "dateR": "4 Ventôse",
+        "description": "Soulèvement d'esclaves mené par Cuffy dans la colonie néerlandaise de Berbice (Guyana)."
+      }
+    ],
     "Ventôse-5": [
       {
         "title": "Proclamation de la IIe République",
         "dateG": "24 février 1848",
         "dateR": "5 Ventôse",
         "description": "La révolution de Février renverse la monarchie de Juillet ; la République est proclamée à Paris."
+      }
+    ],
+    "Ventôse-15": [
+      {
+        "title": "Indépendance du Ghana",
+        "dateG": "6 mars 1957",
+        "dateR": "15 Ventôse",
+        "description": "Sous Kwame Nkrumah, le Ghana devient la première colonie d'Afrique subsaharienne à accéder à l'indépendance."
       }
     ],
     "Ventôse-17": [
@@ -3622,6 +3660,14 @@
         "description": "L'armée versaillaise écrase la Commune de Paris au terme d'une semaine de répression sanglante."
       }
     ],
+    "Prairial-13": [
+      {
+        "title": "Proclamation de la République italienne",
+        "dateG": "2 juin 1946",
+        "dateR": "13 Prairial",
+        "description": "Un référendum abolit la monarchie ; l'Italie devient une république."
+      }
+    ],
     "Prairial-19": [
       {
         "title": "Accords Matignon",
@@ -3700,12 +3746,44 @@
         "description": "L'insurrection parisienne emporte le palais des Tuileries et provoque la chute de la monarchie."
       }
     ],
+    "Thermidor-27": [
+      {
+        "title": "Indépendance de l'Inde",
+        "dateG": "15 août 1947",
+        "dateR": "27 Thermidor",
+        "description": "Fin de la domination britannique et naissance de l'Inde indépendante."
+      }
+    ],
+    "Fructidor-3": [
+      {
+        "title": "Révolte de Nat Turner",
+        "dateG": "21 août 1831",
+        "dateR": "3 Fructidor",
+        "description": "Insurrection d'esclaves menée par Nat Turner en Virginie, l'une des plus marquantes des États-Unis."
+      }
+    ],
+    "Fructidor-5": [
+      {
+        "title": "Début de la Révolution haïtienne",
+        "dateG": "22 août 1791",
+        "dateR": "5 Fructidor",
+        "description": "Le soulèvement des esclaves de Saint-Domingue, dans la nuit du 22 août, ouvre la première révolution antiesclavagiste victorieuse."
+      }
+    ],
     "Fructidor-9": [
       {
         "title": "Déclaration des droits de l'homme et du citoyen",
         "dateG": "26 août 1789",
         "dateR": "9 Fructidor",
         "description": "L'Assemblée constituante proclame les principes de liberté, d'égalité et de souveraineté de la nation."
+      }
+    ],
+    "Fructidor-15": [
+      {
+        "title": "Indépendance du Viêt Nam",
+        "dateG": "2 septembre 1945",
+        "dateR": "15 Fructidor",
+        "description": "Hô Chi Minh proclame l'indépendance de la République démocratique du Viêt Nam à Hanoï."
       }
     ],
     "Fructidor-20": [
