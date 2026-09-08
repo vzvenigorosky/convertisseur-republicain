@@ -3324,12 +3324,28 @@
         "description": "Premier jour de l'an I : la République française est proclamée, à la date de l'équinoxe d'automne."
       }
     ],
+    "Vendémiaire-2": [
+      {
+        "title": "Grito de Lares",
+        "dateG": "23 septembre 1868",
+        "dateR": "2 Vendémiaire",
+        "description": "Soulèvement indépendantiste portoricain contre la domination espagnole."
+      }
+    ],
     "Vendémiaire-7": [
       {
         "title": "Fondation de la Première Internationale",
         "dateG": "28 septembre 1864",
         "dateR": "7 Vendémiaire",
         "description": "L'Association internationale des travailleurs est fondée à Londres, unissant le mouvement ouvrier."
+      }
+    ],
+    "Vendémiaire-8": [
+      {
+        "title": "Indépendance du Botswana",
+        "dateG": "30 septembre 1966",
+        "dateR": "8 Vendémiaire",
+        "description": "Le Botswana, ancien protectorat du Bechuanaland, accède à l'indépendance du Royaume-Uni."
       }
     ],
     "Vendémiaire-9": [
@@ -3786,6 +3802,14 @@
         "description": "Hô Chi Minh proclame l'indépendance de la République démocratique du Viêt Nam à Hanoï."
       }
     ],
+    "Fructidor-17": [
+      {
+        "title": "Proclamation de la IIIe République française",
+        "dateG": "4 septembre 1870",
+        "dateR": "17 Fructidor",
+        "description": "Après la défaite de Sedan, la République est proclamée à Paris, mettant fin au Second Empire."
+      }
+    ],
     "Fructidor-20": [
       {
         "title": "Indépendance du Brésil",
@@ -3808,6 +3832,12 @@
         "dateG": "9 septembre 1739",
         "dateR": "22 Fructidor",
         "description": "Plus grande révolte d'esclaves des colonies britanniques d'Amérique du Nord avant l'indépendance."
+      },
+      {
+        "title": "Révolte de la prison d'Attica",
+        "dateG": "9 septembre 1971",
+        "dateR": "22 Fructidor",
+        "description": "Des détenus se soulèvent pour leurs droits ; la répression fera des dizaines de morts."
       }
     ],
     "Fructidor-23": [
@@ -3852,6 +3882,12 @@
     ],
     "Fructidor-28": [
       {
+        "title": "Indépendance de l'Amérique centrale",
+        "dateG": "15 septembre 1821",
+        "dateR": "28 Fructidor",
+        "description": "Le Guatemala, le Salvador, le Honduras, le Nicaragua et le Costa Rica proclament leur indépendance de l'Espagne."
+      },
+      {
         "title": "Mort de Raoul Villain",
         "dateG": "14 septembre 1936",
         "dateR": "28 Fructidor",
@@ -3872,6 +3908,14 @@
         "dateG": "18 septembre 1810",
         "dateR": "Jour de la Vertu",
         "description": "La junte nationale de Santiago amorce l'indépendance du Chili."
+      }
+    ],
+    "Complémentaires-3": [
+      {
+        "title": "Droit de vote des femmes en Nouvelle-Zélande",
+        "dateG": "19 septembre 1893",
+        "dateR": "Jour du Travail",
+        "description": "La Nouvelle-Zélande devient le premier pays à accorder le droit de vote aux femmes."
       }
     ],
     "Complémentaires-4": [
