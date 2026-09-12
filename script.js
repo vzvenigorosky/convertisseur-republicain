@@ -2741,6 +2741,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    function handleSubmitOnEnter(event) {
+        if (event.key !== 'Enter') {
+            return;
+        }
+
+        event.preventDefault();
+        convertButton.click();
+    }
+
+    dayInput.addEventListener('keydown', handleSubmitOnEnter);
+    monthInput.addEventListener('keydown', handleSubmitOnEnter);
+    yearInput.addEventListener('keydown', handleSubmitOnEnter);
+
     // --- Event Listener (MODIFIÉ pour nouvelle logique d'affichage) ---
     convertButton.addEventListener('click', () => {
         // --- Récupération ---
