@@ -7,7 +7,7 @@ lien Wikipédia, l'article correspondant de *L'Encyclopédie* de Diderot, ainsi 
 les commémorations rattachées à ce jour.
 
 Fichiers : `index.html`, `script.js`, `style.css`, `data.json` (données des jours,
-illustrations, liens et commémorations). Aucun build, aucune dépendance.
+illustrations, liens et commémorations). Aucun build.
 
 ## Ouvrir l'application
 
@@ -22,6 +22,20 @@ python3 -m http.server
 ```
 
 Puis ouvrez `http://localhost:8000/`.
+
+## Dépendances réseau au runtime
+
+Le calcul de date brut fonctionne sans réseau, mais l'expérience complète ne se
+charge pas entièrement hors ligne :
+
+- les polices de l'interface viennent de Google Fonts
+  (`fonts.googleapis.com`, `fonts.gstatic.com`) ;
+- les illustrations et les liens de référence s'appuient sur Wikipédia /
+  Wikisource.
+
+En pratique, sans connexion (ou en `file://` sous Chromium, voir ci-dessus),
+l'application reste utilisable pour la conversion de date, mais les contenus
+enrichis (polices, images, pages externes) peuvent manquer.
 
 ## Deux méthodes de conversion
 
@@ -38,6 +52,11 @@ donne pour chaque année la date (proleptique grégorienne) de l'équinoxe d'aut
 La table couvre **de 600 avant l'ère commune (an −599, numérotation astronomique)
 à 2199**. Les bornes de l'interface et de la saisie en sont déduites
 automatiquement.
+
+La numérotation *astronomique* ci-dessus concerne les années grégoriennes en
+entrée (avec un an 0). L'« An » républicain affiché suit une convention
+historique sans an 0 : on passe de **An I** (1792) à **An -1** (1791), comme la
+transition 1 av. J.-C. → 1 apr. J.-C. dans la numérotation traditionnelle.
 
 Cette table a deux origines :
 
