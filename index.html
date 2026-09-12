@@ -40,11 +40,11 @@
                 </div>
 
                 <button id="convert-button">Convertir</button>
-                <p id="calendar-info"></p>
+                <p id="calendar-info" aria-live="polite"></p>
 
                 <div id="conversion-output-area">
-                    <p id="republican-date-equinox">---</p>
-                    <p id="romme-date-info">Date selon méthode Romme : ---</p>
+                    <p id="republican-date-equinox" aria-live="polite">---</p>
+                    <p id="romme-date-info" aria-live="polite">Date selon méthode Romme : ---</p>
                 </div>
 
                 <div id="commemoration-area" class="commemoration-block" style="display: none;">
@@ -52,13 +52,14 @@
                     <p id="commemoration-description"></p>
                 </div>
 
-                <div id="error-area" class="error-message" style="display: none;"></div>
+                <div id="data-load-error-area" class="error-message" style="display: none;" aria-live="polite"></div>
+                <div id="error-area" class="error-message" style="display: none;" aria-live="polite"></div>
             </div>
         </div>
 
         <div class="left-column">
             <h3 id="left-column-title">Détails du Jour Républicain</h3>
-            <h4 id="fete-date-display">---</h4>
+            <h4 id="fete-date-display" aria-live="polite">---</h4>
 
             <div id="fete-details-area">
                 <p id="fete-latin-author" style="display: none;">
@@ -81,13 +82,13 @@
         <div class="right-column">
             <h3>Encyclopédie (première édition)</h3>
             <div id="encyclopedia-container">
-                <iframe id="encyclopedia-frame" src="about:blank" style="display: none;"></iframe>
+                <iframe id="encyclopedia-frame" src="about:blank" title="Article de l'Encyclopédie de Diderot" style="display: none;"></iframe>
                 <div id="encyclopedia-placeholder">
                     <img src="placeholder.svg" alt="Article non disponible" class="placeholder-illustration">
                     <p class="placeholder-text">Aucun article de l'<em>Encyclopédie</em> n'est lié pour ce jour. Vous pouvez néanmoins consulter l'ouvrage complet ci-dessous.</p>
                 </div>
                 <p class="ency-link-p">
-                    <a href="https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition" target="_blank">Accéder à l'Encyclopédie</a>
+                    <a href="https://fr.m.wikisource.org/wiki/L%E2%80%99Encyclop%C3%A9die/1re_%C3%A9dition" target="_blank" rel="noopener noreferrer">Accéder à l'Encyclopédie</a>
                 </p>
             </div>
         </div>

@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthInput = document.getElementById('month');
     const yearInput = document.getElementById('year');
     const convertButton = document.getElementById('convert-button');
+    const dataLoadErrorDisplay = document.getElementById('data-load-error-area');
     const errorDisplay = document.getElementById('error-area');
     const calendarInfoDisplay = document.getElementById('calendar-info');
     const supportedRangeInfo = document.getElementById('supported-range-info');
@@ -2881,6 +2882,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    function handleSubmitOnEnter(event) {
+        if (event.key !== 'Enter' || event.repeat) {
+            return;
+        }
+
+        event.preventDefault();
+        convertButton.click();
+    }
+
+    dayInput.addEventListener('keydown', handleSubmitOnEnter);
+    monthInput.addEventListener('keydown', handleSubmitOnEnter);
+    yearInput.addEventListener('keydown', handleSubmitOnEnter);
+
     // --- Event Listener (MODIFIÉ pour nouvelle logique d'affichage) ---
     convertButton.addEventListener('click', () => {
         // --- Récupération ---
@@ -3227,15 +3241,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 dailyItems = Array.isArray(data.dailyItems) ? data.dailyItems : [];
                 complementaryItems = Array.isArray(data.complementaryItems) ? data.complementaryItems : [];
                 commemorations = (data.commemorations && typeof data.commemorations === 'object') ? data.commemorations : {};
+                if (dataLoadErrorDisplay) {
+                    dataLoadErrorDisplay.textContent = '';
+                    dataLoadErrorDisplay.style.display = 'none';
+                }
                 dbg(`Données chargées : ${dailyItems.length} mois, ${complementaryItems.length} jours complémentaires, ${Object.keys(commemorations).length} commémorations.`);
             })
             .catch(err => {
                 // Le calcul de la date républicaine fonctionne toujours sans data.json ;
                 // seuls les détails du jour (illustration, article) seront indisponibles.
                 console.error("Impossible de charger data.json :", err);
-                if (errorDisplay) {
-                    errorDisplay.textContent = "Erreur : impossible de charger les données du calendrier (data.json).";
-                    errorDisplay.style.display = 'block';
+                if (dataLoadErrorDisplay) {
+                    dataLoadErrorDisplay.textContent = "Erreur : impossible de charger les données du calendrier (data.json). Ouvrez la page via un serveur local (par ex. `python3 -m http.server`) si vous utilisez Chromium avec `file://`.";
+                    dataLoadErrorDisplay.style.display = 'block';
                 }
             })
             .finally(() => {
