@@ -7,21 +7,35 @@ lien Wikipédia, l'article correspondant de *L'Encyclopédie* de Diderot, ainsi 
 les commémorations rattachées à ce jour.
 
 Fichiers : `index.html`, `script.js`, `style.css`, `data.json` (données des jours,
-illustrations, liens et commémorations). Aucun build : ouvrir `index.html`.
+illustrations, liens et commémorations). Aucun build.
+
+## Ouvrir l'application
+
+L'ouverture directe de `index.html` en `file://` fonctionne mal dans les navigateurs
+basés sur Chromium (Chrome, Edge, Brave, Opera) : `data.json` n'est alors pas chargé à
+cause des restrictions CORS locales, et les détails du jour restent indisponibles.
+
+Utilisez de préférence un serveur statique minimal depuis la racine du dépôt :
+
+```sh
+python3 -m http.server
+```
+
+Puis ouvrez `http://localhost:8000/`.
 
 ## Dépendances réseau au runtime
 
-Le calcul de date brut fonctionne sans réseau, mais l'expérience complète ne
-se charge pas entièrement hors ligne :
+Le calcul de date brut fonctionne sans réseau, mais l'expérience complète ne se
+charge pas entièrement hors ligne :
 
 - les polices de l'interface viennent de Google Fonts
   (`fonts.googleapis.com`, `fonts.gstatic.com`) ;
 - les illustrations et les liens de référence s'appuient sur Wikipédia /
   Wikisource.
 
-En pratique, sans connexion, l'application reste utilisable pour la conversion
-de date, mais les contenus enrichis (polices, images, pages externes) peuvent
-manquer.
+En pratique, sans connexion (ou en `file://` sous Chromium, voir ci-dessus),
+l'application reste utilisable pour la conversion de date, mais les contenus
+enrichis (polices, images, pages externes) peuvent manquer.
 
 ## Deux méthodes de conversion
 
