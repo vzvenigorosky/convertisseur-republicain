@@ -2677,38 +2677,122 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Calcul Principal (Méthode Équinoxe - Révisé pour retourner jour/mois) ---
     function calculateEquinoxDateUsingJDN(inputJDN) {
         // ... (Validation JDN, recherche intervalle, calcul targetYear, startAnJDN, nextStartAnJDN inchangés) ...
-        if (!inputJDN || isNaN(inputJDN)) { return { error: "JDN invalide fourni.", missingData: false }; }
-        const yearsAvailable = Object.keys(equinoxJDNs).map(Number).sort((a, b) => a - b);
-        if (yearsAvailable.length < 2) { return { error: "Données d'équinoxe insuffisantes.", missingData: true }; }
-        const firstAvailableYear = yearsAvailable[0]; const firstAvailableJDN = equinoxJDNs[firstAvailableYear];
-        const lastAvailableYearPlus1 = yearsAvailable[yearsAvailable.length - 1]; const lastAvailableJDNPlus1 = equinoxJDNs[lastAvailableYearPlus1];
-        if (inputJDN < firstAvailableJDN) { return { error: `Données équinoxe non disponibles (avant ${firstAvailableYear}).`, missingData: true }; }
-        if (!lastAvailableJDNPlus1 || inputJDN >= lastAvailableJDNPlus1) { const lastActualDataYear = lastAvailableYearPlus1 - 1; const lastRepAn = (lastActualDataYear >= 1792) ? (lastActualDataYear - 1791) : (lastActualDataYear - 1792); return { error: `Date hors plage des données équinoxe (après An ${toRoman(lastRepAn)}).`, missingData: true }; }
-        // Sentinelle : null (et non -1, désormais une année valide en numérotation astronomique).
-        let targetYear = null, startAnJDN = -1, nextStartAnJDN = -1;
-        for (let i = 0; i < yearsAvailable.length - 1; i++) { const currentYear = yearsAvailable[i], nextYear = yearsAvailable[i+1]; const currentStartJDN = equinoxJDNs[currentYear], nextJDN = equinoxJDNs[nextYear]; if (currentStartJDN === undefined || nextJDN === undefined) { continue; } if (inputJDN >= currentStartJDN && inputJDN < nextJDN) { targetYear = currentYear; startAnJDN = currentStartJDN; nextStartAnJDN = nextJDN; break; } }
-        if (targetYear === null) { return { error: "Impossible de trouver l'intervalle d'année (Erreur interne).", missingData: true }; }
-        let currentAn = (targetYear >= 1792) ? (targetYear - 1791) : (targetYear - 1792);
-        if (isNaN(currentAn)) { return { error: "Erreur calcul An Rép." }; }
-        const dayOfYear = inputJDN - startAnJDN + 1; const yearLength = nextStartAnJDN - startAnJDN; const isSextile = (yearLength === 366);
+        if (!inputJDN || isNaN(inputJDN)) {
+            return { error: "JDN invalide fourni.", missingData: false };
+        }
 
-        let republicanDay = 0, republicanMonthIndex = -1, decadeDayName = "", monthName = "", dayPrefix = "";
+        const yearsAvailable = Object.keys(equinoxJDNs)
+            .map(Number)
+            .sort((a, b) => a - b);
+
+        if (yearsAvailable.length < 2) {
+            return { error: "Données d'équinoxe insuffisantes.", missingData: true };
+        }
+
+        const firstAvailableYear = yearsAvailable[0];
+        const firstAvailableJDN = equinoxJDNs[firstAvailableYear];
+        const lastAvailableYearPlus1 = yearsAvailable[yearsAvailable.length - 1];
+        const lastAvailableJDNPlus1 = equinoxJDNs[lastAvailableYearPlus1];
+
+        if (inputJDN < firstAvailableJDN) {
+            return { error: `Données équinoxe non disponibles (avant ${firstAvailableYear}).`, missingData: true };
+        }
+
+        if (!lastAvailableJDNPlus1 || inputJDN >= lastAvailableJDNPlus1) {
+            const lastActualDataYear = lastAvailableYearPlus1 - 1;
+            const lastRepAn = (lastActualDataYear >= 1792)
+                ? (lastActualDataYear - 1791)
+                : (lastActualDataYear - 1792);
+
+            return { error: `Date hors plage des données équinoxe (après An ${toRoman(lastRepAn)}).`, missingData: true };
+        }
+
+        // Sentinelle : null (et non -1, désormais une année valide en numérotation astronomique).
+        let targetYear = null;
+        let startAnJDN = -1;
+        let nextStartAnJDN = -1;
+
+        for (let i = 0; i < yearsAvailable.length - 1; i++) {
+            const currentYear = yearsAvailable[i];
+            const nextYear = yearsAvailable[i + 1];
+            const currentStartJDN = equinoxJDNs[currentYear];
+            const nextJDN = equinoxJDNs[nextYear];
+
+            if (currentStartJDN === undefined || nextJDN === undefined) {
+                continue;
+            }
+
+            if (inputJDN >= currentStartJDN && inputJDN < nextJDN) {
+                targetYear = currentYear;
+                startAnJDN = currentStartJDN;
+                nextStartAnJDN = nextJDN;
+                break;
+            }
+        }
+
+        if (targetYear === null) {
+            return { error: "Impossible de trouver l'intervalle d'année (Erreur interne).", missingData: true };
+        }
+
+        let currentAn = (targetYear >= 1792) ? (targetYear - 1791) : (targetYear - 1792);
+        if (isNaN(currentAn)) {
+            return { error: "Erreur calcul An Rép." };
+        }
+
+        const dayOfYear = inputJDN - startAnJDN + 1;
+        const yearLength = nextStartAnJDN - startAnJDN;
+        const isSextile = (yearLength === 366);
+
+        let republicanDay = 0;
+        let republicanMonthIndex = -1;
+        let decadeDayName = "";
+        let monthName = "";
+        let dayPrefix = "";
         let isComplementary = false;
         let feteInfo = { name: "Inconnue", latin: "", author: "", urlEncy: "", urlImage: "", urlWiki: "", description: "", commemoration: undefined };
 
         if (dayOfYear > 360) {
-            isComplementary = true; const complementaryDayIndex = dayOfYear - 361;
-            if (complementaryDayIndex < 0 || complementaryDayIndex >= (isSextile ? 6 : 5)) { return { error: "Erreur: Jour complémentaire invalide." }; }
+            isComplementary = true;
+            const complementaryDayIndex = dayOfYear - 361;
+
+            if (complementaryDayIndex < 0 || complementaryDayIndex >= (isSextile ? 6 : 5)) {
+                return { error: "Erreur: Jour complémentaire invalide." };
+            }
+
             const compDayName = (complementaryDaysNames && complementaryDaysNames[complementaryDayIndex]) ? complementaryDaysNames[complementaryDayIndex] : `Jour Comp. ${complementaryDayIndex + 1}`;
-            dayPrefix = compDayName; decadeDayName = ""; monthName = ""; republicanDay = complementaryDayIndex + 1; // Use index+1 for day number in comp days
-            if (complementaryItems && complementaryItems[complementaryDayIndex]) { feteInfo = { ...feteInfo, ...complementaryItems[complementaryDayIndex] }; } else if (compDayName) { feteInfo.name = compDayName; }
+            dayPrefix = compDayName;
+            decadeDayName = "";
+            monthName = "";
+            republicanDay = complementaryDayIndex + 1; // Use index+1 for day number in comp days
+
+            if (complementaryItems && complementaryItems[complementaryDayIndex]) {
+                feteInfo = { ...feteInfo, ...complementaryItems[complementaryDayIndex] };
+            } else if (compDayName) {
+                feteInfo.name = compDayName;
+            }
         } else {
-            isComplementary = false; republicanMonthIndex = Math.floor((dayOfYear - 1) / 30); republicanDay = (dayOfYear - 1) % 30 + 1;
-            if (republicanMonthIndex < 0 || republicanMonthIndex >= 12 || republicanDay < 1 || republicanDay > 30) { return { error: "Erreur calcul mois/jour Rép."}; }
-            decadeDayName = decadeDays[(republicanDay - 1) % 10]; monthName = republicanMonths[republicanMonthIndex];
+            isComplementary = false;
+            republicanMonthIndex = Math.floor((dayOfYear - 1) / 30);
+            republicanDay = (dayOfYear - 1) % 30 + 1;
+
+            if (republicanMonthIndex < 0 || republicanMonthIndex >= 12 || republicanDay < 1 || republicanDay > 30) {
+                return { error: "Erreur calcul mois/jour Rép."};
+            }
+
+            decadeDayName = decadeDays[(republicanDay - 1) % 10];
+            monthName = republicanMonths[republicanMonthIndex];
             dayPrefix = `${decadeDayName} ${republicanDay} ${monthName}`;
-            try { const dayIndex = republicanDay - 1; if (dailyItems && dailyItems[republicanMonthIndex] && dailyItems[republicanMonthIndex][dayIndex]) { feteInfo = { ...feteInfo, ...dailyItems[republicanMonthIndex][dayIndex] }; } }
-            catch (e) { console.error(`Erreur accès dailyItems[${republicanMonthIndex}][${republicanDay - 1}]`, e); }
+
+            try {
+                const dayIndex = republicanDay - 1;
+
+                if (dailyItems && dailyItems[republicanMonthIndex] && dailyItems[republicanMonthIndex][dayIndex]) {
+                    feteInfo = { ...feteInfo, ...dailyItems[republicanMonthIndex][dayIndex] };
+                }
+            }
+            catch (e) {
+                console.error(`Erreur accès dailyItems[${republicanMonthIndex}][${republicanDay - 1}]`, e);
+            }
         }
 
         // ** MODIFICATION : Retourner plus de composants pour formatage flexible **
@@ -2720,9 +2804,13 @@ document.addEventListener('DOMContentLoaded', () => {
             currentAn: currentAn,           // Ex: 233, -11 etc. (Numérique)
             isComplementary: isComplementary,// Boolean
             // Reste des infos
-            fete: feteInfo.name, latin: feteInfo.latin, author: feteInfo.author,
-            description: feteInfo.description, urlImage: feteInfo.urlImage,
-            urlWiki: feteInfo.urlWiki, urlEncy: feteInfo.urlEncy
+            fete: feteInfo.name,
+            latin: feteInfo.latin,
+            author: feteInfo.author,
+            description: feteInfo.description,
+            urlImage: feteInfo.urlImage,
+            urlWiki: feteInfo.urlWiki,
+            urlEncy: feteInfo.urlEncy
             // (commémorations rattachées après coup, par jour républicain)
         };
     } // Fin calculateEquinoxDateUsingJDN
@@ -2730,13 +2818,65 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Calcul Secondaire (Méthode Romme - Reste >= An I) ---
     function calculateRommeDateUsingJDN(inputJDN) {
         // Identique à la version précédente
-        if (!inputJDN || isNaN(inputJDN)) { return { error: "JDN invalide fourni (Romme)." }; }
-        const republicanEpochJDN = 2375840; if (inputJDN < republicanEpochJDN) { return { date: "N/A (avant An I)" }; }
-        let currentAnRomme = 1; let startOfYearJDNRomme = republicanEpochJDN;
-        while (true) { const isSextileRomme = isRepublicanSextileRomme(currentAnRomme); const daysInCurrentAnRomme = isSextileRomme ? 366 : 365; const nextYearStartJDNRomme = startOfYearJDNRomme + daysInCurrentAnRomme; if (inputJDN >= startOfYearJDNRomme && inputJDN < nextYearStartJDNRomme) { break; } if (inputJDN < startOfYearJDNRomme) { return { error: "Erreur calcul An (Romme)." }; } startOfYearJDNRomme = nextYearStartJDNRomme; currentAnRomme++; if (currentAnRomme > 4000) { return { error: "Erreur boucle An (Romme > 4000)."}; } }
-        const dayOfYearRomme = inputJDN - startOfYearJDNRomme + 1; const isSextileRomme = isRepublicanSextileRomme(currentAnRomme); let formattedDateRomme = "";
-        if (dayOfYearRomme > 360) { const complementaryDayIndexRomme = dayOfYearRomme - 361; if (complementaryDayIndexRomme < 0 || complementaryDayIndexRomme >= (isSextileRomme ? 6 : 5)) { return { error: "Erreur: Jour complémentaire invalide (Romme)." }; } const compDayName = (complementaryDaysNames && complementaryDaysNames[complementaryDayIndexRomme]) ? complementaryDaysNames[complementaryDayIndexRomme] : `Jour Comp. ${complementaryDayIndexRomme + 1}`; formattedDateRomme = `${compDayName} An ${toRoman(currentAnRomme)}`; }
-        else { const monthIndexRomme = Math.floor((dayOfYearRomme - 1) / 30); const dayRomme = (dayOfYearRomme - 1) % 30 + 1; if (monthIndexRomme < 0 || monthIndexRomme >= 12 || dayRomme < 1 || dayRomme > 30) { return { error: "Erreur calcul mois/jour Rép. (Romme)."}; } const monthNameRomme = republicanMonths[monthIndexRomme]; formattedDateRomme = `${dayRomme} ${monthNameRomme} An ${toRoman(currentAnRomme)}`; }
+        if (!inputJDN || isNaN(inputJDN)) {
+            return { error: "JDN invalide fourni (Romme)." };
+        }
+
+        const republicanEpochJDN = 2375840;
+        if (inputJDN < republicanEpochJDN) {
+            return { date: "N/A (avant An I)" };
+        }
+
+        let currentAnRomme = 1;
+        let startOfYearJDNRomme = republicanEpochJDN;
+
+        while (true) {
+            const isSextileRomme = isRepublicanSextileRomme(currentAnRomme);
+            const daysInCurrentAnRomme = isSextileRomme ? 366 : 365;
+            const nextYearStartJDNRomme = startOfYearJDNRomme + daysInCurrentAnRomme;
+
+            if (inputJDN >= startOfYearJDNRomme && inputJDN < nextYearStartJDNRomme) {
+                break;
+            }
+
+            if (inputJDN < startOfYearJDNRomme) {
+                return { error: "Erreur calcul An (Romme)." };
+            }
+
+            startOfYearJDNRomme = nextYearStartJDNRomme;
+            currentAnRomme++;
+
+            if (currentAnRomme > 4000) {
+                return { error: "Erreur boucle An (Romme > 4000)." };
+            }
+        }
+
+        const dayOfYearRomme = inputJDN - startOfYearJDNRomme + 1;
+        const isSextileRomme = isRepublicanSextileRomme(currentAnRomme);
+        let formattedDateRomme = "";
+
+        if (dayOfYearRomme > 360) {
+            const complementaryDayIndexRomme = dayOfYearRomme - 361;
+
+            if (complementaryDayIndexRomme < 0 || complementaryDayIndexRomme >= (isSextileRomme ? 6 : 5)) {
+                return { error: "Erreur: Jour complémentaire invalide (Romme)." };
+            }
+
+            const compDayName = (complementaryDaysNames && complementaryDaysNames[complementaryDayIndexRomme]) ? complementaryDaysNames[complementaryDayIndexRomme] : `Jour Comp. ${complementaryDayIndexRomme + 1}`;
+            formattedDateRomme = `${compDayName} An ${toRoman(currentAnRomme)}`;
+        }
+        else {
+            const monthIndexRomme = Math.floor((dayOfYearRomme - 1) / 30);
+            const dayRomme = (dayOfYearRomme - 1) % 30 + 1;
+
+            if (monthIndexRomme < 0 || monthIndexRomme >= 12 || dayRomme < 1 || dayRomme > 30) {
+                return { error: "Erreur calcul mois/jour Rép. (Romme)." };
+            }
+
+            const monthNameRomme = republicanMonths[monthIndexRomme];
+            formattedDateRomme = `${dayRomme} ${monthNameRomme} An ${toRoman(currentAnRomme)}`;
+        }
+
         return { date: formattedDateRomme };
     }
 
@@ -2744,30 +2884,113 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listener (MODIFIÉ pour nouvelle logique d'affichage) ---
     convertButton.addEventListener('click', () => {
         // --- Récupération ---
-        const day = parseInt(dayInput.value, 10); const month = parseInt(monthInput.value, 10); const year = parseInt(yearInput.value, 10);
+        const day = parseInt(dayInput.value, 10);
+        const month = parseInt(monthInput.value, 10);
+        const year = parseInt(yearInput.value, 10);
 
         // --- Reset affichages ---
-        errorDisplay.textContent = ''; errorDisplay.style.display = 'none'; calendarInfoDisplay.textContent = '';
-        republicanDateEquinoxCol1.textContent = '---'; rommeDateInfoCol1.textContent = 'Date selon méthode Romme : ---';
-        if (detailsColumnTitle) detailsColumnTitle.textContent = 'Détails du Jour Républicain';
-        if (feteDateDisplay) feteDateDisplay.textContent = '---';
-        if (feteLatinAuthorLine) { feteLatinDisplay.textContent = ''; feteAuthorDisplay.textContent = ''; feteLatinAuthorLine.style.display = 'none'; }
-        if (feteDescriptionDisplay) feteDescriptionDisplay.textContent = '---';
-        if (commemorationArea) { commemorationArea.style.display = 'none'; if (commemorationTitle) commemorationTitle.textContent = ''; if (commemorationDesc) commemorationDesc.textContent = ''; }
-        if (imageContainer) { wikiLink.style.display = 'none'; wikiLink.href = '#'; wikiLink.removeAttribute('target'); image.style.display = 'none'; image.src = ''; image.alt = ''; imagePlaceholder.style.display = 'block'; }
-        if(encycloFrame) { encycloFrame.style.display = 'none'; encycloFrame.src = 'about:blank'; } if(encycloPlaceholder) encycloPlaceholder.style.display = 'block';
+        errorDisplay.textContent = '';
+        errorDisplay.style.display = 'none';
+        calendarInfoDisplay.textContent = '';
+        republicanDateEquinoxCol1.textContent = '---';
+        rommeDateInfoCol1.textContent = 'Date selon méthode Romme : ---';
+
+        if (detailsColumnTitle) {
+            detailsColumnTitle.textContent = 'Détails du Jour Républicain';
+        }
+
+        if (feteDateDisplay) {
+            feteDateDisplay.textContent = '---';
+        }
+
+        if (feteLatinAuthorLine) {
+            feteLatinDisplay.textContent = '';
+            feteAuthorDisplay.textContent = '';
+            feteLatinAuthorLine.style.display = 'none';
+        }
+
+        if (feteDescriptionDisplay) {
+            feteDescriptionDisplay.textContent = '---';
+        }
+
+        if (commemorationArea) {
+            commemorationArea.style.display = 'none';
+
+            if (commemorationTitle) {
+                commemorationTitle.textContent = '';
+            }
+
+            if (commemorationDesc) {
+                commemorationDesc.textContent = '';
+            }
+        }
+
+        if (imageContainer) {
+            wikiLink.style.display = 'none';
+            wikiLink.href = '#';
+            wikiLink.removeAttribute('target');
+            image.style.display = 'none';
+            image.src = '';
+            image.alt = '';
+            imagePlaceholder.style.display = 'block';
+        }
+
+        if (encycloFrame) {
+            encycloFrame.style.display = 'none';
+            encycloFrame.src = 'about:blank';
+        }
+
+        if (encycloPlaceholder) {
+            encycloPlaceholder.style.display = 'block';
+        }
 
         // --- Validation et Calcul JDN ---
         // L'an 0 (= 1 avant l'ère commune) et les années négatives sont valides (numérotation astronomique).
-        if (!day || !month || isNaN(day) || isNaN(month) || isNaN(year)) { errorDisplay.textContent = "Date invalide/incomplète."; errorDisplay.style.display = 'block'; return; }
-        let inputJDN; let calendarUsed = 'Gregorian';
-        const GREGORIAN_REFORM_YEAR = 1582; const GREGORIAN_REFORM_MONTH = 10; const GREGORIAN_REFORM_DAY_JULIAN_END = 4; const GREGORIAN_REFORM_DAY_GREGORIAN_START = 15;
+        if (!day || !month || isNaN(day) || isNaN(month) || isNaN(year)) {
+            errorDisplay.textContent = "Date invalide/incomplète.";
+            errorDisplay.style.display = 'block';
+            return;
+        }
+
+        let inputJDN;
+        let calendarUsed = 'Gregorian';
+        const GREGORIAN_REFORM_YEAR = 1582;
+        const GREGORIAN_REFORM_MONTH = 10;
+        const GREGORIAN_REFORM_DAY_JULIAN_END = 4;
+        const GREGORIAN_REFORM_DAY_GREGORIAN_START = 15;
         const isPreGregorianReform = year < GREGORIAN_REFORM_YEAR || (year === GREGORIAN_REFORM_YEAR && month < GREGORIAN_REFORM_MONTH) || (year === GREGORIAN_REFORM_YEAR && month === GREGORIAN_REFORM_MONTH && day <= GREGORIAN_REFORM_DAY_JULIAN_END);
         const isSkippedDate = (year === GREGORIAN_REFORM_YEAR && month === GREGORIAN_REFORM_MONTH && day > GREGORIAN_REFORM_DAY_JULIAN_END && day < GREGORIAN_REFORM_DAY_GREGORIAN_START);
-        if (isSkippedDate) { errorDisplay.textContent = `Date invalide: ${day} Oct 1582 n'existe pas.`; errorDisplay.style.display = 'block'; return; }
+
+        if (isSkippedDate) {
+            errorDisplay.textContent = `Date invalide: ${day} Oct 1582 n'existe pas.`;
+            errorDisplay.style.display = 'block';
+            return;
+        }
+
         try {
-            if (isPreGregorianReform) { const daysInJulianMonth = [0, 31, isJulianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; if (month < 1 || month > 12 || day < 1 || day > daysInJulianMonth[month]) { throw new Error(`Date Julienne invalide.`); } inputJDN = julianToJDN(day, month, year); calendarUsed = 'Julian'; calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Julienne.`; }
-            else { const daysInGregorianMonth = [0, 31, isGregorianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; if (month < 1 || month > 12 || day < 1 || day > daysInGregorianMonth[month]) { throw new Error(`Date Grégorienne invalide.`); } inputJDN = gregorianToJDN(day, month, year); calendarUsed = 'Gregorian'; calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Grégorienne.`; }
+            if (isPreGregorianReform) {
+                const daysInJulianMonth = [0, 31, isJulianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+                if (month < 1 || month > 12 || day < 1 || day > daysInJulianMonth[month]) {
+                    throw new Error(`Date Julienne invalide.`);
+                }
+
+                inputJDN = julianToJDN(day, month, year);
+                calendarUsed = 'Julian';
+                calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Julienne.`;
+            }
+            else {
+                const daysInGregorianMonth = [0, 31, isGregorianLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+                if (month < 1 || month > 12 || day < 1 || day > daysInGregorianMonth[month]) {
+                    throw new Error(`Date Grégorienne invalide.`);
+                }
+
+                inputJDN = gregorianToJDN(day, month, year);
+                calendarUsed = 'Gregorian';
+                calendarInfoDisplay.textContent = `Note: Date (${day}/${month}/${year}) traitée comme Grégorienne.`;
+            }
+
             dbg(`Using ${calendarUsed} calendar. JDN: ${inputJDN}`);
 
             // --- Appel Calcul Républicain ---
@@ -2780,7 +3003,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     ? `Complémentaires-${resultEquinox.day}`
                     : `${resultEquinox.month}-${resultEquinox.day}`;
                 const list = commemorations[repKey];
-                if (Array.isArray(list) && list.length) { resultEquinox.commemorations = list; }
+                if (Array.isArray(list) && list.length) {
+                    resultEquinox.commemorations = list;
+                }
             }
 
 // --- Affichage ---
@@ -2788,8 +3013,13 @@ document.addEventListener('DOMContentLoaded', () => {
                  // Colonne 1: Afficher l'erreur pour Equinoxe
                  republicanDateEquinoxCol1.textContent = resultEquinox.error;
                  // Colonne 2: Reset Titre
-                 if (detailsColumnTitle) detailsColumnTitle.textContent = 'Détails du Jour Républicain';
-                 if (feteDateDisplay) feteDateDisplay.textContent = '---';
+                 if (detailsColumnTitle) {
+                     detailsColumnTitle.textContent = 'Détails du Jour Républicain';
+                 }
+
+                 if (feteDateDisplay) {
+                     feteDateDisplay.textContent = '---';
+                 }
                  // (Les autres éléments Col 2 sont déjà reset)
             } else if (resultEquinox.datePrefix !== undefined && resultEquinox.currentAn !== undefined) {
                  // ** COLONNE 1 **
@@ -2797,7 +3027,9 @@ document.addEventListener('DOMContentLoaded', () => {
                  republicanDateEquinoxCol1.textContent = `${resultEquinox.datePrefix} ${formatAn(resultEquinox.currentAn)}`;
 
                  // ** COLONNE 2 **
-                 if (detailsColumnTitle) detailsColumnTitle.textContent = `Détails du Jour Républicain`;
+                 if (detailsColumnTitle) {
+                     detailsColumnTitle.textContent = `Détails du Jour Républicain`;
+                 }
 
                  // ** NOUVEAU TITRE COMBINÉ: "Jour Mois - Fête" ou "Nom Jour Comp." **
                  let feteDateHeading = "";
@@ -2818,73 +3050,149 @@ document.addEventListener('DOMContentLoaded', () => {
                  // Détails fête (latin, desc)
                  if (feteLatinAuthorLine) { // Vérifie si l'élément conteneur existe
                     if (resultEquinox.latin || resultEquinox.author) {
-                         if(feteLatinDisplay) feteLatinDisplay.textContent = resultEquinox.latin || '';
-                         if(feteAuthorDisplay) feteAuthorDisplay.textContent = resultEquinox.author || '';
+                         if (feteLatinDisplay) {
+                             feteLatinDisplay.textContent = resultEquinox.latin || '';
+                         }
+
+                         if (feteAuthorDisplay) {
+                             feteAuthorDisplay.textContent = resultEquinox.author || '';
+                         }
+
                          feteLatinAuthorLine.style.display = 'block';
                     } else {
                          feteLatinAuthorLine.style.display = 'none';
                     }
                  }
-                 if(feteDescriptionDisplay) feteDescriptionDisplay.textContent = resultEquinox.description || 'Pas de description.';
+                 if (feteDescriptionDisplay) {
+                     feteDescriptionDisplay.textContent = resultEquinox.description || 'Pas de description.';
+                 }
 
                  // Image / Wiki
                  if (resultEquinox.urlImage && imageContainer) {
                      // Repli vers le placeholder si le lien n'est pas valide (image introuvable)
-                     image.onerror = () => { image.onerror = null; image.style.display = 'none'; image.src = ''; if (wikiLink) wikiLink.style.display = 'none'; imagePlaceholder.style.display = 'block'; };
-                     image.src = resultEquinox.urlImage; image.alt = `Illustration pour ${resultEquinox.fete}`; image.style.display = 'block'; imagePlaceholder.style.display = 'none'; if (resultEquinox.urlWiki && wikiLink) { wikiLink.href = resultEquinox.urlWiki; wikiLink.target = '_blank'; wikiLink.style.display = 'inline-block'; } else if (wikiLink) { wikiLink.style.display = 'none'; } }
-                 else if (imageContainer) { imagePlaceholder.style.display = 'block'; image.style.display = 'none'; if (wikiLink) wikiLink.style.display = 'none'; }
+                     image.onerror = () => {
+                         image.onerror = null;
+                         image.style.display = 'none';
+                         image.src = '';
+
+                         if (wikiLink) {
+                             wikiLink.style.display = 'none';
+                         }
+
+                         imagePlaceholder.style.display = 'block';
+                     };
+                     image.src = resultEquinox.urlImage;
+                     image.alt = `Illustration pour ${resultEquinox.fete}`;
+                     image.style.display = 'block';
+                     imagePlaceholder.style.display = 'none';
+
+                     if (resultEquinox.urlWiki && wikiLink) {
+                         wikiLink.href = resultEquinox.urlWiki;
+                         wikiLink.target = '_blank';
+                         wikiLink.style.display = 'inline-block';
+                     } else if (wikiLink) {
+                         wikiLink.style.display = 'none';
+                     }
+                 }
+                 else if (imageContainer) {
+                     imagePlaceholder.style.display = 'block';
+                     image.style.display = 'none';
+
+                     if (wikiLink) {
+                         wikiLink.style.display = 'none';
+                     }
+                 }
 
                  // Commémorations du jour républicain (sous l'image) — une ou plusieurs
                  if (commemorationArea && Array.isArray(resultEquinox.commemorations) && resultEquinox.commemorations.length) {
-                     if (commemorationTitle) { commemorationTitle.textContent = ''; const tagline = document.createElement('span'); tagline.className = 'commemoration-tagline'; tagline.textContent = 'Ce jour-là :'; commemorationTitle.appendChild(tagline); }
+                     if (commemorationTitle) {
+                         commemorationTitle.textContent = '';
+                         const tagline = document.createElement('span');
+                         tagline.className = 'commemoration-tagline';
+                         tagline.textContent = 'Ce jour-là :';
+                         commemorationTitle.appendChild(tagline);
+                     }
+
                      if (commemorationDesc) {
                          commemorationDesc.textContent = '';
                          resultEquinox.commemorations.forEach(c => {
-                             if (!c || !c.title || !c.description) return;
-                             const item = document.createElement('span'); item.className = 'commemoration-item';
-                             const t = document.createElement('strong'); t.className = 'commemoration-event-title'; t.textContent = c.title;
+                             if (!c || !c.title || !c.description) {
+                                 return;
+                             }
+
+                             const item = document.createElement('span');
+                             item.className = 'commemoration-item';
+                             const t = document.createElement('strong');
+                             t.className = 'commemoration-event-title';
+                             t.textContent = c.title;
                              item.appendChild(t);
                              const dParts = [c.dateG, c.dateR].filter(Boolean);
+
                              if (dParts.length) {
-                                 const dl = document.createElement('span'); dl.className = 'commemoration-date';
+                                 const dl = document.createElement('span');
+                                 dl.className = 'commemoration-date';
                                  dl.textContent = dParts.join(' · ');
                                  item.appendChild(dl);
                              }
-                             const dsc = document.createElement('span'); dsc.className = 'commemoration-text'; dsc.textContent = c.description;
+
+                             const dsc = document.createElement('span');
+                             dsc.className = 'commemoration-text';
+                             dsc.textContent = c.description;
                              item.appendChild(dsc);
                              commemorationDesc.appendChild(item);
                          });
                      }
                      commemorationArea.style.display = 'block';
                  }
-                 else { if (commemorationArea) commemorationArea.style.display = 'none'; }
+                 else {
+                     if (commemorationArea) {
+                         commemorationArea.style.display = 'none';
+                     }
+                 }
 
                  // ** COLONNE 3 ** Encyclopédie
                  if (resultEquinox.urlEncy && encycloFrame) {
                      encycloFrame.src = resultEquinox.urlEncy;
                      encycloFrame.style.display = 'block';
-                     if(encycloPlaceholder) encycloPlaceholder.style.display = 'none';
+                     if (encycloPlaceholder) {
+                         encycloPlaceholder.style.display = 'none';
+                     }
                      dbg("Chargement Encyclopédie: ", resultEquinox.urlEncy);
                  } else if (encycloFrame) {
                      // Pas d'URL ou erreur précédente, assure que c'est caché/reset
                      encycloFrame.style.display = 'none';
-                     if(encycloPlaceholder) encycloPlaceholder.style.display = 'block';
+                     if (encycloPlaceholder) {
+                         encycloPlaceholder.style.display = 'block';
+                     }
+
                      encycloFrame.src = 'about:blank';
                  }
             } else {
                  // Cas d'erreur imprévu
                  republicanDateEquinoxCol1.textContent = "Erreur résultat Equinoxe";
                  console.error("Résultat Equinoxe invalide:", resultEquinox);
-                 if (feteDateDisplay) feteDateDisplay.textContent = '---'; // Reset titre col 2 aussi
+                 if (feteDateDisplay) {
+                     feteDateDisplay.textContent = '---';
+                 } // Reset titre col 2 aussi
             }
 
 
             // Affichage Romme (toujours en Col 1)
-            if (resultRomme.error) { rommeDateInfoCol1.textContent = `Date selon méthode Romme : Erreur (${resultRomme.error})`; }
-            else if (resultRomme.date) { rommeDateInfoCol1.textContent = `Date selon méthode Romme : ${resultRomme.date}`; }
-            else { rommeDateInfoCol1.textContent = `Date selon méthode Romme : Erreur inconnue`; }
+            if (resultRomme.error) {
+                rommeDateInfoCol1.textContent = `Date selon méthode Romme : Erreur (${resultRomme.error})`;
+            }
+            else if (resultRomme.date) {
+                rommeDateInfoCol1.textContent = `Date selon méthode Romme : ${resultRomme.date}`;
+            }
+            else {
+                rommeDateInfoCol1.textContent = `Date selon méthode Romme : Erreur inconnue`;
+            }
 			
-        } catch (e) { console.error("Erreur:", e); errorDisplay.textContent = e.message || "Erreur."; errorDisplay.style.display = 'block'; }
+        } catch (e) {
+            console.error("Erreur:", e);
+            errorDisplay.textContent = e.message || "Erreur.";
+            errorDisplay.style.display = 'block';
+        }
     }); // Fin Event Listener
 
     // --- Initialisation ---
