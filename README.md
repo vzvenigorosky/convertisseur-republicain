@@ -7,8 +7,21 @@ lien Wikipédia, l'article correspondant de *L'Encyclopédie* de Diderot, ainsi 
 les commémorations rattachées à ce jour.
 
 Fichiers : `index.html`, `script.js`, `style.css`, `data.json` (données des jours,
-illustrations, liens et commémorations). Aucun build, aucune dépendance : ouvrir
-`index.html`.
+illustrations, liens et commémorations). Aucun build, aucune dépendance.
+
+## Ouvrir l'application
+
+L'ouverture directe de `index.html` en `file://` fonctionne mal dans les navigateurs
+basés sur Chromium (Chrome, Edge, Brave, Opera) : `data.json` n'est alors pas chargé à
+cause des restrictions CORS locales, et les détails du jour restent indisponibles.
+
+Utilisez de préférence un serveur statique minimal depuis la racine du dépôt :
+
+```sh
+python3 -m http.server
+```
+
+Puis ouvrez `http://localhost:8000/`.
 
 ## Deux méthodes de conversion
 
