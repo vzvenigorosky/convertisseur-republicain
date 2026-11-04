@@ -30,3 +30,9 @@ jobs:
 
       - name: Vérifier la syntaxe de script.js
         run: node --check script.js
+
+      - name: Vérifier la syntaxe du module de calcul
+        run: node --check calendar-math.js
+
+      - name: Exécuter les tests de régression du calendrier
+        run: node --test
